@@ -1,0 +1,7 @@
+body > header:first-child + header {
+    background-color: #1E1E1E;
+}
+body > header:first-child + header > section > img:first-child {
+    width: 230px;
+    height: 80px;
+}
