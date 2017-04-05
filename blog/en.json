@@ -1,0 +1,47 @@
+﻿{
+    "name": "Web Software Development Blog",
+    "list": [
+        {
+            "name": "Parse DOM attribute object",
+            "url": "/2016/parse-dom-attribute.md",
+            "categories": [],
+            "date": "20160318"
+        },
+        {
+            "name": "Delay task",
+            "url": "/2016/delay-task.md",
+            "categories": [],
+            "date": "20160320"
+        },
+        {
+            "name": "Multiple hit task",
+            "url": "/2016/multiple-hit-task.md",
+            "categories": [],
+            "date": "20160321"
+        },
+        {
+            "name": "Slide on web",
+            "url": "/2016/slide-on-web.md",
+            "categories": [],
+            "date": "20160323"
+        },
+        {
+            "name": "JavaScript Promise",
+            "url": "/2016/promise-in-web.md",
+            "categories": [],
+            "date": "20160325"
+        },
+        {
+            "name": "Localization in web page",
+            "url": "/2016/web-localization.md",
+            "categories": [],
+            "date": "20160330"
+        },
+        {
+            "name": "Get and set DOM size",
+            "url": "/2016/dom-size.md",
+            "categories": [],
+            "date": "20160414"
+        }
+    ]
+}
