@@ -232,10 +232,11 @@ a.link-tile-wide.grouping-more, a.link-tile-wide.grouping-more:visited {
 @media screen and (max-width:800px) {
     a.link-tile-wide, a.link-tile-wide:visited {
         width: auto;
+        margin: 0 0 4px 0;
         display: block;
     }
     a.link-tile-wide.grouping-more, a.link-tile-wide.grouping-more:visited {
-        width: 60px;
+        width: 80px;
         padding: 16px;
         text-align: center; 
     }
