@@ -11,13 +11,25 @@
             "name": "Delay task",
             "url": "/2016/delay-task.md",
             "categories": [],
-            "date": "20160320"
+            "date": "20160320",
+            "related": [
+                {
+                    "name": "C# 版",
+                    "url": "https://kingcean.net/blog/?delay-task"
+                }
+            ]
         },
         {
             "name": "Multiple hit task",
             "url": "/2016/multiple-hit-task.md",
             "categories": [],
-            "date": "20160321"
+            "date": "20160321",
+            "related": [
+                {
+                    "name": "C# 版",
+                    "url": "https://kingcean.net/blog/?multiple-hit-task"
+                }
+            ]
         },
         {
             "name": "Slide on web",

@@ -9,15 +9,27 @@
         },
         {
             "name": "延迟合并处理任务",
-            "url": "/2016/yanchi-renwu-js.md",
+            "url": "/2016/yanchi-renwu.md",
             "categories": [],
-            "date": "20160320"
+            "date": "20160320",
+            "related": [
+                {
+                    "name": "C# 版",
+                    "url": "https://kingcean.net/blog/?yanchi-renwu"
+                }
+            ]
         },
         {
             "name": "暴击事件",
-            "url": "/2016/baoji-shijian-js.md",
+            "url": "/2016/baoji-shijian.md",
             "categories": [],
-            "date": "20160321"
+            "date": "20160321",
+            "related": [
+                {
+                    "name": "C# 版",
+                    "url": "https://kingcean.net/blog/?baoji-shijian"
+                }
+            ]
         },
         {
             "name": "网页元素的滑动事件",
