@@ -8,6 +8,9 @@
     <link href="css/layout.css" rel="stylesheet" />
     <link href="css/current.css" rel="stylesheet" />
     <style type="text/css">
+    body > header + section {
+        min-height: 640px; margin-bottom: 60px;
+    }
     a#project-item-datasense {
         background-color: rgba(51, 102, 153, 0.8);
     }
@@ -59,7 +62,7 @@
             </ul>
         </section>
     </header>
-    <section style="min-height: 640px; margin-bottom: 60px; ">
+    <section>
         <h2>Projects</h2>
         <section style="background-color: #282828; border-radius: 8px; height: 80px; ">
             <img alt="WebDev" src="images/logos/webdev_wordmark.png" style="width: 230px; height: 80px; position: absolute; top: 0; left: 30px; " />
@@ -70,11 +73,11 @@
             </a><a id="project-item-hje" href="https://github.com/compositejs/hje"><span>Hyper-JSON Engine</span>
             </a><a id="project-more" class="grouping-more" href="#" onclick="showMoreProjects();return false;" ><span>More…</span>
             </a><a id="project-item-chemistry" href="https://github.com/12dlabs/chemistry" style="display: none;"><span>Chemistry</span>
-            </a><a id="project-item-quark" href="./alibaba?quark" style="display: none;"><span><span style="color: #999; ">Ali</span>Quark</span>
+            </a><a id="project-item-quark" href="./alibaba?quark" style="display: none;"><span><span>Ali</span>Quark</span>
             </a><a id="project-item-apass" href="./alibaba?apass" style="display: none;"><span>APASS</span>
-            </a><a id="project-item-nine" href="./alibaba?nine" style="display: none;"><span>Nine <span style="color: #999; ">(AliVOC)</span></span>
-            </a><a id="project-item-sop" href="./alibaba?sop" style="display: none;"><span><span style="color: #999; ">Ali</span>SOP</span>
-            </a><a id="project-item-iqiyi" href="./iqiyi" style="display: none;"><span>iQIYI<span style="color: #999; "> Windows client app</span></span>
+            </a><a id="project-item-nine" href="./alibaba?nine" style="display: none;"><span>Nine <span>(AliVOC)</span></span>
+            </a><a id="project-item-sop" href="./alibaba?sop" style="display: none;"><span><span>Ali</span>SOP</span>
+            </a><a id="project-item-iqiyi" href="./iqiyi" style="display: none;"><span>iQIYI<span> Windows client app</span></span>
             </a>
         </section>
         <h2>Community</h2>
