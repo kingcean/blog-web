@@ -8,9 +8,18 @@
     <link href="../css/layout.css" rel="stylesheet" />
     <link href="../css/current.css" rel="stylesheet" />
     <link href="../css/site.css" rel="stylesheet" />
-    <script type="text/javascript" src="../js/jquery.min.js" ></script>
-    <script type="text/javascript" src="../js/remarkable.min.js" ></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" ></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@1.1.0/dist/index.js" ></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/marked@16.2.1/lib/marked.umd.js" ></script>
     <script type="text/javascript" src="../js/site.js" ></script>
+    <style type="text/css" >
+    #blog_content {
+        display: block; min-height: 400px; padding-top: 0; grid-template-columns: auto;
+    }
+    #blog_content > section > p > img {
+        width: 100%;
+    }
+    </style>
 </head>
 <body>
     <header>
@@ -59,9 +68,8 @@
         }
         
         $.get(id + ".md").then(function (r2) {
-            var md = new Remarkable();
             r2 = r2.replace(/\(.\//g, "(./");
-            cntEle.innerHTML = "<section>" + md.render(r2) + "</section>";
+            cntEle.innerHTML = "<section>" + marked.parse(r2) + "</section>";
         }, function (r) {
             cntEle.innerHTML = "<section><em>Load failed.</em></section>";
         });
