@@ -25,14 +25,20 @@
         box-sizing: border-box;
     }
     </style>
+    <script type="text/javascript" src="../js/site.js" ></script>
+    <script type="text/javascript">
+    function onInit() {
+        site.getString("blogs", "topmenu-blogs");
+    }
+    </script>
 </head>
-<body>
+<body onload="onInit()">
     <header>
         <section>
             <h1><a href="https://kingcean.org"><strong>Kingcean</strong><span>.org</span></a></h1>
             <ul>
                 <li>
-                    <a href="https://kingcean.org/blog">Blogs</a>
+                    <a id="topmenu-blogs" href="https://kingcean.org/blog">Blogs</a>
                 </li>
                 <li>
                     <a href="https://compositejs.github.io">CompositeJs</a>
