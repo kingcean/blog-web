@@ -29,6 +29,10 @@
     <script type="text/javascript">
     function onInit() {
         site.getString("blogs", "topmenu-blogs");
+        site.getString("screenshots", "title-screenshots")
+        site.getString("architecture", "title-architecture");
+        site.getString("officialWebsite", "title-website");
+        site.getString("goHome", "link-gohome");
     }
     </script>
 </head>
@@ -51,7 +55,7 @@
     </header>
     <section style="min-height: 640px; margin-bottom: 60px; ">
         <section>
-            <a href="../">&lt; Back to homepage</a><span> &nbsp; | &nbsp; Project at iQIYI Inc</span>
+            <a href="../">&lt; <span id="link-gohome">Back to homepage</span></a><span> &nbsp; | &nbsp; Project at iQIYI Inc</span>
             <img alt="Logo" src="../images/logos/iqiyi.png" style="width: 48px; height: 48px; float: right; " />
         </section>
         <h2>iQIYI Windows client app</h2>
@@ -65,7 +69,7 @@
             <a id="project-item-datasense" class="link-long-button" href="ms-windows-store://pdp/?productId=XPFP2VL78MNLGD"><span>iQIYI <span>- Microsoft Store page</span></span>
             </a>
         </section>
-        <h2>Screenshots</h2>
+        <h2 id="title-screenshots">Screenshots</h2>
         <section id="sec-screenshots">
             <img alt="Homepage" src="images/scn-220526-100135.jpg" />
             <img alt="TV series page" src="images/scn-220526-100957.jpg" />
@@ -74,9 +78,14 @@
             <img alt="Library (animes channel)" src="images/scn-220526-100730.jpg" />
             <span style="color: #808080; " >Captured on May 26<sup>th</sup> 2022, version 9.6.158.</span>
         </section>
-        <h2>Architecture</h2>
+        <h2 id="title-architecture">Architecture</h2>
         <section>
             <a class="link-long-button" href="../blog/?iqiyi-pca" >Web native PC app</a>
+        </section>
+        <h2 id="title-website">Official website</h2>
+        <section>
+            <a class="link-long-button" href="https://iqiyi.com"><span>iQIYI.com</span>
+            </a>
         </section>
     </section>
     <footer>

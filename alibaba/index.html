@@ -23,6 +23,7 @@
     <script type="text/javascript">
     function onInit() {
         site.getString("blogs", "topmenu-blogs");
+        site.getString("goHome", "link-gohome");
 
         var id = site.firstQuery();
         var menu = [
@@ -54,7 +55,7 @@
             <h1><a href="https://kingcean.org"><strong>Kingcean</strong><span>.org</span></a></h1>
             <ul>
                 <li>
-                    <a href="https://kingcean.org/blog">Blogs</a>
+                    <a id="topmenu-blogs" href="https://kingcean.org/blog">Blogs</a>
                 </li>
                 <li>
                     <a href="https://compositejs.github.io">CompositeJs</a>
@@ -66,7 +67,7 @@
         </section>
     </header>
     <section>
-        <section><a href="../">&lt; Back to homepage</a><span> &nbsp; | &nbsp; Project at Alibaba Group</span></section>
+        <section><a href="../">&lt; <span id="link-gohome">Back to homepage</span></a><span> &nbsp; | &nbsp; Project at Alibaba Group</span></section>
     </section>
     <section id="blog_content"></section>
     <footer>

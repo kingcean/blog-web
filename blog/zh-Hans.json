@@ -61,5 +61,14 @@
             "categories": [],
             "date": "20181202"
         }
-    ]
+    ],
+    "redir": {
+        "parse-dom-attribute": "jiexi-dom-shuxing",
+        "delay-task": "yanchi-renwu",
+        "multiple-hit-task": "baoji-shijian",
+        "slide-on-web": "web-huadong",
+        "promise-in-web": "js-promise-shixian",
+        "web-localization": "web-bendihua",
+        "dom-size": "dom-daxiao"
+    }
 }
