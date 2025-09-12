@@ -59,7 +59,14 @@
             "name": "创新客户端开发架构",
             "url": "/2018/iqiyi-pca.md",
             "categories": [],
-            "date": "20181202"
+            "date": "20181202",
+            "end": true,
+            "related": [
+                {
+                    "name": "PPT",
+                    "url": "https://kingcean.org/blog/2018/attachments/Top100Summit-2018-iQIYI-Arch.pptx"
+                }
+            ]
         }
     ],
     "redir": {
