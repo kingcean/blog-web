@@ -44,7 +44,7 @@
             r2 = r2.replace(/\(.\//g, "(./");
             cntEle.innerHTML = "<section>" + marked.parse(r2) + "</section>";
         }, function (r) {
-            cntEle.innerHTML = "<section><em>Load failed.</em></section>";
+            cntEle.innerHTML = "<section><em>" + site.getString("loadFailed") + "</em></section>";
         });
     }
     </script>
@@ -73,7 +73,7 @@
     <footer>
         <section>
             <div class="x-copyright">
-                <img src="../images/logos/barcode.svg" />
+                <img alt="Kingcean.org" src="../images/logos/barcode.svg" />
                 <span>&copy; Kingcean Tuan 2021 &nbsp; | &nbsp; Front-end</span>
             </div>
         </section>
