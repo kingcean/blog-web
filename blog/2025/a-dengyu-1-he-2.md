@@ -245,6 +245,23 @@ const a = {
 console.info(JSON.stringify(a)); // -> "{\"info\":\"序列化后仍是一个对象，且会包含本属性。\"}"
 ```
 
+但这里请注意，如果 `toJSON()` 返回的对象中，也包含了 `toJSON()` 成员方法，那么这个序列化内部调用是不会传递的，也就是说，不会触发 `toJSON()` 返回对象里的 `toJSON()`，而是直接对其进行序列化了。
+
+```javascript
+a.toJSON = function () {
+  data: "原始层",
+  return {
+    data: "第一层",
+    toJSON() {
+      return { data: "第二层" };
+    }
+  }
+};
+
+// 测试
+console.info(JSON.stringify(a)); // -> "{\"data\":\"第一层\"}"
+```
+
 所以，对 `Date` 实现该方法，返回一个能表示该日期时间的 ISO 8601 标准格式的字符串，即可实现现实中的效果。
 
 ```javascript

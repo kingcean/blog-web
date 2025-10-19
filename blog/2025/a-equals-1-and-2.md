@@ -246,6 +246,23 @@ const a = {
 console.info(JSON.stringify(a)); // -> "{\"info\":\"It will serializes as an object with this field.\"}"
 ```
 
+However, please note that if the `toJSON()` method returns an object that also contains a `toJSON()` method, the internal serialization call will not propagate. In other words, the `toJSON()` method of the returned object will not be triggered; instead, it will be serialized directly.
+
+```javascript
+a.toJSON = function () {
+  data: "Original",
+  return {
+    data: "First",
+    toJSON() {
+      return { data: "Second" };
+    }
+  }
+};
+
+// 测试
+console.info(JSON.stringify(a)); // -> "{\"data\":\"First\"}"
+```
+
 So, implementing this method for `Date` to return a string in the ISO 8601 standard format that represents the date and time can achieve the effect in real-world scenarios.
 
 ```javascript
