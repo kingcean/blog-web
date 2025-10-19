@@ -67,6 +67,12 @@
                     "url": "https://kingcean.org/blog/2018/attachments/Top100Summit-2018-iQIYI-Arch.pptx"
                 }
             ]
+        },
+        {
+            "name": "a == 1 && a == 2 && a != 2 && a != 1",
+            "url": "/2025/a-dengyu-1-he-2.md",
+            "categories": [],
+            "date": "20251018"
         }
     ],
     "redir": {
