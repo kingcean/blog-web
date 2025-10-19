@@ -27,7 +27,7 @@ Perfect! The output matches the scenario where the `if (a == 1 && a == 2 && a !=
 
 > Equation holds!
 
-### Weakly typed
+## Weakly typed
 
 Actually, many friends who are familiar with JavaScript can instantly understand that the `valueOf()` method is the key behind this "bizarre effect." It is a prototype method of the `Object`, meaning all objects inherit this member method. Of course, we can override this method as needed to return more suitable content. The purpose of this method is to return the primitive value of an object. In scenarios where JavaScript needs to convert an object to a primitive value, such as unary operations and equality comparisons, this function is implicitly invoked internally.
 
@@ -51,7 +51,7 @@ The reason JavaScript can handle these different types of values and ultimately 
 - In the first line of the example, `1 + "1"`, the number `1` is implicitly converted into the string `"1"`;
 - In the second line, `true + 1`, the boolean `true` is implicitly converted into the number `1`; similarly, in the third line, `false` is converted into the number `0`.
 
-### `Symbol.toPrimitive`
+## `Symbol.toPrimitive`
 
 How does JavaScript perform such conversions? First, it determines the most appropriate type based on the current statement and the types of existing variables. It then attempts to invoke the following methods (if available and applicable) in roughly this order:
 
@@ -112,7 +112,7 @@ console.info(a + "!"); // -> "3!"
 
 This indicates that `[Symbol.toPrimitive](hint)` has a very high priority, and the parameter passed in various scenarios depends on the specific context. When `[Symbol.toPrimitive](hint)` is absent, the `valueOf()` method becomes the corresponding fallback method.
 
-### `valueOf`
+## `valueOf`
 
 As mentioned earlier, `valueOf()` is a method available to all types, except for `null` and `undefined`. You can find it in all objects. By default, it returns the object itself (`this`), but some types override this method, such as `Date`, as shown below.
 
@@ -167,7 +167,7 @@ console.info(b == b); // -> true
 console.info(`${b}`); // -> "[object Object]"
 ```
 
-### Other kind of implementation
+## Other kind of implementation
 
 Therefore, when implementing `a == 1 && a == 2 && a != 2 && a != 1`, aside from the earlier example using `valueOf()`, we can also use `[Symbol.toPrimitive](hint)` to achieve the same effect.
 
@@ -222,7 +222,7 @@ console.info(String(today)); // -> "Thu Oct 16 2025 17:00:00 GMT-0700 (Pacific T
 console.info("Today is " + today); // -> "Today is Thu Oct 16 2025 17:00:00 GMT-0700 (Pacific Time)"
 ```
 
-### `stringify`
+## `stringify`
 
 But, the detail-oriented among you may notice that when we serialize a `Date` object, it is also converted into a custom format — specifically, an ISO 8601 standard format string representing a specific date and time.
 
