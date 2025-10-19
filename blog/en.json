@@ -54,6 +54,12 @@
             "url": "/2016/dom-size.md",
             "categories": [],
             "date": "20160414"
+        },
+        {
+            "name": "a == 1 && a == 2 && a != 2 && a != 1",
+            "url": "/2025/a-equals-1-and-2.md",
+            "categories": [],
+            "date": "20251017"
         }
     ]
 }
