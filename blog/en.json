@@ -2,7 +2,7 @@
     "name": "Web Software Development Blog",
     "list": [
         {
-            "name": "Parse DOM attribute object",
+            "name": "Parse DOM attribute object",
             "url": "/2016/parse-dom-attribute.md",
             "categories": [],
             "date": "20160318"
@@ -14,7 +14,7 @@
             "date": "20160320",
             "related": [
                 {
-                    "name": "C# 版",
+                    "name": "C# edition",
                     "url": "https://kingcean.net/blog/?delay-task"
                 }
             ]
@@ -26,7 +26,7 @@
             "date": "20160321",
             "related": [
                 {
-                    "name": "C# 版",
+                    "name": "C# edition",
                     "url": "https://kingcean.net/blog/?multiple-hit-task"
                 }
             ]
@@ -50,7 +50,7 @@
             "date": "20160330"
         },
         {
-            "name": "Get and set DOM size",
+            "name": "Get and set DOM size",
             "url": "/2016/dom-size.md",
             "categories": [],
             "date": "20160414"

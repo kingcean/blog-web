@@ -58,7 +58,7 @@ How does JavaScript perform such conversions? First, it determines the most appr
 1. `[Symbol.toPrimitive](hint)`: Attempts to retrieve a value converted to a specific type. By default, this method is not present; if implemented, it must return a primitive value. The `hint` parameter, a string, indicates the desired type and can have the following values:
    - '"default"': This is the usual value, except in the cases below.
    - '"number"': Used during numeric coercion, including unary numeric operations and `Number()`.
-   - '"string"':Used during string coercion, such as with template literals and `String()`.
+   - '"string"':Used during string coercion, including with template literals and `String()`.
 2. `valueOf()`: Attempts to retrieve the object's intrinsic value. By default, it returns the object itself. If the return value is a non-primitive type, it will be ignored.
 3. `toString()`: Outputs the formatted string representation of the object. This is applicable in limited scenarios.
 
@@ -167,7 +167,7 @@ console.info(b == b); // -> true
 console.info(`${b}`); // -> "[object Object]"
 ```
 
-## Other kind of implementation
+## Other way to implement
 
 Therefore, when implementing `a == 1 && a == 2 && a != 2 && a != 1`, aside from the earlier example using `valueOf()`, we can also use `[Symbol.toPrimitive](hint)` to achieve the same effect.
 
@@ -222,7 +222,7 @@ console.info(String(today)); // -> "Thu Oct 16 2025 17:00:00 GMT-0700 (Pacific T
 console.info("Today is " + today); // -> "Today is Thu Oct 16 2025 17:00:00 GMT-0700 (Pacific Time)"
 ```
 
-## `stringify`
+## `JSON.stringify`
 
 But, the detail-oriented among you may notice that when we serialize a `Date` object, it is also converted into a custom format — specifically, an ISO 8601 standard format string representing a specific date and time.
 
@@ -230,9 +230,25 @@ But, the detail-oriented among you may notice that when we serialize a `Date` ob
 console.info(JSON.stringify(today)); // -> "2025-10-17T00:00:00.000Z"
 ```
 
-So, what’s going on here? 
+So, what's going on here? 
 
-It turns out that for objects, we can implement their `toJSON()` method. When such an object, or when it is a property of another object, is serialized using `JSON.stringif()`, this method, if present, will be implicitly called first. This method needs to return a value, which can be a simple type (such as a string, boolean, or number) or an object or array. The serialized result will then be based on this returned value.
+It turns out that for objects, we can implement their `toJSON()` method. When such an object, or when it is a property of another object, is serialized using `JSON.stringif()`, this method, if present, will be implicitly called first. This method needs to return a value, which can be a simple type (such as a string, boolean, or number) or an object or array. Finally, the serialized result will then be based on this returned value. And the result will be a string.
+
+| Type | The content of string | Result sample |
+| ------- | -------------------- | ---------- |
+| `null` | `null` | `"null"` |
+| `NaN` | `null` | `"null"` |
+| `Symbol` | `null` | `"null"` |
+| `undefined` | N/A (return `undefined`) | `undefined` |
+| `true` | `true` | `"true"` |
+| `false` | `false` | `"false"` |
+| Number | The decimal digits | `"123"` |
+| String | The string escaped | `"\"Hello!\""` |
+| Object | The object to stringify | `"{\"value\":100}"` |
+| Array | The array to stringify | `"[\"a\"]"` |
+| Function | N/A (return `undefined`) | `undefined` |
+
+Following is a sample of which `toJSON()` method returns a JSON object.
 
 ```javascript
 const a = {
@@ -275,7 +291,7 @@ class Date {
     // {yyyy}-{MM}-{dd}T{HH}-{mm}-{ss}.{sss}Z
     return `${numberToStringInternal(this.getUTCFullYear())}-${numberToStringInternal(this.getUTCMonth() + 1)}-${numberToStringInternal(this.getUTCDay())}T${numberToStringInternal(this.getUTCHours())}:${numberToStringInternal(this.getUTCMinutes())}:${numberToStringInternal(this.getUTCSeconds())}.${numberToStringInternal(this.getUTCMilliseconds())}Z`;
   }
-  
+
   // … Other member properties and methods are omitted here.
 }
 ```
