@@ -1,1 +1,3 @@
-
+#blog_content > article > main {
+    overflow-x: hidden;
+}
