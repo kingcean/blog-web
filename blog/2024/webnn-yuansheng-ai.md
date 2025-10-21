@@ -36,7 +36,7 @@ WebNN 可运行于 Web 前端所在的本地设备之上。对于客户端所用
 | 操作系统 | 原生机器学习框架 | 原生框架实现者 |
 | ------------ | ------------ | ---------- |
 | Windows | [DirectML](https://learn.microsoft.com/zh-cn/windows/ai/directml/dml) | 微软 |
-| macOS/iOS/iPadOS | [CoreML](https://developer.apple.com/documentation/CoreML) | 苹果 |
+| macOS / iOS / iPadOS | [CoreML](https://developer.apple.com/documentation/CoreML) | 苹果 |
 | Android | [NN API](https://developer.android.google.cn/ndk/guides/neuralnetworks?hl=zh-cn) | 谷歌 |
 | Linux (on Intel® Core) | [OpenVINO](https://www.intel.cn/content/www/cn/zh/developer/tools/openvino-toolkit/overview.html) | 英特尔 |
 
@@ -607,12 +607,15 @@ function practRandSimpleFastCounter32(a, b, c, d) {
 由此，整个文生图的大致逻辑便已完成。以下是部分运行截图。
 
 ![截图 1](./images/webnn-screenshot-1.jpg)
+
 🔺 _运行时，浏览器的 GPU 加速进程消耗了大量 GPU 资源，说明模型运行于端侧浏览器中。另，标签页所占内存巨大，说明模型加载与本地。_
 
 ![截图 2](./images/webnn-screenshot-2.jpg)
+
 🔺 _生成的图片。使用的 prompt 为：rainbow, castle, river, cloud。_
 
 ![截图 3](./images/webnn-screenshot-3.jpg)
+
 🔺 _初始化和运行期间统计的指标信息。_
 
 __附__：Demo 所用电脑相关主要配置如下。

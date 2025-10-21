@@ -3,8 +3,8 @@ In HTML, sometimes we need get, set or adapt the size from or to an element by s
 - Gets or sets the size of a DOM.
 - Gets the size of the window.
 - Gets the size of the HTML document.
-- Binds the width of a DOM to the one of window or another DOM.
-- Binds the height of a DOM to the one of window or another DOM.
+- Binds the `width` of a DOM to the one of window or another DOM.
+- Binds the `height` of a DOM to the one of window or another DOM.
 
 I will introduce the implementation in Type Script for them here.
 
@@ -20,6 +20,7 @@ export interface SizeContract {
 ```
 
 And we want to implement the function to get following types of element.
+
 - Document.
 - Window.
 - DOM in body.
@@ -36,7 +37,7 @@ export function getSize(element: HTMLElement | string | Window | Document)
 }
 ```
 
-If the argument element is an identifier string, we need get its element.
+If the argument `element` is an identifier string, we need get its element.
 
 ```typescript
 if (typeof element === "string")
@@ -44,14 +45,10 @@ if (typeof element === "string")
 if (!element) return null;
 ```
 
-To get the size of a DOM, window or document, we can test which element type user passed to us. For document, we can check if there is any of following properties.
+To get the size of a DOM, `window` or `document`, we can test which element type user passed to us. For `document`, we can check if there is any of following properties.
 
-- body
-
-  A property of HTML document object.
-- documentElement
-
-  A property of XML document object.
+- `body`: A property of HTML document object.
+- `documentElement`: A property of XML document object.
 
 Following is code.
 
@@ -68,7 +65,7 @@ if (!!(element as any as Document).body || !!(element as any as Document).docume
 }
 ```
 
-For window, it contains a parent property to point to the parent window.
+For `window`, it contains a `parent` property to point to its parent window.
 
 ```typescript
 if (!!(element as any as Window).parent) {
@@ -79,7 +76,7 @@ if (!!(element as any as Window).parent) {
 }
 ```
 
-Otherwise, it should be a DOM in body. And we can get its offset width and height.
+Otherwise, it should be a DOM in `body`. And we can get its offset width and height.
 
 ```typescript
 return {
@@ -157,7 +154,7 @@ if (!element || !target) return {
 
 And we need implement a handler to set the width as same as the one of the target element.
 
-1. Check if the target is a window.
+1. Check if the `target` is a window.
 2. Get its width.
 3. Convert the width if there is a compute function.
 4. Set the width.
@@ -178,7 +175,7 @@ Then we need call this handler.
 setWidth();
 ```
 
-This will be called only once. But we need call this every time when the target element has resized. So we need add an event listener to do so.
+This will be called only once. But we need call this every time when the `target` element has resized. So we need add an event listener to do so.
 
 ```typescript
 target.addEventListener("resize", setWidth, false);

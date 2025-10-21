@@ -10,7 +10,16 @@
 
 ## 获取大小
 
-为了方便起见，我们定义返回值为一个 JSON 对象，其中包含 width 和 height 两个属性，均为数字型，以表示宽度和高度。接下来，我们需要实现以下函数，并返回刚才定义的类型。
+为了方便起见，我们定义返回值为一个 JSON 对象，其中包含 `width` 和 `height` 两个属性，均为数字型，以表示宽度和高度。
+
+```typescript
+export interface SizeContract {
+    width: number;
+    height: number;
+}
+```
+
+接下来，我们需要实现以下函数，并返回刚才定义的类型。
 
 ```javascript
 function getSize(element) {  
@@ -21,12 +30,12 @@ function getSize(element) {  
 }
 ```
 
-在这个函数里，传入参数 element 我们认为可能会是以下任意一种情形。
+在这个函数里，传入参数 `element` 我们认为可能会是以下任意一种情形。
 
 - 字符串，表示某一 DOM 的 ID。
 - 网页文档元素。
-- 窗口元素（即 window 对象）。
-- 某一 body 内的 DOM 元素。
+- 窗口元素（即 `window` 对象）。
+- 某一 `body` 内的 DOM 元素。
 
 为此，我们开始逐一实现。针对字符串，我们先尝试着获取一下它对应的 DOM。
 
@@ -38,8 +47,8 @@ if (!element) return null; 
 
 当然，你也可以把这个改成 query 而非 ID 的方式来获取。然后，针对文档，可以考虑测试以下属性。
 
-- 如果有 body 属性，则可能为 HTML 文档对象。
-- 如果有 documentElement 属性，则可能为 XML 文档对象。
+- 如果有 `body` 属性，则可能为 HTML 文档对象。
+- 如果有 `documentElement` 属性，则可能为 XML 文档对象。
 
 然后再尝试获取其尺寸。
 
@@ -56,7 +65,7 @@ if (element.body || element.documentElement) {  
 }
 ```
 
-而对于窗口元素（即 window 对象），其实只要判断有没有 parent 属性就好了。不过在获取宽度和高度的时候，需要进行一些兼容性处理。
+而对于窗口元素（即 `window` 对象），其实只要判断有没有 `parent` 属性就好了。不过在获取宽度和高度的时候，需要进行一些兼容性处理。
 
 ```javascript
 if (element.parent) {  
@@ -67,7 +76,7 @@ if (element.parent) {  
 }
 ```
 
-那么剩下的，我们就认为应该是 body 内的 DOM 元素对象了。
+那么剩下的，我们就认为应该是 `body` 内的 DOM 元素对象了。
 
 ```javascript
 return {  
@@ -91,9 +100,9 @@ function setSize(element, width, height) {  
 }
 ```
 
-同样，对于参数 element 为字符串的情形，我们先做一个处理。
+同样，对于参数 `element` 为字符串的情形，我们先做一个处理。
 
-```
+```javascript
 var ele = typeof element === "string" ? document.getElementById(element) : element;  
 if (!ele) return null;
 ```
@@ -143,10 +152,10 @@ if (!element || !target) return {  
 
 接下来，我们需要实现一个匿名函数，用于设置宽度。
 
-1. 检查 target 是 window 对象还是 body 内的某一 DOM 对象。
-2. 获取 target 当下的宽度。
-3. 如果 compute 函数存在的话，使用它进行数值转化。
-4. 对 element 设置宽度。
+1. 检查 `target` 是 `window` 对象还是 `body` 内的某一 DOM 对象。
+2. 获取 `target` 当下的宽度。
+3. 如果 `compute` 函数存在的话，使用它进行数值转化。
+4. 对 `element` 设置宽度。
 
 代码如下。
 
@@ -164,7 +173,7 @@ var setWidth = function () {  
 setWidth();
 ```
 
-然而，这只是在调用我们写的这个函数时才会执行一次，对于在此之后的页面变化，并不会重新触发。因此，我们还需要针对这种情况，进行后续跟进，即，当 target 的尺寸发生变化时，我们也需要重新调用这个匿名函数，故需要增加一个事件。
+然而，这只是在调用我们写的这个函数时才会执行一次，对于在此之后的页面变化，并不会重新触发。因此，我们还需要针对这种情况，进行后续跟进，即，当 `target` 的尺寸发生变化时，我们也需要重新调用这个匿名函数，故需要增加一个事件。
 
 ```javascript
 target.addEventListener("resize", setWidth, false);

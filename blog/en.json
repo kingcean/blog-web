@@ -1,5 +1,5 @@
 ﻿{
-    "name": "Web Software Development Blog",
+    "name": "FE Dev Blog",
     "list": [
         {
             "name": "Parse DOM attribute object",
@@ -28,6 +28,10 @@
                 {
                     "name": "C# edition",
                     "url": "https://kingcean.net/blog/?multiple-hit-task"
+                },
+                {
+                    "name": "Demo",
+                    "url": "https://12dlabs.github.io/games/hit/"
                 }
             ]
         },

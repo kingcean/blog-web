@@ -56,9 +56,9 @@ The reason JavaScript can handle these different types of values and ultimately 
 How does JavaScript perform such conversions? First, it determines the most appropriate type based on the current statement and the types of existing variables. It then attempts to invoke the following methods (if available and applicable) in roughly this order:
 
 1. `[Symbol.toPrimitive](hint)`: Attempts to retrieve a value converted to a specific type. By default, this method is not present; if implemented, it must return a primitive value. The `hint` parameter, a string, indicates the desired type and can have the following values:
-   - '"default"': This is the usual value, except in the cases below.
-   - '"number"': Used during numeric coercion, including unary numeric operations and `Number()`.
-   - '"string"':Used during string coercion, including with template literals and `String()`.
+   - `"default"`: This is the usual value, except in the cases below.
+   - `"number"`: Used during numeric coercion, including unary numeric operations and `Number()`.
+   - `"string"`:Used during string coercion, including with template literals and `String()`.
 2. `valueOf()`: Attempts to retrieve the object's intrinsic value. By default, it returns the object itself. If the return value is a non-primitive type, it will be ignored.
 3. `toString()`: Outputs the formatted string representation of the object. This is applicable in limited scenarios.
 
