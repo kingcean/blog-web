@@ -16,6 +16,10 @@
                 {
                     "name": "C# 版",
                     "url": "https://kingcean.net/blog/?yanchi-renwu"
+                },
+                {
+                    "name": "任务 - DataSense 库",
+                    "url": "https://datasense.js.org/articles/?task"
                 }
             ]
         },
@@ -32,6 +36,10 @@
                 {
                     "name": "在线演示效果",
                     "url": "https://12dlabs.github.io/games/hit/"
+                },
+                {
+                    "name": "任务 - DataSense 库",
+                    "url": "https://datasense.js.org/articles/?task"
                 }
             ]
         },
@@ -51,7 +59,13 @@
             "name": "Web 前端本地化",
             "url": "/2016/web-bendihua.md",
             "categories": [],
-            "date": "20160330"
+            "date": "20160330",
+            "related": [
+                {
+                    "name": "本地化 - Langpack 库",
+                    "url": "https://langpack.js.org/articles/?localization"
+                }
+            ]
         },
         {
             "name": "获取和设置 DOM 大小",

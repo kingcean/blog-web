@@ -16,6 +16,10 @@
                 {
                     "name": "C# edition",
                     "url": "https://kingcean.net/blog/?delay-task"
+                },
+                {
+                    "name": "Task - DataSense lib",
+                    "url": "https://datasense.js.org/articles/?task"
                 }
             ]
         },
@@ -32,6 +36,10 @@
                 {
                     "name": "Demo",
                     "url": "https://12dlabs.github.io/games/hit/"
+                },
+                {
+                    "name": "Task - DataSense lib",
+                    "url": "https://datasense.js.org/articles/?task"
                 }
             ]
         },
@@ -51,7 +59,13 @@
             "name": "Localization in web page",
             "url": "/2016/web-localization.md",
             "categories": [],
-            "date": "20160330"
+            "date": "20160330",
+            "related": [
+                {
+                    "name": "Localization - Langpack lib",
+                    "url": "https://langpack.js.org/articles/?localization"
+                }
+            ]
         },
         {
             "name": "Get and set DOM size",
