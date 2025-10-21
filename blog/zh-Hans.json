@@ -4,7 +4,7 @@
         {
             "name": "解析 DOM 元素里的复杂属性值",
             "url": "/2016/jiexi-dom-shuxing.md",
-            "categories": [],
+            "categories": ["dom"],
             "date": "20160318"
         },
         {
@@ -40,7 +40,7 @@
         {
             "name": "JavaScript Promise 实现",
             "url": "/2016/js-promise-shixian.md",
-            "categories": [],
+            "categories": ["underlying"],
             "date": "20160325"
         },
         {
@@ -52,7 +52,7 @@
         {
             "name": "获取和设置 DOM 大小",
             "url": "/2016/dom-daxiao.md",
-            "categories": [],
+            "categories": ["dom"],
             "date": "20160414"
         },
         {
@@ -71,7 +71,7 @@
         {
             "name": "WebNN —— 浏览器也能原生运行 AI",
             "url": "/2024/webnn-yuansheng-ai.md",
-            "categories": [],
+            "categories": ["ai"],
             "date": "20241218",
             "end": true,
             "related": [

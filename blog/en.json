@@ -4,7 +4,7 @@
         {
             "name": "Parse DOM attribute object",
             "url": "/2016/parse-dom-attribute.md",
-            "categories": [],
+            "categories": ["dom"],
             "date": "20160318"
         },
         {
@@ -40,7 +40,7 @@
         {
             "name": "JavaScript Promise",
             "url": "/2016/promise-in-web.md",
-            "categories": [],
+            "categories": ["underlying"],
             "date": "20160325"
         },
         {
@@ -52,7 +52,7 @@
         {
             "name": "Get and set DOM size",
             "url": "/2016/dom-size.md",
-            "categories": [],
+            "categories": ["dom"],
             "date": "20160414"
         },
         {
