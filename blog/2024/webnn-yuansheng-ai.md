@@ -86,6 +86,8 @@ WebNN 最终体现为浏览器内置的一套 JS API 集合，通过暴露类和
 - `MLContext`：所有 AI 操作的通用上下文，可以基于此创建组件，用于数据准备、特征工程、训练、预测和模型评估，以及追踪等附加功能。
 - `MLGraphBuilder`：简单说来，可以被认为是 `MLGraph` 和 `MLOperand` 的工厂。
 
+具体创建和执行链路：`MLContext` 包含设备搭载的可用芯片（CPU、GPU、NPU 等）和电源平衡状态（高性能或低功耗）等信息，以此为参数创建 `MLGraphBuilder`，用于构建计算图（Computational Graph），再编译成 `MLGraph`，便可传入输入 Buffers 并产生输出 Buffers。
+
 ### ONNX
 
 [Open Neural Network Exchange](https://onnx.ai/) 支持市面上大多数主流 AI 框架，功能强大，简化并统一了许多调用方式，其封装格式也更为通用，是现代许多 AI 开发的利器。
