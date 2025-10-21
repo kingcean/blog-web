@@ -69,6 +69,35 @@
             ]
         },
         {
+            "name": "WebNN —— 浏览器也能原生运行 AI",
+            "url": "/2024/webnn-yuansheng-ai.md",
+            "categories": [],
+            "date": "20241218",
+            "end": true,
+            "related": [
+                {
+                    "name": "字节跳动在《稀土掘金》网站上的转载文章",
+                    "url": "https://juejin.cn/post/7476071555530817570"
+                },
+                {
+                    "name": "WebNN - W3C 标准文档",
+                    "url": "https://www.w3.org/TR/webnn/"
+                },
+                {
+                    "name": "GitHub: WebNN - W3C 标准文档",
+                    "url": "https://github.com/webmachinelearning/webnn"
+                },
+                {
+                    "name": "ONNX 中文网站",
+                    "url": "https://onnx.org.cn/"
+                }
+            ],
+            "notes": [
+                "本文中部分图片来自网络，版权归其所有者所有。",
+                "本文最初发布至字节跳动技术文章库之架构前端。"
+            ]
+        },
+        {
             "name": "a == 1 && a == 2 && a != 2 && a != 1",
             "url": "/2025/a-dengyu-1-he-2.md",
             "categories": [],
