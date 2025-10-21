@@ -265,7 +265,6 @@ console.info(JSON.stringify(a)); // -> "{\"info\":\"序列化后仍是一个对�
 
 ```javascript
 a.toJSON = function () {
-  data: "原始层",
   return {
     data: "第一层",
     toJSON() {

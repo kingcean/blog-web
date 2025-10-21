@@ -266,7 +266,6 @@ However, please note that if the `toJSON()` method returns an object that also c
 
 ```javascript
 a.toJSON = function () {
-  data: "Original",
   return {
     data: "First",
     toJSON() {
