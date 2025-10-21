@@ -4,8 +4,8 @@ Web Neural Network API 是一套 Web 友好的 W3C 标准，其基于浏览器�
 
 ## 概述
 
-- https://www.w3.org/TR/webnn/
-
+> https://www.w3.org/TR/webnn/
+>
 > The Web Neural Network API defines a web-friendly hardware-agnostic abstraction layer that makes use of Machine Learning capabilities of operating systems and underlying hardware platforms without being tied to platform-specific capabilities. The abstraction layer addresses the requirements of key Machine Learning JavaScript frameworks and also allows web developers familiar with the ML domain to write custom code without the help of libraries.
 
 ### 用处
@@ -137,7 +137,8 @@ about://flags/#web-machine-learning-neural-network
 | ------ | -------------------- |
 | 名称 | __text-encoder__ |
 | 大小 | 235 MB |
-| 地址 | https://huggingface.co/microsoft/stable-diffusion-v1.5-webnn/resolve/main/text-encoder.onnx |
+
+🔗 https://huggingface.co/microsoft/stable-diffusion-v1.5-webnn/resolve/main/text-encoder.onnx
 
 通过将人类阅读友好（human-readable）文本转换成 AI 模型能理解的 prompt 的 CLIP 模型，以实现图像绘制信息的描述。
 
@@ -149,7 +150,8 @@ about://flags/#web-machine-learning-neural-network
 | ------ | -------------------- |
 | 名称 | __unet__ |
 | 大小 | 1.60 GB |
-| 地址 | https://huggingface.co/microsoft/stable-diffusion-v1.5-webnn/resolve/main/sd-unet-v1.5-model-b2c4h64w64s77-float16-compute-and-inputs-layernorm.onnx |
+
+🔗 https://huggingface.co/microsoft/stable-diffusion-v1.5-webnn/resolve/main/sd-unet-v1.5-model-b2c4h64w64s77-float16-compute-and-inputs-layernorm.onnx
 
 这是一种卷积网络架构图模型（Convolutional networks for biomedical image segmentation），由多层 ResNet 模块串联构成，并在其间添加交叉注意力机制，用于接收额外的文本指令，指导图像生成，其名称由来是因为处理过程形同英文字母 U 如下图，即 contracting path 下采样到 expansive path 上采样的完整过程，故名 U-net。本例中我们预计会进行25轮，以将随机噪声转化为图像隐特征。
 
@@ -161,7 +163,8 @@ about://flags/#web-machine-learning-neural-network
 | ------ | -------------------- |
 | 名称 | __vae-decoder__ |
 | 大小 | 95 MB |
-| 地址 | https://huggingface.co/microsoft/stable-diffusion-v1.5-webnn/resolve/main/Stable-Diffusion-v1.5-vae-decoder-float16-fp32-instancenorm.onnx |
+
+🔗 https://huggingface.co/microsoft/stable-diffusion-v1.5-webnn/resolve/main/Stable-Diffusion-v1.5-vae-decoder-float16-fp32-instancenorm.onnx
 
 此处用的是其中解码部分，可将图片在一定范围内进行高质量拉升，即低分辨率至高分辨率提升后，尽可能保证常规场景的细节仍旧细腻完整，符合一定自然规律。
 
@@ -173,7 +176,8 @@ about://flags/#web-machine-learning-neural-network
 | ------ | -------------------- |
 | 名称 | __safety-checker__ |
 | 大小 | 580 MB |
-| 地址 | https://huggingface.co/microsoft/stable-diffusion-v1.5-webnn/resolve/main/safety_checker_int32_reduceSum.onnx |
+
+🔗 https://huggingface.co/microsoft/stable-diffusion-v1.5-webnn/resolve/main/safety_checker_int32_reduceSum.onnx
 
 其实就是安全审核，过滤掉一些不该出现的内容。此过程执行时图片已经生成完毕，因此是个延后处理的过程。
 
@@ -183,10 +187,10 @@ about://flags/#web-machine-learning-neural-network
 
 可以通过 npm 和打包工具将代码嵌入至代码中，也可直接将脚本上传至字节的 CDN 上之后由页面引用。
 
-[npm package (onnxruntime-web)](https://www.npmjs.com/package/onnxruntime-web)
+> [npm package](https://www.npmjs.com/package/onnxruntime-web) (onnxruntime-web)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.18.0-dev.20240311-5479124834/dist/ort.webgpu.min.js" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.18.0-dev.20240311-5479124834/dist/ort.webgpu.min.js" />
 ```
 
 下方代码中 `ort` 即为 ONNX runtime web 所 `export` 出来的根实例。
@@ -206,6 +210,8 @@ async function builder() => {
     throw new Error();
 };
 ```
+
+以上代码在不支持的情况下，会抛出 `Error`，可 `catch` 此异常并作后续处理。
 
 #### 2. 加载模型
 
