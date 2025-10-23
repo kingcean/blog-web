@@ -111,7 +111,7 @@ npm i onnxruntime-web
 
 对于 Edge 和 Chrome 浏览器，建议更新至 v130.0 或更高版本，并确保启用以下特性。
 
-```
+```url
 about://flags/#web-machine-learning-neural-network
 ```
 
