@@ -197,7 +197,7 @@ class Date {
     return this.toString();
   }
 
-  // … 其它成员属性和方法，此处略。
+  // … Other member properties and methods are omitted here.
 }
 ```
 
@@ -274,7 +274,7 @@ a.toJSON = function () {
   }
 };
 
-// 测试
+// Test
 console.info(JSON.stringify(a)); // -> "{\"data\":\"First\"}"
 ```
 
