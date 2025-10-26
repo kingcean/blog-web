@@ -126,3 +126,12 @@ function delayTest() {  
 ```
 
 你会发现，前面的时间间隔测试中，虽然执行了三次，但实际只会执行最后的那一次；而后面的点击测试中，如果你多次快速点击，只有这一批次中的最后一下会被记录，除非你某两次的点击间隔时常超过0.3秒，那么前面的那次也会被记录，因为这是两个批次。这说明一切运转如预期。
+
+<!-- End -->
+---
+
+原文发布于 MSDN 博客《Delay Task》
+
+> https://blogs.msdn.com/b/kingcean/archive/2016/03/20/delay-task.aspx
+
+(cc) Kingcean Tuan, 2016.

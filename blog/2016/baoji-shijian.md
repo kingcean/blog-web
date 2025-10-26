@@ -130,3 +130,12 @@ document.body.addEventListener("click", function (ev) {  
 ```
 
 当你在页面中快速点击，你会在浏览器控制台中看到，只有快速连击3以上才会显示记录，当出现了100次之后，就不会再有了，除非停一会儿，那就又重新开始计算了。
+
+<!-- End -->
+---
+
+原文发布于 MSDN 博客《Multiple Hit Task》
+
+> https://blogs.msdn.com/b/kingcean/archive/2016/03/21/multiple-hit-task.aspx
+
+(cc) Kingcean Tuan, 2016.
