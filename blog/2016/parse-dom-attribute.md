@@ -246,3 +246,12 @@ export function bindAttr<T>(
 ```
 
 Enjoy!
+
+<!-- End -->
+---
+
+Originally published on MSDN blogs, _Parse DOM attribute object_.
+
+> https://blogs.msdn.com/b/kingcean/archive/2016/03/18/parse-attribute-object-in-dom.aspx
+
+(cc) Kingcean Tuan, 2016.

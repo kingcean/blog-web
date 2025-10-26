@@ -285,3 +285,12 @@ Promise.all(values) {  
 ```
 
 除此之外，还有诸如 Promise.race 这样的函数，相信此处不多说，大家也已明白其实现原理。
+
+<!-- End -->
+---
+
+原文发布于 MSDN 博客《JavaScript Promise》
+
+> https://blogs.msdn.com/b/kingcean/archive/2016/03/25/promise-in-web.aspx
+
+(cc) Kingcean Tuan, 2016.

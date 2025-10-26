@@ -228,3 +228,12 @@ export function adaptHeight(element: HTMLElement, target?: HTMLElement | Window,
 ```
 
 Now we can manage the size of any element in HTML now.
+
+<!-- End -->
+---
+
+Originally published on MSDN blogs, _Get and set DOM size_.
+
+> https://blogs.msdn.com/b/kingcean/archive/2016/04/14/dom-size.aspx
+
+(cc) Kingcean Tuan, 2016.

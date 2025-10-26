@@ -226,3 +226,12 @@ function adaptHeight(element, target, compute) {  
 ```
 
 啊哈，一切都搞定了！
+
+<!-- End -->
+---
+
+原文发布于 MSDN 博客《Get and set DOM size》
+
+> https://blogs.msdn.com/b/kingcean/archive/2016/04/14/dom-size.aspx
+
+(cc) Kingcean Tuan, 2016.

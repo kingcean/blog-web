@@ -431,3 +431,12 @@ console.debug(strings.greetings);
 ```
 
 Well, you will see it works as what we expect so that you can use this anywhere for localization.
+
+<!-- End -->
+---
+
+Originally published on MSDN blogs, _Localization in web page_.
+
+> https://blogs.msdn.com/b/kingcean/archive/2016/03/30/web-localization.aspx
+
+(cc) Kingcean Tuan, 2016.

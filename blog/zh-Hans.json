@@ -5,13 +5,15 @@
             "name": "解析 DOM 元素里的复杂属性值",
             "url": "/2016/jiexi-dom-shuxing.md",
             "categories": ["dom"],
-            "date": "20160318"
+            "date": "20160318",
+            "end": true
         },
         {
             "name": "延迟合并处理任务",
             "url": "/2016/yanchi-renwu.md",
             "categories": [],
             "date": "20160320",
+            "end": true,
             "related": [
                 {
                     "name": "C# 版",
@@ -28,6 +30,7 @@
             "url": "/2016/baoji-shijian.md",
             "categories": [],
             "date": "20160321",
+            "end": true,
             "related": [
                 {
                     "name": "C# 版",
@@ -44,22 +47,25 @@
             ]
         },
         {
-            "name": "网页元素的滑动事件",
-            "url": "/2016/web-huadong.md",
+            "name": "滑动事件",
+            "url": "/2016/huadong.md",
             "categories": [],
-            "date": "20160323"
+            "date": "20160323",
+            "end": true
         },
         {
-            "name": "JavaScript Promise 实现",
-            "url": "/2016/js-promise-shixian.md",
+            "name": "Promise 实现",
+            "url": "/2016/promise-shixian.md",
             "categories": ["underlying"],
-            "date": "20160325"
+            "date": "20160325",
+            "end": true
         },
         {
-            "name": "Web 前端本地化",
-            "url": "/2016/web-bendihua.md",
+            "name": "前端本地化",
+            "url": "/2016/bendihua.md",
             "categories": [],
             "date": "20160330",
+            "end": true,
             "related": [
                 {
                     "name": "本地化 - LangPack 库",
@@ -71,7 +77,8 @@
             "name": "获取和设置 DOM 大小",
             "url": "/2016/dom-daxiao.md",
             "categories": ["dom"],
-            "date": "20160414"
+            "date": "20160414",
+            "end": true
         },
         {
             "name": "创新客户端开发架构",

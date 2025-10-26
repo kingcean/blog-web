@@ -476,3 +476,12 @@ addSlide("demo_gesture_fore", {
 ```
 
 这个测试页面创造一个水平的滑动模块。你也可以用这个创造更多滑动组件出来。
+
+<!-- End -->
+---
+
+原文发布于 MSDN 博客《Slide on web》
+
+> https://blogs.msdn.com/b/kingcean/archive/2016/03/23/slide-on-web.aspx
+
+(cc) Kingcean Tuan, 2016.

@@ -322,3 +322,12 @@ export function race<T>(values: Iterable<T | PromiseLike<T>>): Promise<T> {
 ```
 
 You can implement it by yourself.
+
+<!-- End -->
+---
+
+Originally published on MSDN blogs, _JavaScript Promise_.
+
+> https://blogs.msdn.com/b/kingcean/archive/2016/03/25/promise-in-web.aspx
+
+(cc) Kingcean Tuan, 2016.

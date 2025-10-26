@@ -213,3 +213,12 @@ function bindAttr(element: HTMLElement | string, names: string[], loadOnc
 ```
 
 有没有觉得特别棒？
+
+<!-- End -->
+---
+
+原文发布于 MSDN 博客《Parse DOM attribute object》
+
+> https://blogs.msdn.com/b/kingcean/archive/2016/03/18/parse-attribute-object-in-dom.aspx
+
+(cc) Kingcean Tuan, 2016.

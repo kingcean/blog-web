@@ -396,3 +396,12 @@ console.debug(strings.hello);  // Undefined
 ```
 
 现在，你已经拥有了一套基本的 Web 前端本地化解决方案了。
+
+<!-- End -->
+---
+
+原文发布于 MSDN 博客《Localization in web page》
+
+> https://blogs.msdn.com/b/kingcean/archive/2016/03/30/web-localization.aspx
+
+(cc) Kingcean Tuan, 2016.

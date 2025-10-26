@@ -499,3 +499,12 @@ addSlide("demo_gesture_fore", {
 ```
 
 Now, you can continue to implement lots of components which need sliding by touching or mouse.
+
+<!-- End -->
+---
+
+Originally published on MSDN blogs, _Slide on web_.
+
+> https://blogs.msdn.com/b/kingcean/archive/2016/03/23/slide-on-web.aspx
+
+(cc) Kingcean Tuan, 2016.

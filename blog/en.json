@@ -5,13 +5,15 @@
             "name": "Parse DOM attribute object",
             "url": "/2016/parse-dom-attribute.md",
             "categories": ["dom"],
-            "date": "20160318"
+            "date": "20160318",
+            "end": true
         },
         {
             "name": "Delay task",
             "url": "/2016/delay-task.md",
             "categories": [],
             "date": "20160320",
+            "end": true,
             "related": [
                 {
                     "name": "C# edition",
@@ -28,6 +30,7 @@
             "url": "/2016/multiple-hit-task.md",
             "categories": [],
             "date": "20160321",
+            "end": true,
             "related": [
                 {
                     "name": "C# edition",
@@ -45,21 +48,24 @@
         },
         {
             "name": "Slide on web",
-            "url": "/2016/slide-on-web.md",
+            "url": "/2016/slide.md",
             "categories": [],
-            "date": "20160323"
+            "date": "20160323",
+            "end": true
         },
         {
             "name": "JavaScript Promise",
-            "url": "/2016/promise-in-web.md",
+            "url": "/2016/promise.md",
             "categories": ["underlying"],
-            "date": "20160325"
+            "date": "20160325",
+            "end": true
         },
         {
             "name": "Localization in web page",
-            "url": "/2016/web-localization.md",
+            "url": "/2016/localization.md",
             "categories": [],
             "date": "20160330",
+            "end": true,
             "related": [
                 {
                     "name": "Localization - LangPack lib",
@@ -71,7 +77,8 @@
             "name": "Get and set DOM size",
             "url": "/2016/dom-size.md",
             "categories": ["dom"],
-            "date": "20160414"
+            "date": "20160414",
+            "end": true
         },
         {
             "name": "a == 1 && a == 2 && a != 2 && a != 1",
