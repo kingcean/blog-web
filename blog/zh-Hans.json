@@ -147,6 +147,7 @@
         "promise-in-web": "js-promise-shixian",
         "web-localization": "web-bendihua",
         "dom-size": "dom-daxiao",
-        "a-equals-1-and-2": "a-dengyu-1-he-2"
+        "a-equals-1-and-2": "a-dengyu-1-he-2",
+        "number": "shuzi"
     }
 }
