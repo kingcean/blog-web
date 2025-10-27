@@ -1,4 +1,4 @@
-# WebNN —— Browsers can also run AI natively
+# WebNN —— Browser runs native AI
 
 Web Neural Network API is a web-friendly W3C standard that provides a cross-platform abstraction layer independent of the operating system and underlying hardware based on browser-built JS APIs, leveraging GPUs, CPUs, NPUs, or other purpose-built AI accelerators to facilitate front-end R&D to build AI-based web applications.
 
@@ -33,10 +33,10 @@ Specifically, WebNN serves as the intermediate unified adaptation layer, providi
 
 | OS | Native ML Framework | Manuafactory |
 | ------------ | ------------ | ---------- |
-| Windows | [DirectML](https://learn.microsoft.com/zh-cn/windows/ai/directml/dml) | Microsoft |
+| Windows | [DirectML](https://learn.microsoft.com/en-us/windows/ai/directml/dml) | Microsoft |
 | macOS / iOS / iPadOS | [CoreML](https://developer.apple.com/documentation/CoreML) | Apple |
-| Android | [NN API](https://developer.android.google.cn/ndk/guides/neuralnetworks?hl=zh-cn) | Google |
-| Linux (on Intel® Core) | [OpenVINO](https://www.intel.cn/content/www/cn/zh/developer/tools/openvino-toolkit/overview.html) | Intel |
+| Android | [NN API](https://developer.android.google.cn/ndk/guides/neuralnetworks?hl=en-us) | Google |
+| Linux (on Intel® Core) | [OpenVINO](https://www.intel.cn/content/www/us/en/developer/tools/openvino-toolkit/overview.html) | Intel |
 
 In addition, on early, non-Windows devices, WebNN API polyfills built via the WebGL graphics API implement correspondence in a compatible way. Many newer Chromium-based browsers, such as Microsoft Edge, now support it. Since WebNN is actually driven by Microsoft and developed first on Edge on Windows, it currently (November 2024) has a better experience with this operating system and browser pairing.
 
@@ -133,7 +133,7 @@ Let's use Stable Diffusion 1.5 as an example to demonstrate how to use it.
 
 > Microsoft provides an example of Image Classification (identifying items in images), which is relatively simple and uses the [MobileNet v2](https://huggingface.co/docs/transformers/model_doc/mobilenet_v2) model, which can be learned from the link below.
 >
-> https://learn.microsoft.com/zh-cn/windows/ai/directml/webnn-tutorial
+> https://learn.microsoft.com/en-us/windows/ai/directml/webnn-tutorial
 >
 > This article uses a relatively more complex but common scenario to show, based on [high-resolution image synthesis with latent diffusion models](https://github.com/Stability-AI/StableDiffusion) (powered by Stability AI), which uses multiple models and has some complex data processing.
 
@@ -211,7 +211,7 @@ You can embed code into your code via npm and packaging tools, or you can upload
 
 #### 1. Detection
 
-对 WebNN 能力支持的检测非常简单，关键在于判断标识浏览器的 `navigator` 上的 `ml` 对象能否调用 `createContext` 方法，该方法允许传入一个可选的配置参数，并会返回一个 `fulfilled` 值为 `MLContext` 类型的 `Promise` 对象，可以利用该对象作为参数创建 `MLGraphBuilder` 实例，用于图的编译和执行，但此处我们只是借用是否包含这项能力来验证 WebNN 是否可用。
+The key to determining whether the property `ml` on the `navigator` to identify browser can call the method `createContext` that allows an optional configuration parameter to be passed in and returns a `Promise` object with its `fulfilled` value of type `MLContext` that can be used as a parameter to create a `MLGraphBuilder` instance for graph compilation and execution, but here we are just borrowing this capability to verify that WebNN is available.
 
 ```javascript
 async function builder() => {
@@ -223,17 +223,17 @@ async function builder() => {
 };
 ```
 
-以上代码在不支持的情况下，会抛出 `Error`，可 `catch` 此异常并作后续处理。
+If the above code is not supported, it will throw an `Error`, which can be `catch`ed for exception handler later.
 
 #### 2. Load models
 
-1. 我们实现一个模型加载函数，传入模型名称和初始化参数，通过 fetch 将线上模型文件下载存储值 OPFS（源私有文件系统）中（该函数 `getModelOPFS` 的具体细节和实现见后面随附的“辅助方法和配置”部分），并据此创建推理会话返回。
+1. We implement a model loading function, pass in the model name and initialization parameters, download the online model file to the stored value OPFS (Source Private File System) via fetch (see the _Helper and config_ section attached later for the specific details of function `getModelOPFS`), and create an inference session to return it accordingly.
 
-   这其中，名称是用于我们建立索引方便在 OPFS 中找文件用的，因此可以是任意字符串标识符；参数在是依据不同模型要求填入的，后面步骤 3.3 中会传入。
+   The name is used to create an index to find files in OPFS, so it can be an arbitrary string identifier; The parameters are filled in according to the requirements of different models, and will be passed in in step 3.3.
 
 ```javascript
 /**
- * 加载具体的模型。
+ * Load the specific model.
  */
 async function loadModel(name, dimension) {
     let path = "model/" + modelMapping[name];
@@ -250,22 +250,21 @@ async function loadModel(name, dimension) {
 }
 ```
 
-2. 我们会为上述4个模型进行暂存。
+2. We will stage the above 4 models.
 
 ```javascript
-// 模型们都在这。
+// All models are following.
 let textEncoderSession;
 let vaeDecoderModelSession;
 let unetModelSession;
 let scModelSession;
 ```
 
-3. 接下来，我们要进行初始化，即分别调用上述加载模型的函数并创建对应的推理会话，将其存入上述暂存变量中。当然，为了防止意外发生，我们在初始化之前还要先做清理，即如果推理会话已经存在，那么我们将其释放。
-这其中，各模型的初始化参数是根据其要求传入的，其中部分字段在此处为固定值（配置代码详见后面随附“辅助方法和配置”部分）。
+3. Next, we need to initialize the above-mentioned function to load the model and create a corresponding inference session, which is stored in the above staging variable. Of course, to prevent accidents, we also clean up before initializing it, i.e. if the inference session already exists, then we release it. The initialization parameters of each model are passed in according to their requirements, and some of the fields are fixed values here (see the _Helper and config_ section attached later for details of the configuration code).
 
 ```javascript
 /**
- * 加载模型们。
+ * Load all models.
  */
 async function init() {
     cleanUpModels();
@@ -284,7 +283,7 @@ async function init() {
 }
 
 /**
- * 清理模型们。
+ * Clean up models.
  */
 async function cleanUpModels() {
     if (!textEncoderSession) return;
@@ -301,27 +300,27 @@ async function cleanUpModels() {
 
 #### 3. Execute inference
 
-其实运行模型的关键在于构造模型运行过程中所需的参数，部分值来源于上下文（如前一个模型的返回值），因此这里面大部分代码都是在做这样的转换，这些参数的许多字段通常为 `MLTensor` 类型，因此常有需要将一些数组等对象转为为该类型类型（转化方法的实现可见后面随附“辅助方法和配置”部分）。而运行过程所需参数准备完毕后，对模型的调用本身其实很简单，只需对上述暂存的推理会话实例调用成员方法 `run` 即可，其入参即为上述这些处理后的运行过程所需参数。
+In fact, the key to running the model is to construct the parameters required during the model run, some of the values come from the context (such as the return value of the previous model), so most of the code here is doing such conversions, many fields of these parameters are type of `MLTensor`, so it is often necessary to convert some arrays and other objects to this type type (the implementation of the conversion method can be seen in the _Helper and config_ section below). After the parameters required for the running process are prepared, the call to the model itself is actually very simple, just call the member method `run` on the above-mentioned staging inference session instance, and its parameters are the parameters required for the above processed execution process.
 
-总体来说，依此按照文本编码、unet 循环执行、VAE 解码和健康审查顺序执行推理会话，其中会在 unet 执行前创建一个潜在空间用于存储其结果，以及在 VAE 解码完成后即可生成图片。
+Overall, the inference session is executed in the order of text encoding, unet loop execution, VAE decoding, and health review, where a potential space is created to store its results before the unet is executed, and images can be generated after VAE decoding is complete.
 
 ```javascript
 async function run(positiveText, negativeText) {
-    /* ------- 文本编码 ------- */
+    /* ------- Text encoder ------- */
     const textEncoderInputs = textEncoderInputsGen(positiveText, negativeText);
     const textEncoderOutputs = await textEncoderSession.run(textEncoderInputs);
 
-    /* ------- 生成潜在空间 ------- */
+    /* ------- Generate latent spaces ------- */
     const latentsTensor = toTensor(
         "float16",
         [unetBatch, unetChannelCount, latentHeight, latentWidth],
         latentSpace,
     );
-    const halfLatentElementCount = latentsTensor.size / 2; // 只需要给出第一个 batch [2, 4, 64, 64]。
+    const halfLatentElementCount = latentsTensor.size / 2; // Only resolve the first batch [2, 4, 64, 64].
     let latents = await latentsTensor.getData();
-    let halfLatents = latents.subarray(0, halfLatentElementCount); // 获取第一个 batch。
+    let halfLatents = latents.subarray(0, halfLatentElementCount); // Get the first batch。
 
-    /* ------- U-Net 循环执行 ------- */
+    /* ------- U-Net in loop ------- */
     const unetInputs = await unetInputsGen(textEncoderOutputs);
     for (var i = 0; i < unetIterationCount; ++i) {
         unetInputsRound(unetInputs, i);
@@ -330,14 +329,14 @@ async function run(positiveText, negativeText) {
         denoiseLatentSpace(/*inout*/ latents, i, predictedNoise);
     }
 
-    /* ------- VAE 解码 ------- */
+    /* ------- VAE decode ------- */
     const vaeDecoderInputs = vaeDecoderInputs(latentsTensor, halfLatents);
     const decodedOutputs = await vaeDecoderModelSession.run(vaeDecoderInputs);
 
-    /* ------- 在 Canvas 中显示 ------- */
+    /* ------- Render in canvas ------- */
     displayPlanarRGB(await decodedOutputs.sample.getData());
     
-    /* ------- 运行健康审查 ------- */
+    /* ------- Safety check ------- */
     let resized_image_data = resize_image(224, 224);
     let normalized_image_data = normalizeImageData(resized_image_data);
     const { has_nsfw_concepts } = await scModelSession.run({
@@ -348,11 +347,11 @@ async function run(positiveText, negativeText) {
 }
 ```
 
-上述代码中渲染函数 `displayPlanarRGB`（具体实现此处略）接受坐标颜色信息，以将其绘制至 canvas 上即可。
+In the above code, the render function `displayPlanarRGB` (the specific implementation is omitted here) accepts the coordinate color information and draws it onto the canvas.
 
-具体各模型执行的入参准备函数如下。
+The specific parameters are as follows.
 
-1. __文本编码运行入参__：其中 `positiveText` 是正向文本描述，即用户想生成什么图片；`negativeText` 为负向，即排除掉哪些情形。
+1. __Text encoding parameters__: Where `positiveText` is the forward text description, that is, what image the user wants to generate; `negativeText` is negative, that is, which situations are excluded.
 
 ```javascript
 async function textEncoderInputsGen(positiveText, negativeText) {
@@ -385,13 +384,13 @@ async function textEncoderInputsGen(positiveText, negativeText) {
 }
 ```
 
-2. __U-Net 运行入参__：包含入参基准的生成，以及后续循环时的变更。（其中潜在空间相关函数实现可见后面随附“辅助方法和配置”部分）
+2. __U-Net parameters__：Contains the generation of input baselines, as well as changes during subsequent cycles. (The _Helper and config_ section is attached later)
 
 ```javascript
 async function unetInputsGen(textEncoderOutputs, halfLatents) {
     let latentSpace = new Uint16Array(latentWidth * latentHeight * unetChannelCount);
     generateNoise(/*inout*/ latentSpace, seed);
-    latentSpace = new Uint16Array([...latentSpace, ...latentSpace]); // 根据 unetBatch 进行重复。
+    latentSpace = new Uint16Array([...latentSpace, ...latentSpace]); // Repeat based on unetBatch.
     prescaleLatentSpace(/*inout*/ halfLatents, defaultSigmas[0]);
     return {
         encoder_hidden_states: toTensor(
@@ -404,10 +403,10 @@ async function unetInputsGen(textEncoderOutputs, halfLatents) {
 
 function unetInputsRound(unetInputs, i) {
     unetInputs["timestep"] = fillTensor("int64", [unetBatch], BigInt(Math.round(defaultTimeSteps[i])));
-    let nextLatents = latents.slice(0); // 复制第一个 batch，用于正向和负向 prompt。
+    let nextLatents = latents.slice(0); // Copy the first batch used to positive prompt or negative one.
     let halfNextLatents = nextLatents.subarray(0, halfLatentElementCount);
     scaleLatentSpaceForPrediction(/*inout*/ halfNextLatents, i);
-    nextLatents.copyWithin(halfLatentElementCount, 0, halfLatentElementCount); // 从低往高复制。
+    nextLatents.copyWithin(halfLatentElementCount, 0, halfLatentElementCount); // Copy from low to high.
     unetInputs.sample = toTensor(
         "float16",
         [unetBatch, unetChannelCount, latentHeight, latentWidth],
@@ -416,20 +415,20 @@ function unetInputsRound(unetInputs, i) {
 }
 ```
 
-3. __VAE 解码运行入参__：由于上一步 unet 基本将结果存入了潜在空间，因此此处入参无需使用其对应 Outputs。
+3. __VAE decoding parameters__：Since the previous step unet basically stores the results in latent space, there is no need to use its corresponding Outputs for entering parameters here.
 
 ```javascript
 function async vaeDecoderInputsGen(latentsTensor, halfLatents) {
-    applyVaeScalingFactor(/*inout*/ halfLatents); // 从 latent 中解码。
+    applyVaeScalingFactor(/*inout*/ halfLatents); // Decode from latent.
     let dimensions = latentsTensor.dims.slice(0);
-    dimensions[0] = 1; // 设置 batch 尺寸为 1。
+    dimensions[0] = 1; // Set the size of batch as 1.
     const vaeDecoderInputs = {
         latent_sample: toTensor("float16", dimensions, halfLatents.slice(0)),
     };
 }
 ```
 
-4. __审查入参__：较为简短，已位于 `run` 函数内。（其中涉及的变更图片大小等函数的实现此处略）
+4. __Safety check arguments__：Relatively short, already in the function `run`. (The implementation of functions such as changing the image size involved is omitted here)
 
 #### Helper and config
 
@@ -459,20 +458,20 @@ const ArrayTypeMapping = {
     uint64: BigUint64Array,
     int64: BigInt64Array
 }
-const modelMapping = { // 模型文件路径映射
+const modelMapping = { // Mapping of model path
     "text-encoder": "text-encoder.onnx",
     "unet": "sd-unet-v1.5-model-b2c4h64w64s77-float16-compute-and-inputs-layernorm.onnx",
     "vae-decoder": "Stable-Diffusion-v1.5-vae-decoder-float16-fp32-instancenorm.onnx",
     "safety-checker": "safety_checker_int32_reduceSum.onnx"
 };
-let seed = "1234"; // 随机数 - 可修改
+let seed = "1234"; // Random seed, can be modified.
 ```
 
 - __Model → OPFS__
 
 ```javascript
 /**
- * 通过源私有文件系统（Origin Private File System）获取模型。
+ * Get model from Origin Private File System.
  */
 async function getModelOPFS(name, url, updateModel) {
     const root = await navigator.storage.getDirectory();
@@ -526,7 +525,7 @@ async function getModelOPFS(name, url, updateModel) {
 
 ```javascript
 /**
- * 将值或 byte 数组转换为张量对象。
+ * Convert a value or byte to tensor.
  */
 export function toTensor(dataType, shape, values) {
     let size = 1;
@@ -540,7 +539,7 @@ export function toTensor(dataType, shape, values) {
 }
 
 /**
- * 创建并填充张量对象。
+ * Create and fill tensor.
  */
 export function fillTensor(dataType, shape, values) {
     let size = 1;

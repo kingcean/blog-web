@@ -81,6 +81,39 @@
             "end": true
         },
         {
+            "name": "WebNN —— Browser runs native AI",
+            "url": "/2024/webnn-yuansheng-ai.md",
+            "categories": ["ai"],
+            "date": "20241218",
+            "end": true,
+            "related": [
+                {
+                    "name": "Xitu Juejin",
+                    "subtitle": "published by ByteDance",
+                    "url": "https://juejin.cn/post/7476071555530817570"
+                },
+                {
+                    "name": "WebNN",
+                    "subtitle": "W3C spec",
+                    "url": "https://www.w3.org/TR/webnn/"
+                },
+                {
+                    "name": "WebNN",
+                    "subtitle": "GitHub (W3C spec)",
+                    "url": "https://github.com/webmachinelearning/webnn"
+                },
+                {
+                    "name": "ONNX",
+                    "subtitle": "Official website",
+                    "url": "https://onnx.ai/"
+                }
+            ],
+            "notes": [
+                "Some of the pictures in this article are from the Internet, and the copyright belongs to their owners.",
+                "This article was originally published in Simplified Chinese on the front-end architecture of the ByteDance technical article library."
+            ]
+        },
+        {
             "name": "a == 1 && a == 2 && a != 2 && a != 1",
             "url": "/2025/a-equals-1-and-2.md",
             "categories": [],
