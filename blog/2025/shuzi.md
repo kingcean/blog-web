@@ -1,4 +1,4 @@
-JavaScript 中的数字（`Number`），属于基本类型，既能表示整数，又能表示常规小数，还能是带指数的小数。其支持各类适用于数字的运算符，除此之外在内置对象 `Math` 中包含大量辅助方法和常量属性。和其它许多编程语言一样，它也有着自己在精度和范围上的限制。
+JavaScript 中的数字（`Number`），充斥在前端脚本中的各个角落。其属于基本类型，既能表示整数，又能表示常规小数，还能是带指数的小数。支持各类适用于数字的运算符，并在内置对象 `Math` 中包含大量辅助方法和常量属性。和其它许多编程语言一样，它也有着自己在精度和范围上的限制。
 
 ## 特征
 
@@ -83,16 +83,53 @@ console.info((0.1 + 0.2 - 0.3) < Number.EPSILON); // -> true
 
 除此之外，还有3个比较特殊的 `Number` 类型的值，其中一些在上文中已经出现过。
 
-- `NaN`：不是一个数字（Not a number）。该值通常由不合法算数（例如除以 0 所得的商）或其它类型强转数字时失败而来。该值有一处比较特殊的抢矿，即其不等于任何值或对象，包括也不等于自己，只能使用 `isNaN` 判断；以及其与任何数字的大小比较，均返回 `false`。
-- `Number.POSITIVE_INFINITY`：正无穷。这是 JavaScript 中唯一大于 `Number.MAX_VALUE` 的值。
-- `Number.NEGATIVE_INFINITY`：负无穷。这是 JavaScript 中唯一小于 `-Number.MAX_VALUE` 的值。
-- 以上关于大小比较，有个矛盾之处，即 `NaN` 分别与 `Number.POSITIVE_INFINITY` 和 `Number.NEGATIVE_INFINITY`，究竟竖大熟小：此时遵循 `NaN` 的规则，即均返回 `false`。
+- `NaN`
 
-为什么会出现这些特征，以及这些阈值是怎么来的呢？这就和其在计算机底层的编码有关了。
+  不是一个数字（Not a number）。该值通常由以下情形的来。
+  
+  - 计算结果不是实数的数学运算，例如 `Math.sqrt(-2)`。
+  - 其它类型强转数字时失败而来。
+  - 不定式。
+  - 与 `NaN` 进行常见的算数运算。
+  - 将一些对象的无效情况，转化成数字，例如从不合法的日期中获取 Tick（`new Date("Good morning").getTime()`）。
+
+  该值有一处比较特殊的抢矿，即其不等于任何值或对象，包括也不等于自己，只能使用 `isNaN` 判断；以及其与任何数字的大小比较，均返回 `false`。
+
+- `Number.POSITIVE_INFINITY`
+
+  正无穷，亦即 `Infinity`。这是 JavaScript 中唯一大于 `Number.MAX_VALUE` 的值。
+
+- `Number.NEGATIVE_INFINITY`
+
+  负无穷，亦即 `-Infinity`。这是 JavaScript 中唯一小于 `-Number.MAX_VALUE` 的值。
+
+以上关于大小比较，有个矛盾之处，即 `NaN` 分别与 `Number.POSITIVE_INFINITY` 和 `Number.NEGATIVE_INFINITY`，究竟竖大熟小：此时遵循 `NaN` 的规则，即均返回 `false`。
+
+```javascript
+console.info(Math.sqrt(-2)); // -> NaN
+console.info(0 * INFINITY); // -> NaN
+console.info(1 ** INFINITY); // -> NaN
+console.info(INFINITY / INFINITY); // -> NaN
+console.info(INFINITY - INFINITY); // -> NaN
+console.info(NaN === NaN); // -> false
+console.info(NaN > 1); // -> false
+console.info(NaN < 1); // -> false
+console.info(NaN < Number.POSITIVE_INFINITY); // -> false
+console.info(NaN > Number.POSITIVE_INFINITY); // -> false
+console.info(100 / 0); // -> INFINITY
+console.info(-100 / 0); // -> -INFINITY
+console.info(Number.POSITIVE_INFINITY); // -> Infinity
+console.info(-Number.POSITIVE_INFINITY); // -> -Infinity
+console.info(-Number.POSITIVE_INFINITY === Number.NEGATIVE_INFINITY); // -> true
+console.info(Number.POSITIVE_INFINITY + 100); // -> Infinity
+console.info(Number.POSITIVE_INFINITY * 100); // -> Infinity
+```
 
 ## 编码结构
 
-数字在编码结构上，是由 64 位二进制表示，其从左到右内由3部分构成。
+为什么会出现这些特征，以及这些阈值是怎么来的呢？这就和其在计算机底层的编码有关了。
+
+`Number`在编码结构上，是由 64 位二进制表示，其从左到右内由3部分构成。
 
 1. 其中首位表示符号（sign），0 为正、1 为负。
 2. 随后11位（即第2位-第12位）表示指数（exponent），这些位数的二进制转换为十进制后，可表示的数字范围为 -1022 至 1023 闭区间。
