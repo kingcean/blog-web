@@ -97,27 +97,40 @@ console.info((0.1 + 0.2 - 0.3) < Number.EPSILON); // -> true
 
 - `Number.POSITIVE_INFINITY`
 
-  正无穷，亦即 `Infinity`。这是 JavaScript 中唯一大于 `Number.MAX_VALUE` 的值。
+  正无穷（+∞），亦即 `Infinity`。这是 JavaScript 中唯一大于 `Number.MAX_VALUE` 的 `Number` 数值。
 
 - `Number.NEGATIVE_INFINITY`
 
-  负无穷，亦即 `-Infinity`。这是 JavaScript 中唯一小于 `-Number.MAX_VALUE` 的值。
+  负无穷（-∞），亦即 `-Infinity`。这是 JavaScript 中唯一小于 `-Number.MAX_VALUE` 的 `Number` 数值。
 
 以上关于大小比较，有个矛盾之处，即 `NaN` 分别与 `Number.POSITIVE_INFINITY` 和 `Number.NEGATIVE_INFINITY`，究竟竖大熟小：此时遵循 `NaN` 的规则，即均返回 `false`。
 
 ```javascript
+// 虚数
 console.info(Math.sqrt(-2)); // -> NaN
+
+// 不定式
 console.info(0 * INFINITY); // -> NaN
 console.info(1 ** INFINITY); // -> NaN
 console.info(INFINITY / INFINITY); // -> NaN
 console.info(INFINITY - INFINITY); // -> NaN
+
+// NaN 的相等和大小比较
 console.info(NaN === NaN); // -> false
+console.info(NaN !== NaN); // -> true
 console.info(NaN > 1); // -> false
 console.info(NaN < 1); // -> false
+console.info(NaN === 1); // -> false
+console.info(NaN !== 1); // -> true
 console.info(NaN < Number.POSITIVE_INFINITY); // -> false
 console.info(NaN > Number.POSITIVE_INFINITY); // -> false
-console.info(100 / 0); // -> INFINITY
-console.info(-100 / 0); // -> -INFINITY
+console.info(NaN === Number.POSITIVE_INFINITY); // -> false
+console.info(NaN !== Number.POSITIVE_INFINITY); // -> true
+
+// 无穷
+console.info(100 / 0); // -> Infinity
+console.info(-100 / 0); // -> -Infinity
+console.info(INFINITY > Number.MAX_VALUE); // -> Infinity
 console.info(Number.POSITIVE_INFINITY); // -> Infinity
 console.info(-Number.POSITIVE_INFINITY); // -> -Infinity
 console.info(-Number.POSITIVE_INFINITY === Number.NEGATIVE_INFINITY); // -> true
@@ -222,9 +235,35 @@ Number = (-1)<sup>sign</sup> × (1 + mantissa) × 2<sup>exponent</sup>
 
   以特定语言环境表示该数字的字符串，接受可选的 `locales` 和 `options` 参数。
 
-## 受影响
+## 影响与否
 
-字符串的长度受最大精确整数（`Number.MAX_SAFE_INTEGER`）影响，理论最多只能有 2⁵³-1 个元素。不过此长度的字符串需要 16,384 TB 的存储空间，远超当下许多设备的内存限制，因此实际情况通常是字符串最大长度会更小。
+细品下来，考虑到 JavaScript 中许多其它类型的一些区间范围，受数字表示影响，似乎也会受精度整数的极值限制。那么是否真的如此呢？
+
+- 字符串的最大长度
+
+  字符串（`string`）的长度似乎受最大精确整数（`Number.MAX_SAFE_INTEGER`）影响限制，理论最多只能有 2⁵³-1 个元素。不过此长度的字符串需要 16,384 TB 的存储空间，远超当下许多设备的实际运行内存使用情况。
+
+  因此实际情况通常是字符串最大长度会比这个限制要显著更小，具体值受不同 JavaScript 运行环境实现而不一定相同。
+
+- 日期的表示范围
+
+  日期与时间（`Date`）是以协调世界时（UTC）1970年1月1日零点整为原点，以毫秒（ms）为精度，使用时间戳表示的具体时间点的结构，不考虑闰秒。也就是说，它本质上是依靠数字进行对具体日期时间进行存储，并经封装转义而来的结构。既然底层基于数字，那么似乎其表示的最古老时间和最未来时间，应该是受精确整数的最大和最小值确定。
+
+  然而实际也并非如此。日期的表示范围另有约定，其以该原点的正负一亿天（即864万亿毫秒）范围为界，也就是协调世界时公元前271821年4月20日零点整到公元275760年9月13日零点整闭区间，超出这个范围的会被视为非法日期。
+
+  ```javascript
+  function logDate(num) {
+    console.info(new Date(num).toUTCString());
+  }
+
+  logDate(0); // -> Thu, 01 Jan 1970 00:00:00 GMT
+  logDate(8640000000000000);  // -> Sat, 13 Sep 275760 00:00:00 GMT
+  logDate(8640000000000001);  // -> Invalid Date
+  logDate(-8640000000000000); // -> Tue, 20 Apr -271821 00:00:00 GMT
+  logDate(-8640000000000001); // -> Invalid Date
+  logDate(Number.MAX_SAFE_INTEGER); // -> Invalid Date
+  logDate(Number.MIN_SAFE_INTEGER); // -> Invalid Date
+  ```
 
 ## `BigInt`
 
