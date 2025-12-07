@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:image" content="../images/bg/poster.jpg">
     <title>Projects at Alibaba Group - Kingcean.org</title>
-    <link href="https://cdn.jsdelivr.net/npm/hje@2.2.0/docs/css/site.org.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/hje@2.3.1/docs/css/site.org.css" rel="stylesheet" />
     <link href="../css/current.css" rel="stylesheet" />
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.2.0/dist/index.js" ></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/marked@16.2.1/lib/marked.umd.js" ></script>
     <style type="text/css" >
     #blog_content {
@@ -17,13 +16,13 @@
         width: 100%;
     }
     </style>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.2.0/docs/js/site.js" ></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.3.1/docs/js/mdblogs.js" ></script>
     <script type="text/javascript">
     function onInit() {
-        site.getString("blogs", "topmenu-blogs");
-        site.getString("goHome", "link-gohome");
+        DeepX.MdBlogs.setElementText("topmenu-blogs", "blogs" );
+        DeepX.MdBlogs.setElementText("link-gohome", "goHome");
 
-        var id = site.firstQuery();
+        var id = DeepX.MdBlogs.firstQuery();
         var menu = [
             { name: "Quark", id: "quark" },
             { name: "APASS", id: "apass" },
@@ -44,7 +43,7 @@
             r2 = r2.replace(/\(.\//g, "(./");
             cntEle.innerHTML = "<section>" + marked.parse(r2) + "</section>";
         }, function (r) {
-            cntEle.innerHTML = "<section><em>" + site.getString("loadFailed") + "</em></section>";
+            cntEle.innerHTML = "<section><em>" + DeepX.MdBlogs.getLocaleString("loadFailed") + "</em></section>";
         });
     }
     </script>

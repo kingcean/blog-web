@@ -1,0 +1,187 @@
+﻿{
+    "name": "FE Dev Blog",
+    "name#zh": "前端开发博客",
+    "blog": [
+        {
+            "name": "Parse DOM attribute object",
+            "name#zh": "解析 DOM 元素里的复杂属性值",
+            "file": "parse-dom-attribute.md",
+            "file#zh": "jiexi-dom-shuxing.md",
+            "keywords": ["dom"],
+            "date": "20160318",
+            "end": true
+        },
+        {
+            "name": "Delay task",
+            "name#zh": "延迟合并处理任务",
+            "file": "delay-task.md",
+            "file#zh": "yanchi-renwu.md",
+            "keywords": [],
+            "date": "20160320",
+            "end": true,
+            "related": [
+                {
+                    "name": "C# edition",
+                    "name#zh": "C# 版",
+                    "url": "https://kingcean.net/blog/?delay-task",
+                    "url#zh": "https://kingcean.net/blog/?yanchi-renwu"
+                },
+                {
+                    "name": "Task - DataSense lib",
+                    "name#zh": "任务 - DataSense 库",
+                    "url": "https://datasense.js.org/articles/?task",
+                    "url#zh": "https://datasense.js.org/articles/?task"
+                }
+            ]
+        },
+        {
+            "name": "Multiple hit task",
+            "name#zh": "暴击事件",
+            "file": "multiple-hit-task.md",
+            "file#zh": "baoji-shijian.md",
+            "keywords": [],
+            "date": "20160321",
+            "end": true,
+            "related": [
+                {
+                    "name": "C# edition",
+                    "name#zh": "C# 版",
+                    "url": "https://kingcean.net/blog/?multiple-hit-task",
+                    "url#zh": "https://kingcean.net/blog/?baoji-shijian"
+                },
+                {
+                    "name": "Demo",
+                    "name#zh": "在线演示效果",
+                    "url": "https://12dlabs.github.io/games/hit/"
+                },
+                {
+                    "name": "Task - DataSense lib",
+                    "name#zh": "任务 - DataSense 库",
+                    "url": "https://datasense.js.org/articles/?task"
+                }
+            ]
+        },
+        {
+            "name": "Slide on web",
+            "name#zh": "滑动事件",
+            "file": "slide.md",
+            "file#zh": "huadong.md",
+            "keywords": [],
+            "date": "20160323",
+            "end": true
+        },
+        {
+            "name": "JavaScript Promise",
+            "name#zh": "Promise 实现",
+            "file": "promise.md",
+            "file#zh": "promise-shixian.md",
+            "keywords": ["underlying"],
+            "date": "20160325",
+            "end": true
+        },
+        {
+            "name": "Localization in web page",
+            "name#zh": "前端本地化",
+            "file": "localization.md",
+            "file#zh": "bendihua.md",
+            "keywords": [],
+            "date": "20160330",
+            "end": true,
+            "related": [
+                {
+                    "name": "Localization - LangPack lib",
+                    "name#zh": "本地化 - LangPack 库",
+                    "url": "https://langpack.js.org/articles/?localization",
+                    "url#zh": "https://langpack.js.org/articles/?localization"
+                }
+            ]
+        },
+        {
+            "name": "Get and set DOM size",
+            "name#zh": "获取和设置 DOM 大小",
+            "file": "dom-size.md",
+            "file#zh": "dom-daxiao.md",
+            "keywords": ["dom"],
+            "date": "20160414",
+            "end": true
+        },
+        {
+            "name": "创新客户端开发架构",
+            "disable": true,
+            "disable#zh": false,
+            "intro": "看着大家在移动端玩得风生水起，传统的 PC 端仍旧有它不可或缺的存在理由，无论是面向企业办公，还是打造顶级娱乐和游戏，我们都会一如既往地继续投资 PC 端软件的研发。然而，由于一些开发和发布的模式原因，以及历史惯性所致，导致传统PC端软件在产品迭代上略显迟缓。有什么办法来解决这个问题吗？解决这个问题的过程本身，又会遇到什么新的问题吗？",
+            "file": "iqiyi-pca.md",
+            "keywords": [],
+            "date": "20181202",
+            "end": true,
+            "related": [
+                {
+                    "name": "PPT",
+                    "url": "https://kingcean.org/blog/2018/attachments/Top100Summit-2018-iQIYI-Arch.pptx"
+                }
+            ]
+        },
+        {
+            "name": "WebNN —— 浏览器也能原生运行 AI",
+            "name#en": "WebNN —— Browser runs native AI",
+            "file": "webnn-native-ai.md",
+            "file#zh": "webnn-yuansheng-ai.md",
+            "keywords": ["ai"],
+            "date": "20241218",
+            "end": true,
+            "related": [
+                {
+                    "name": "稀土掘金",
+                    "name#en": "Xitu Juejin",
+                    "subtitle": "字节跳动发布技术文章",
+                    "subtitle#en": "published by ByteDance",
+                    "url": "https://juejin.cn/post/7476071555530817570"
+                },
+                {
+                    "name": "WebNN",
+                    "subtitle": "W3C spec",
+                    "subtitle#zh": "W3C 规范",
+                    "url": "https://www.w3.org/TR/webnn/"
+                },
+                {
+                    "name": "WebNN",
+                    "subtitle": "GitHub (W3C spec)",
+                    "subtitle#zh": "GitHub（W3C 页）",
+                    "url": "https://github.com/webmachinelearning/webnn"
+                },
+                {
+                    "name": "ONNX",
+                    "subtitle": "Official website",
+                    "subtitle#zh": "简体中文官网",
+                    "url": "https://onnx.ai/",
+                    "url#zh": "https://onnx.org.cn/"
+                }
+            ],
+            "notes": [
+                "Some of the pictures in this article are from the Internet, and the copyright belongs to their owners.",
+                "This article was originally published in Simplified Chinese on the front-end architecture of the ByteDance technical article library."
+            ],
+            "notes#zh": [
+                "本文中部分图片来自网络，版权归其所有者所有。",
+                "本文最初发布至字节跳动技术文章库之架构前端。"
+            ]
+        },
+        {
+            "name": "a == 1 && a == 2 && a != 2 && a != 1",
+            "file": "a-equals-1-and-2.md",
+            "file#zh": "a-dengyu-1-he-2.md",
+            "keywords": [],
+            "date": "20251017"
+        },
+        {
+            "name": "数字的范围精度和内在原理",
+            "name#en": "Number (precision and structure)",
+            "file": "number.md",
+            "file#zh": "shuzi.md",
+            "keywords": [],
+            "date": "20251027"
+        }
+    ],
+    "redir": {
+    }
+}
