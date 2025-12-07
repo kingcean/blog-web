@@ -23,8 +23,8 @@
                 {
                     "name": "C# edition",
                     "name#zh": "C# 版",
-                    "url": "https://kingcean.net/blog/?delay-task",
-                    "url#zh": "https://kingcean.net/blog/?yanchi-renwu"
+                    "url": "https://kingcean.net/blog/?2016/delay-task",
+                    "url#zh": "https://kingcean.net/blog/?2016/yanchi-renwu"
                 },
                 {
                     "name": "Task - DataSense lib",
@@ -57,7 +57,8 @@
                 {
                     "name": "Task - DataSense lib",
                     "name#zh": "任务 - DataSense 库",
-                    "url": "https://datasense.js.org/articles/?task"
+                    "url": "https://datasense.js.org/articles/?wiki/task",
+                    "url#zh": "https://datasense.js.org/articles/?wiki/renwu"
                 }
             ]
         },
@@ -91,8 +92,8 @@
                 {
                     "name": "Localization - LangPack lib",
                     "name#zh": "本地化 - LangPack 库",
-                    "url": "https://langpack.js.org/articles/?localization",
-                    "url#zh": "https://langpack.js.org/articles/?localization"
+                    "url": "https://langpack.js.org/articles/?wiki/localization",
+                    "url#zh": "https://langpack.js.org/articles/?wiki/localization"
                 }
             ]
         },
@@ -143,6 +144,7 @@
                     "subtitle#en": "published by ByteDance",
                     "url": "https://juejin.cn/post/7476071555530817570"
                 },
+                "References",
                 {
                     "name": "WebNN",
                     "subtitle": "W3C spec",
