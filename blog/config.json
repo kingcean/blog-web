@@ -119,14 +119,20 @@
                     "name": "PPT",
                     "url": "https://kingcean.org/blog/2018/attachments/Top100Summit-2018-iQIYI-Arch.pptx"
                 }
+            ],
+            "notes": [
+                "本文内容为第7届 Top 100 软件案例研究峰会中的演讲内容。"
             ]
         },
         {
-            "name": "WebNN —— 浏览器也能原生运行 AI",
-            "name#en": "WebNN —— Browser runs native AI",
+            "name": "WebNN",
             "file": "webnn-native-ai.md",
             "file#zh": "webnn-yuansheng-ai.md",
             "keywords": ["ai"],
+            "subtitle": "Browser runs native AI",
+            "subtitle#zh": "浏览器也能原生运行 AI",
+            "intro": "Web Neural Network API is a web-friendly W3C standard that provides a cross-platform abstraction layer independent of the operating system and underlying hardware based on browser-built JS APIs, leveraging GPUs, CPUs, NPUs, or other purpose-built AI accelerators to facilitate front-end R&D to build AI-based web applications.",
+            "intro#zh": "Web Neural Network API 是一套 Web 友好的 W3C 标准，其基于浏览器内置 JS API 的方式，提供与操作系统和底层硬件无关的跨平台抽象层，利用 GPU、CPU、NPU 或其它专门构建的 AI 加速器，方便前端研发来构建基于人工智能的网页应用。",
             "date": "20241218",
             "end": true,
             "related": [
@@ -168,6 +174,8 @@
         },
         {
             "name": "a == 1 && a == 2 && a != 2 && a != 1",
+            "intro": "If we were to create an object a such that the equation a == 1 && a == 2 && a != 2 && a != 1 holds true, it sounds bizarre at first, but upon closer thought, it's actually quite easy to achieve.",
+            "intro#zh": "如果让我们创建一个对象 a，使得等式 a == 1 && a == 2 && a != 2 && a != 1 成立，如何做到呢？",
             "file": "a-equals-1-and-2.md",
             "file#zh": "a-dengyu-1-he-2.md",
             "keywords": [],
@@ -176,6 +184,7 @@
         {
             "name": "数字的范围精度和内在原理",
             "name#en": "Number (precision and structure)",
+            "intro#zh": "JS 世界中的 number，似乎不区分整型和小数，同时它也有着精度方面的限制，那么具体的特征是什么呢？让我们一起来探究。",
             "file": "number.md",
             "file#zh": "shuzi.md",
             "keywords": [],
