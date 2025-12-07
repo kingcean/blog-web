@@ -246,7 +246,7 @@ Considering that many other types of range ranges in JavaScript are affected by 
 
   Date and time (`Date`) is a structure of a specific time point represented by a timestamp based on the origin of the zero point of January 1, 1970 in Coordinated Universal Time (UTC) and with milliseconds (ms) as the precision, regardless of leap seconds. In other words, it essentially relies on numbers to store specific dates and times, and is escaped by encapsulation. Since the underlying layer is based on numbers, it seems that the oldest and most future times it represents should be determined by the maximum and minimum values of the exact integer.
 
-  However, this is not the case. The range of the date is defined by the range of plus or minus 100 million days (i.e. 864 trillion milliseconds) of the origin, that is, the range from 0:00 on April 20, 271821 BC to 0:00 on September 13, 275760 AD.
+  However, this is not the case. The range of the date is defined by the range of plus or minus 100 million days (i.e. 864 trillion milliseconds) of the origin, that is, the range from 0:00 on April 20, 271821 BC to 0:00 on September 13, 275760 AD. This range is less than and within the scope of exact integers in JavaScript.
 
   ```javascript
   function logDate(num) {
@@ -270,6 +270,7 @@ Its constructor (likewise `Number` without keywords `new`) accepts a number or a
 
 ```javascript
 console.info(1n === BigInt(1)); // -> true
+console.info(1n + 1n); // -> 2n
 ```
 
 Its `typeof` returns a string `bigint`. When performing static function `JSON.stringify` to serialize, it will be converted into a string form, and the content returned will be the corresponding decimal numeric representation.
