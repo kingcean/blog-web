@@ -6,8 +6,6 @@ Web Neural Network API 是一套 Web 友好的 W3C 标准，其基于浏览器�
 
 ## 概述
 
-> https://www.w3.org/TR/webnn/
->
 > The Web Neural Network API defines a web-friendly hardware-agnostic abstraction layer that makes use of Machine Learning capabilities of operating systems and underlying hardware platforms without being tied to platform-specific capabilities. The abstraction layer addresses the requirements of key Machine Learning JavaScript frameworks and also allows web developers familiar with the ML domain to write custom code without the help of libraries.
 
 ### 用处

@@ -1,6 +1,6 @@
 ﻿{
-    "name": "FE Dev Blog",
-    "name#zh": "前端开发博客",
+    "name": "FE Blog",
+    "name#zh": "前端博客",
     "blog": [
         {
             "name": "Parse DOM attribute object",
@@ -191,6 +191,15 @@
             "file#zh": "shuzi.md",
             "keywords": [],
             "date": "20251027"
+        },
+        {
+            "name": "微前端实现的另一个思路",
+            "name#en": "New solution of micro-frontend",
+            "intro#zh": "微前端是一种将许多子业务拆散到对应不同的前端包，并由前端主应用按需载入进行运行呈现的一套模式。为减少相互影响，这些被载入的独立模块之间会被进行安全隔离，且各自均可独立维护开发。",
+            "file": "weiqianduan.md",
+            "file#en": "microfe.md",
+            "keywords": [],
+            "date": "20251207"
         }
     ],
     "redir": {
