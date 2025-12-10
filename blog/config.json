@@ -150,8 +150,7 @@
         },
         {
             "name": "创新客户端开发架构",
-            "disable": true,
-            "disable#zh": false,
+            "name#en": "Creative architecture of client app (in Chinese simplified)",
             "intro": "看着大家在移动端玩得风生水起，传统的 PC 端仍旧有它不可或缺的存在理由，无论是面向企业办公，还是打造顶级娱乐和游戏，我们都会一如既往地继续投资 PC 端软件的研发。然而，由于一些开发和发布的模式原因，以及历史惯性所致，导致传统PC端软件在产品迭代上略显迟缓。有什么办法来解决这个问题吗？解决这个问题的过程本身，又会遇到什么新的问题吗？",
             "file": "iqiyi-pca.md",
             "keywords": [],
