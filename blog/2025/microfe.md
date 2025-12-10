@@ -20,7 +20,7 @@ However, as front-end pages have grown increasingly large and comprehensive, a s
 
 The solution to this challenge is micro-frontend.
 
-### Solutions
+### About the Solution
 
 In today's real world, micro-frontend technology is applied in many scenarios, emphasizing independence, composability, autonomy, and isolation, albeit with some trade-offs based on existing web frontend technologies.
 
@@ -112,6 +112,16 @@ When the interface elements change, due to the influence of MVVM, these changes 
 
 The content transmitted via the post message primarily includes changes to the view model and any newly used view templates. The reverse transmission mainly consists of subscription information.
 
+### Summary
+
+In short, the principle of this micro-frontend solution is as following.
+
+- Load the business page through a hidden iframe, the core of which lies in the script rather than the page, the script communicates with the backend, and is used to create view templates and view models, and the related content and subsequent changes are summarized and collected through the subscription mechanism, and sent to the host page, and accepted by the front-end main application, and the actual rendering and update are performed;
+- At the same time, the interface receives an interactive response and causes the view model to change, or triggers a custom event, serializes it and sends it back to the embedded page, and finally routes synchronize it to the corresponding original view model, or trigger the corresponding function.
+- The state synchronization of both sides is achieved by special treatment of the view model and its subscription mechanism, including subscription aggregation in a unified place to complete serialization and sending, as well as reverse receive and deserialization, and continue to connect the existing processes.
+
+Business pages are isolated from each other and from the main application, with objects such as `windows` in the internal scope of their embedded pages, and even origin and cookies.
+
 ## Back to Today
 
 Using history as a mirror can help us understand the insight into the possibilities of the present.
@@ -166,7 +176,7 @@ The information exchange mechanism between the web worker and the main interface
 
 ![Flow in React](./images/pic-12-mfe-23.webp)
 
-The content transmitted via post message primarily includes the changes in the Virtual DOM (including props and states), while the reverse transmission carries event information. However, due to the additional cross-thread relay based on post message, the performance in some aspects is naturally less efficient compared to the original React model. Nonetheless, this solution inherently possesses advantages in terms of security and isolation.
+The content transmitted via post message primarily includes the changes in the Virtual DOM (including props and states), while the reverse transmission carries event information. However, due to the additional cross-thread relay based on post message, the performance in some aspects is naturally less efficient compared to the original React model. Nonetheless, this solution inherently possesses advantages in terms of security and isolation. Alternatively, if you still want lower latency between web workers and page, consider using `SharedArrayBuffer` instead of the post/on message mechanism.
 
 ### Shadow DOM
 
