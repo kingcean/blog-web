@@ -43,7 +43,7 @@
                 "This article was originally published in MSDN blogs."
             ],
             "notes#zh": [
-                "本文最初发布于作者在 MSDN 上所开设的博客。"
+                "本文最初发布于作者在 MSDN 上所开设的博客。原文含有其它编程语言实现版本，本文中已将该部分拆分。"
             ]
         },
         {
@@ -58,8 +58,8 @@
                 {
                     "name": "C# edition",
                     "name#zh": "C# 版",
-                    "url": "https://kingcean.net/blog/?multiple-hit-task",
-                    "url#zh": "https://kingcean.net/blog/?baoji-shijian"
+                    "url": "https://kingcean.net/blog/?2016/multiple-hit-task",
+                    "url#zh": "https://kingcean.net/blog/?2016/baoji-shijian"
                 },
                 {
                     "name": "Demo",
@@ -77,7 +77,7 @@
                 "This article was originally published in MSDN blogs."
             ],
             "notes#zh": [
-                "本文最初发布于作者在 MSDN 上所开设的博客。"
+                "本文最初发布于作者在 MSDN 上所开设的博客。原文含有其它编程语言实现版本，本文中已将该部分拆分。"
             ]
         },
         {
@@ -111,8 +111,8 @@
             ]
         },
         {
-            "name": "Localization in web page",
-            "name#zh": "前端本地化",
+            "name": "Localization",
+            "name#zh": "本地化",
             "file": "localization.md",
             "file#zh": "bendihua.md",
             "keywords": [],

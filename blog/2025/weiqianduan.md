@@ -33,27 +33,26 @@
 而对于 JS 运行时，为了防止全局对象共享导致的相互影响，通常微前端会引入沙箱机制，例如在加载前端包后，将其内容放入对 `window` 等对象改写后的上下文中，再触发运行。如以下代码示例。这些模式有时可能依然存在考虑步骤的地方。
 
 ```javascript
-const sandboxStore: Record<string | symbol, unknown> = {
-  // 可在此处声明和实现需要替换的全局对象，此处略。
-};
-function get(target: Window & typeof globalThis, key: string | symbol) {
-  return sandboxStore[key] || window[key as any];
-}
-function set(target: Window & typeof globalThis, key: string | symbol, value: any) {
-  sandboxStore[key] = value;
-  return true;
-}
-function has(target: Window & typeof globalThis, key: string | symbol) {
-  return true;
-}
-const sandboxWindow = new Proxy(window, { get, set });
-const sandboxContext = new Proxy(window, { get, set, has });
-export function handle(fn: string) {
+export function inject(js: string) {
+  const store: Record<string | symbol, unknown> = {
+    // 可在此处声明和实现需要替换的全局对象，此处略。
+  };
+  function get(target: Window & typeof globalThis, key: string | symbol) {
+    return store[key] || window[key as any];
+  }
+  function set(target: Window & typeof globalThis, key: string | symbol, value: any) {
+    store[key] = value;
+    return true;
+  }
+  function has(target: Window & typeof globalThis, key: string | symbol) {
+    return true;
+  }
+
   (new Function("window", "globalContext", `
     with (globalContext) {
-        ${fn}
+        ${js}
     }
-  `))(sandboxWindow, sandboxContext);
+  `))(new Proxy(window, { get, set }), new Proxy(window, { get, set, has }));
 };
 ```
 
@@ -69,7 +68,7 @@ export function handle(fn: string) {
 
 ### MVVM
 
-微软的 Azure Portal（既微软公有云控制台管理站点）的最早期版本，其微前端方案其实底层是基于 `iframe` 的。不过，并不是将这些子业务放进 `iframe` 来进行页面呈现的传统方式。那时 React 尚未问世，Azure Portal 前端基于 Knockout 的 MVVM 模式开发，这种模式是采用将数据模型（model / data model）和视图模板片段（view / view template）两部分作为基本构成部分，并通过对数据模型在内部包装成视图模型（view model），同时根据业务赋予一些监听响应，从而完成对界面渲染和交互的描述。该模式与 Angular 和 Vue 较为类似，只是功能没那么丰富。
+微软的 Azure Portal（即微软公有云控制台管理站点）的最早期版本，其微前端方案其实底层是基于 `iframe` 的。不过，并不是将这些子业务放进 `iframe` 来进行页面呈现的传统方式。那时 React 尚未问世，Azure Portal 前端基于 Knockout 的 MVVM 模式开发，这种模式是采用将数据模型（model / data model）和视图模板片段（view / view template）两部分作为基本构成部分，并通过对数据模型在内部包装成视图模型（view model），同时根据业务赋予一些监听响应，从而完成对界面渲染和交互的描述。该模式与 Angular 和 Vue 较为类似，只是功能没那么丰富。
 
 具体说来，
 
