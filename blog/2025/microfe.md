@@ -1,6 +1,6 @@
 # New solution of micro-frontend
 
-Micro-frontends is a pattern that breaks down various sub-businesses into corresponding independent frontend packages, which are then loaded and rendered by the main frontend application as needed. To minimize mutual interference, these loaded independent modules are securely isolated from each other and can be independently maintained and developed.
+Micro-frontends is a pattern that breaks down various sub-businesses into corresponding independent frontend packages, which are then loaded and rendered by the main web app as needed. To minimize mutual interference, these loaded independent modules are securely isolated from each other and can be independently maintained and developed.
 
 Nowadays, there are numerous micro frontend solutions. Here, I would like to introduce a new implementation approach, which has some connection to the early architectural design of Azure Portal that I was involved in during the early 2010s.
 
@@ -134,12 +134,12 @@ interface NameValueComponentProps {
   name: string;
   value: string[];
 }
-function NameValueComponent({ name, value }: KeyValuePairComponentProps) {
+function NameValueComponent({ name, value }: NameValueComponentProps) {
   return <dl>
     <dt key={"name"}>{name}</dt>
     {
       value.map((item, i) => (
-        <dd key={`item-${i}`}>{value}</dd>
+        <dd key={`item-${i}`}>{item}</dd>
       ))
     }
   </dl>;

@@ -132,12 +132,12 @@ interface NameValueComponentProps {
   name: string;
   value: string[];
 }
-function NameValueComponent({ name, value }: KeyValuePairComponentProps) {
+function NameValueComponent({ name, value }: NameValueComponentProps) {
   return <dl>
     <dt key={"name"}>{name}</dt>
     {
       value.map((item, i) => (
-        <dd key={`item-${i}`}>{value}</dd>
+        <dd key={`item-${i}`}>{item}</dd>
       ))
     }
   </dl>;
