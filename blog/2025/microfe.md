@@ -156,13 +156,13 @@ In the main web app, you can listen to this event, and within the React componen
 
 This process is similar to the early implementation of the Azure Portal mentioned earlier, except that React replaces Knockout, and the transmitted information changes from view templates and view models to internal change description structure in React. On the business frontend, React no longer needs to render directly on the real `document`; this process is handled by the main web app, while other processes remain unchanged. On the main web app side, state changes triggered by React components are also sent back to the React processing flow in the business frontend through a similar postMessage mechanism. This may eventually trigger the reactive logic within the React components in the business frontend, potentially leading to new renders, which then continue the aforementioned process, rendering within the component corresponding to the business in the main web app.
 
-### Service Worker
+### Web Worker
 
 However, the business frontend no longer needs to be placed inside an `iframe`. In the browser, apart from some interface controls, an `iframe` instance is essentially similar to opening a new tab, containing multiple sets of logic such as JS execution and rendering. Since the business frontend does not require actual rendering in the current process, at the very least, the rendering of the page corresponding to the `iframe`, or the `document` part, is actually unnecessary. In fact, modern browsers provide a mode that allows JS to run independently without a visual interface.
 
-This is the service worker.
+This is web worker.
 
-The information exchange mechanism between the service worker and the main interface still supports the post message format. Therefore, in the previous React model, communication between the business frontend and the main web app can continue to function normally. The business frontend simply resides in the browser as a business worker, in a very pure form. Since the service worker runs in an independent process, it avoids thread-level blocking issues between itself and the main web app process caused by load. From an on-demand loading perspective, creating a service worker is relatively simple and controllable, making micro-frontend package management easier to implement.
+The information exchange mechanism between the web worker and the main interface still supports the post message format. Therefore, in the previous React model, communication between the business frontend and the main web app can continue to function normally. The business frontend simply resides in the browser as a business worker, in a very pure form. Since the web worker runs in an independent process, it avoids thread-level blocking issues between itself and the main web app process caused by load. From an on-demand loading perspective, creating a web worker is relatively simple and controllable, making micro-frontend package management easier to implement.
 
 ![Flow in React](./images/pic-12-mfe-23.webp)
 
@@ -172,7 +172,7 @@ The content transmitted via post message primarily includes the changes in the V
 
 So how should styles be handled? Mature solutions can still be used, such as convention-based namespaces or Shadow DOM.
 
-If Shadow DOM is used, a unified React component can be customized within the main web app and encapsulated into a Shadow DOM. This serves as the root node of the business view slot. The Shadow DOM element and its internal React components receive notifications routed and mapped by the main web app based on the service worker, including the initialization of styles and other information at the start, as well as subsequent React Virtual DOM change events that trigger actual UI layer updates. As a result, the interface rendering part is completely isolated, with its encapsulation and external interaction fully managed by the main web app. Meanwhile, all business logic resides within the Shadow DOM, ensuring no interference with external elements.
+If Shadow DOM is used, a unified React component can be customized within the main web app and encapsulated into a Shadow DOM. This serves as the root node of the business view slot. The Shadow DOM element and its internal React components receive notifications routed and mapped by the main web app based on the web worker, including the initialization of styles and other information at the start, as well as subsequent React Virtual DOM change events that trigger actual UI layer updates. As a result, the interface rendering part is completely isolated, with its encapsulation and external interaction fully managed by the main web app. Meanwhile, all business logic resides within the Shadow DOM, ensuring no interference with external elements.
 
 ### Bring It to Reality
 
