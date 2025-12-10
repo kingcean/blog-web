@@ -149,6 +149,7 @@ a.toString = function () { return "Hi!"; };
 
 // 测试
 console.info(String(a)); // -> "Hi!"
+console.info(`${a}`); // -> "Hi!"
 ```
 
 然后我们再来测试一下 `valueOf()` 返回的是复杂类型时的场景，会发现相当于效果如同并无此重写一样，即强制转化时，并为采纳该方法返回的结果，而仍旧当作普通对象进行处理。

@@ -9,7 +9,13 @@
             "file#zh": "jiexi-dom-shuxing.md",
             "keywords": ["dom"],
             "date": "20160318",
-            "end": true
+            "end": true,
+            "notes": [
+                "This article was originally published in MSDN blogs."
+            ],
+            "notes#zh": [
+                "本文最初发布于作者在 MSDN 上所开设的博客。"
+            ]
         },
         {
             "name": "Delay task",
@@ -32,6 +38,12 @@
                     "url": "https://datasense.js.org/articles/?wiki/task",
                     "url#zh": "https://datasense.js.org/articles/?wiki/renwu"
                 }
+            ],
+            "notes": [
+                "This article was originally published in MSDN blogs."
+            ],
+            "notes#zh": [
+                "本文最初发布于作者在 MSDN 上所开设的博客。"
             ]
         },
         {
@@ -60,6 +72,12 @@
                     "url": "https://datasense.js.org/articles/?wiki/task",
                     "url#zh": "https://datasense.js.org/articles/?wiki/renwu"
                 }
+            ],
+            "notes": [
+                "This article was originally published in MSDN blogs."
+            ],
+            "notes#zh": [
+                "本文最初发布于作者在 MSDN 上所开设的博客。"
             ]
         },
         {
@@ -69,7 +87,13 @@
             "file#zh": "huadong.md",
             "keywords": [],
             "date": "20160323",
-            "end": true
+            "end": true,
+            "notes": [
+                "This article was originally published in MSDN blogs."
+            ],
+            "notes#zh": [
+                "本文最初发布于作者在 MSDN 上所开设的博客。"
+            ]
         },
         {
             "name": "JavaScript Promise",
@@ -78,7 +102,13 @@
             "file#zh": "promise-shixian.md",
             "keywords": ["underlying"],
             "date": "20160325",
-            "end": true
+            "end": true,
+            "notes": [
+                "This article was originally published in MSDN blogs."
+            ],
+            "notes#zh": [
+                "本文最初发布于作者在 MSDN 上所开设的博客。"
+            ]
         },
         {
             "name": "Localization in web page",
@@ -95,6 +125,12 @@
                     "url": "https://langpack.js.org/articles/?wiki/localization",
                     "url#zh": "https://langpack.js.org/articles/?wiki/localization"
                 }
+            ],
+            "notes": [
+                "This article was originally published in MSDN blogs."
+            ],
+            "notes#zh": [
+                "本文最初发布于作者在 MSDN 上所开设的博客。"
             ]
         },
         {
@@ -104,7 +140,13 @@
             "file#zh": "dom-daxiao.md",
             "keywords": ["dom"],
             "date": "20160414",
-            "end": true
+            "end": true,
+            "notes": [
+                "This article was originally published in MSDN blogs."
+            ],
+            "notes#zh": [
+                "本文最初发布于作者在 MSDN 上所开设的博客。"
+            ]
         },
         {
             "name": "创新客户端开发架构",
@@ -171,7 +213,7 @@
             ],
             "notes#zh": [
                 "本文中部分图片来自网络，版权归其所有者所有。",
-                "本文最初发布至字节跳动技术文章库之架构前端。"
+                "本文最初发布于字节跳动技术文章库之架构前端。"
             ]
         },
         {
@@ -184,8 +226,8 @@
             "date": "20251017"
         },
         {
-            "name": "数字的范围精度和内在原理",
-            "name#en": "Number (precision and structure)",
+            "name": "Number (precision and structure)",
+            "name#zh": "数字的范围精度和内在原理",
             "intro#zh": "JS 世界中的 number，似乎不区分整型和小数，同时它也有着精度方面的限制，那么具体的特征是什么呢？让我们一起来探究。",
             "file": "number.md",
             "file#zh": "shuzi.md",
@@ -193,8 +235,9 @@
             "date": "20251027"
         },
         {
-            "name": "微前端实现的另一个思路",
-            "name#en": "New solution of micro-frontend",
+            "name": "New solution of micro-frontend",
+            "name#zh": "微前端实现的另一个思路",
+            "intro": "Micro-frontends is a pattern that breaks down various sub-businesses into corresponding independent frontend packages, which are then loaded and rendered by the main frontend application as needed. To minimize mutual interference, these loaded independent modules are securely isolated from each other and can be independently maintained and developed.",
             "intro#zh": "微前端是一种将许多子业务拆散到对应不同的前端包，并由前端主应用按需载入进行运行呈现的一套模式。为减少相互影响，这些被载入的独立模块之间会被进行安全隔离，且各自均可独立维护开发。",
             "file": "weiqianduan.md",
             "file#en": "microfe.md",

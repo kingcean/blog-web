@@ -150,6 +150,7 @@ a.toString = function () { return "Hi!"; };
 
 // Test
 console.info(String(a)); // -> "Hi!"
+console.info(`${a}`); // -> "Hi!"
 ```
 
 Then let's test the scenario where `valueOf()` returns a complex type. We will find that it essentially behaves as if the method wasn't overridden at all. When forced conversion occurs, the result returned by this method is not adopted, and it is still treated as a regular object.
