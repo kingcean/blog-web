@@ -239,8 +239,8 @@
             "name#zh": "微前端实现的另一个思路",
             "intro": "Micro-frontends is a pattern that breaks down various sub-businesses into corresponding independent frontend packages, which are then loaded and rendered by the main frontend application as needed. To minimize mutual interference, these loaded independent modules are securely isolated from each other and can be independently maintained and developed.",
             "intro#zh": "微前端是一种将许多子业务拆散到对应不同的前端包，并由前端主应用按需载入进行运行呈现的一套模式。为减少相互影响，这些被载入的独立模块之间会被进行安全隔离，且各自均可独立维护开发。",
-            "file": "weiqianduan.md",
-            "file#en": "microfe.md",
+            "file": "microfe.md",
+            "file#zh": "weiqianduan.md",
             "keywords": [],
             "date": "20251207"
         }
