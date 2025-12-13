@@ -232,11 +232,11 @@ Tile 是一个在 XCard 页面中应用最广泛的组件，它主要用于呈�
 
 最终，爱奇艺 PC 客户端软件，通过创新客户端开发架构，实现了再次华丽蜕变。并且，我们还将和大家一起继续前行。
 
+<!-- End -->
 .
 
 2018年12月 北京
 
 ![Top 100 Case Study](./images/top100-2018-kingcean.jpg)
 
-<!-- End -->
 [PPT](./attachments/Top100Summit-2018-iQIYI-Arch.pptx)

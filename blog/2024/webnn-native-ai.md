@@ -1,6 +1,7 @@
 # WebNN
 
 —— Browser runs native AI
+<!-- Start -->
 
 Web Neural Network API is a web-friendly W3C standard that provides a cross-platform abstraction layer independent of the operating system and underlying hardware based on browser-built JS APIs, leveraging GPUs, CPUs, NPUs, or other purpose-built AI accelerators to facilitate front-end R&D to build AI-based web applications.
 
