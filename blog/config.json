@@ -23,7 +23,7 @@
             "name#zh": "延迟合并处理任务",
             "file": "delay-task.md",
             "file#zh": "yanchi-renwu.md",
-            "keywords": [],
+            "keywords": ["ux"],
             "date": "20160320",
             "end": true,
             "related": [
@@ -52,7 +52,7 @@
             "name#zh": "暴击事件",
             "file": "multiple-hit-task.md",
             "file#zh": "baoji-shijian.md",
-            "keywords": [],
+            "keywords": ["ux"],
             "date": "20160321",
             "end": true,
             "related": [
@@ -86,7 +86,7 @@
             "name#zh": "滑动事件",
             "file": "slide.md",
             "file#zh": "huadong.md",
-            "keywords": [],
+            "keywords": ["ux"],
             "date": "20160323",
             "end": true,
             "notes": [
@@ -170,9 +170,10 @@
         },
         {
             "name": "WebNN",
-            "file": "webnn-native-ai.md",
-            "file#zh": "webnn-yuansheng-ai.md",
-            "keywords": ["ai"],
+            "dir": "webnn",
+            "file": true,
+            "file#zh": "chs.md",
+            "keywords": ["ai", "underlying"],
             "subtitle": "Browser runs native AI",
             "subtitle#zh": "浏览器也能原生运行 AI",
             "intro": "Web Neural Network API is a web-friendly W3C standard that provides a cross-platform abstraction layer independent of the operating system and underlying hardware based on browser-built JS APIs, leveraging GPUs, CPUs, NPUs, or other purpose-built AI accelerators to facilitate front-end R&D to build AI-based web applications.",
@@ -228,18 +229,20 @@
             "name": "a == 1 && a == 2 && a != 2 && a != 1",
             "intro": "If we were to create an object a such that the equation a == 1 && a == 2 && a != 2 && a != 1 holds true, it sounds bizarre at first, but upon closer thought, it's actually quite easy to achieve.",
             "intro#zh": "如果让我们创建一个对象 a，使得等式 a == 1 && a == 2 && a != 2 && a != 1 成立，如何做到呢？",
-            "file": "a-equals-1-and-2.md",
-            "file#zh": "a-dengyu-1-he-2.md",
-            "keywords": [],
+            "dir": "a-eq-1-n-2",
+            "file": true,
+            "file#zh": "chs.md",
+            "keywords": ["underlying"],
             "date": "20251017"
         },
         {
             "name": "Number (precision and structure)",
             "name#zh": "数字的范围精度和内在原理",
             "intro#zh": "JS 世界中的 number，似乎不区分整型和小数，同时它也有着精度方面的限制，那么具体的特征是什么呢？让我们一起来探究。",
-            "file": "number.md",
-            "file#zh": "shuzi.md",
-            "keywords": [],
+            "dir": "number",
+            "file": true,
+            "file#zh": "chs.md",
+            "keywords": ["underlying"],
             "date": "20251027"
         },
         {
@@ -247,12 +250,15 @@
             "name#zh": "微前端实现的另一个思路",
             "intro": "Micro-frontends is a pattern that breaks down various sub-businesses into corresponding independent frontend packages, which are then loaded and rendered by the web main app as needed. To minimize mutual interference, these loaded independent modules are securely isolated from each other and can be independently maintained and developed.",
             "intro#zh": "微前端是一种将许多子业务拆散到对应不同的前端包，并由前端主应用按需载入进行运行呈现的一套模式。为减少相互影响，这些被载入的独立模块之间会被进行安全隔离，且各自均可独立维护开发。",
-            "file": "microfe.md",
-            "file#zh": "weiqianduan.md",
+            "dir": "microfe",
+            "file": true,
+            "file#zh": "chs.md",
             "keywords": [],
             "date": "20251207"
         }
     ],
+    "redir": {
+    },
     "$defs": {
         "contributors": [
             { "name": "Kingcean Tuan", "url": "https://kingcean.org" }
@@ -260,9 +266,11 @@
         "keywords": [
             { "name": "Installation", "name#zh": "安装", "value": "install" },
             { "name": "Prepare", "name#zh": "准备", "value": "prepare" },
-            { "name": "NPM", "value": "npm" }
+            { "name": "NPM", "value": "npm" },
+            { "name": "Underlying", "name#zh": "底层", "value": "underlying" },
+            { "name": "AI", "value": "ai" },
+            { "name": "UX", "name#zh": "交互", "value": "ux" },
+            { "name": "DOM", "value": "dom" }
         ]
-    },
-    "redir": {
     }
 }
