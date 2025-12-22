@@ -67,9 +67,6 @@
     ],
     "redir": {
     },
-    "options": {
-        "disableName": true
-    },
     "$defs": {
         "contributors": [
             { "name": "Kingcean Tuan", "url": "https://kingcean.net" }

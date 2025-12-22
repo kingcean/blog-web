@@ -1,0 +1,21 @@
+section.x-part-projects-banner {
+    margin-bottom: 20px; cursor: default; user-select: none;
+}
+section.x-part-projects-banner > a:first-child, section.x-part-projects-banner > a:visited:first-child, section.x-part-projects-banner > a:hover:first-child, section.x-part-projects-banner > a:active:first-child {
+    text-decoration: none;
+}
+section.x-part-projects-banner > a:first-child::before {
+    content: "<"; margin-right: 8px;
+}
+section.x-part-projects-banner > span {
+    color: #999;
+}
+section.x-part-projects-banner > a:first-child + span > strong {
+    color: #EEE; font-weight: normal;
+}
+section.x-part-projects-banner > a:first-child + span::before {
+    content: "|"; margin-left: 20px; margin-right: 20px;
+}
+section:has(> section.x-part-projects-banner) + section#blog_content {
+    border-top: 1px dashed rgba(128, 128, 128, 0.2);
+}
