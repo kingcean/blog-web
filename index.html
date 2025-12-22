@@ -62,8 +62,11 @@
     #blog_content > ul.x-list-blogs > li {
         padding: 0; margin: 0 0 8px 0; list-style: none;
     }
+    #blog_content > ul.x-list-blogs > .grouping-header {
+        color: #999; padding-left: 20px; cursor: default; user-select: none;
+    }
     #blog_content > ul.x-list-blogs > li > a {
-        padding: 0; margin: 0 0 10px 0; display: block; border-radius: 8px; overflow: hidden; position: relative;
+        padding: 0; margin: 0 0 10px 0; display: block; border-radius: 4px; overflow: hidden; position: relative;
     }
     #blog_content > ul.x-list-blogs > li > a, #blog_content > ul.x-list-blogs > li > a:visited, #blog_content > ul.x-list-blogs > li > a:hover, #blog_content > ul.x-list-blogs > li > a:active {
         text-decoration: none;
@@ -96,7 +99,16 @@
         background-color: rgba(128, 128, 128, 0.12);
     }
     #blog_content > ul.x-list-blogs > li > a > div:first-child {
-        padding-top: 8px; padding-right: 110px; border-top-left-radius: 8px; border-top-right-radius: 8px; line-height: 26px;
+        padding-top: 7px; padding-right: 110px; border-width: 1px 0 0 0; border-style: solid none none none; border-top-left-radius: 4px; border-top-right-radius: 4px; line-height: 26px;
+    }
+    #blog_content > ul.x-list-blogs > li > a > div:first-child, #blog_content > ul.x-list-blogs > li > a:visited > div:first-child {
+        border-color: rgba(128, 128, 128, 0.04);
+    }
+    #blog_content > ul.x-list-blogs > li > a:hover > div:first-child {
+        border-color: rgba(128, 128, 128, 0.12);
+    }
+    #blog_content > ul.x-list-blogs > li > a:active > div:first-child {
+        border-color: rgba(128, 128, 128, 0.08);
     }
     #blog_content > ul.x-list-blogs > li > a > div:first-child > strong:first-child {
         font-weight: normal; font-size: 18px;
@@ -117,7 +129,16 @@
         margin-left: 20px;
     }
     #blog_content > ul.x-list-blogs > li > a > div:first-child + div > img {
-        width: 80px; height: 45px; border: 1px solid rgba(128, 128, 128, 0.1); border-radius: 4px; object-fit: cover; position: absolute; top: 8px; right: 16px;
+        border: 1px solid rgba(128, 128, 128, 0.1); border-radius: 4px; object-fit: cover; position: absolute; transition: 0.4s;
+    }
+    #blog_content > ul.x-list-blogs > li > a > div:first-child + div > img, #blog_content > ul.x-list-blogs > li > a:visited > div:first-child + div > img {
+        width: 80px; height: 45px; top: 8px; right: 16px;
+    }
+    #blog_content > ul.x-list-blogs > li > a:hover > div:first-child + div > img {
+        width: 88px; height: 50px; top: 6px; right: 12px;
+    }
+    #blog_content > ul.x-list-blogs > li > a:active > div:first-child + div > img {
+        width: 84px; height: 48px; top: 7px; right: 14px;
     }
     #blog_content > ul.x-list-blogs > li > a > div:first-child + div {
         font-size: 12px; padding-bottom: 8px; line-height: 20px;
@@ -132,7 +153,15 @@
         padding-top: 7px; border-top: 1px solid rgba(128, 128, 128, 0.1);
     }
     #blog_content > ul.x-list-blogs > li > a > div:last-child {
-        padding-bottom: 8px; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;
+        padding-bottom: 8px; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;
+    }
+    @media screen and (max-width:800px) {
+    #blog_content > ul.x-list-blogs > li > a > div:first-child > strong:first-child {
+        display: block;
+    }
+    #blog_content > ul.x-list-blogs > li > a > div:first-child > strong:first-child + span {
+        margin-left: 0;
+    }
     }
     </style>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.4.2/docs/js/mdblogs.js" ></script>
@@ -154,7 +183,7 @@
         });
         DeepX.MdBlogs.generateMenuPromise("./blog/config.json", "blogs", {
             styleRefs: "x-list-blogs",
-            deep: -1,
+            deep: false,
             path: "./blog/",
             render(model, article, options) {
                 if (!model.children || model.children.length !== 1 || !article) return;
