@@ -8,6 +8,20 @@
     <link href="https://cdn.jsdelivr.net/npm/hje@2.4.3/docs/css/site.org.css" rel="stylesheet" />
     <link href="../css/current.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/vs2015.min.css" rel="stylesheet" />
+    <style type="text/css" >
+    section.x-part-projects-banner {
+        margin-bottom: 20px; cursor: default; user-select: none;
+    }
+    section.x-part-projects-banner > a:first-child, section.x-part-projects-banner > a:visited:first-child, section.x-part-projects-banner > a:hover:first-child, section.x-part-projects-banner > a:active:first-child {
+        text-decoration: none;
+    }
+    section.x-part-projects-banner > a:first-child::before {
+        content: "<"; margin-right: 8px;
+    }
+    section.x-part-projects-banner > a:first-child + span::before {
+        content: "|"; margin-left: 20px; margin-right: 20px;
+    }
+    </style>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/marked@16.2.1/lib/marked.umd.js" ></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.4.3/docs/js/mdblogs.js" ></script>
@@ -33,13 +47,20 @@
     <script type="text/javascript">
         DeepX.MdBlogs.render("blog_content", "./config.json", {
             title: true,
-            supplement: {
-                tagName: "p",
+            banner: {
+                tagName: "section",
+                styleRefs: "x-part-projects-banner",
                 children: [{
                     tagName: "a",
-                    styleRefs: "link-tile-wide",
                     props: { href: "../" },
-                    children: "< " + DeepX.MdBlogs.getLocaleString("home")
+                    children: DeepX.MdBlogs.getLocaleString("goHome")
+                }, {
+                    tagName: "span",
+                    children: [
+                        { tagName: "span", children: "Projects at " },
+                        { tagName: "strong", children: "Alibaba" },
+                        { tagName: "span", children: " Group" }
+                    ]
                 }]
             }
         });

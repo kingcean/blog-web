@@ -65,6 +65,11 @@
             ]
         }
     ],
+    "redir": {
+    },
+    "options": {
+        "disableName": true
+    },
     "$defs": {
         "contributors": [
             { "name": "Kingcean Tuan", "url": "https://kingcean.net" }
@@ -74,7 +79,5 @@
             { "name": "Prepare", "name#zh": "准备", "value": "prepare" },
             { "name": "NPM", "value": "npm" }
         ]
-    },
-    "redir": {
     }
 }
