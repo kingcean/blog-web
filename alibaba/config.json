@@ -1,0 +1,80 @@
+{
+    "$schema": "https://cdn.jsdelivr.net/npm/hje@2.4.3/dist/mdblogs.schema.json",
+    "name": "Projects at Alibaba Group",
+    "docs": [
+        {
+            "name": "Quark",
+            "dir": "quark",
+            "file": true,
+            "keywords": [],
+            "end": true,
+            "related": [
+                {
+                    "name": "Tutorial",
+                    "name#zh": "入门",
+                    "url": "https://12dlabs.github.io/quark"
+                },
+                {
+                    "name": "GitHub",
+                    "url": "https://github.com/12dlabs/quark"
+                }
+            ]
+        },
+        {
+            "name": "APASS",
+            "dir": "apass",
+            "file": true,
+            "keywords": [],
+            "end": true,
+            "related": [
+                {
+                    "name": "Official website",
+                    "name#zh": "官网",
+                    "url": "https://apass.taobao.com"
+                }
+            ]
+        },
+        {
+            "name": "Nine",
+            "name#zh": "九点电台",
+            "subtitle": "Alibaba VOC",
+            "dir": "nine",
+            "file": true,
+            "keywords": [],
+            "end": true,
+            "related": [
+                {
+                    "name": "Main source code",
+                    "name#zh": "主要源码",
+                    "url": "https://g.alicdn.com/hub/nine/3.0.0/scripts/index.js"
+                }
+            ]
+        },
+        {
+            "name": "AliSOP",
+            "dir": "sop",
+            "file": true,
+            "keywords": [],
+            "end": true,
+            "related": [
+                {
+                    "name": "Demo",
+                    "name#zh": "静态演示",
+                    "url": "https://g.alicdn.com/hub/flow/2.3.671/demo/index.html"
+                }
+            ]
+        }
+    ],
+    "$defs": {
+        "contributors": [
+            { "name": "Kingcean Tuan", "url": "https://kingcean.net" }
+        ],
+        "keywords": [
+            { "name": "Installation", "name#zh": "安装", "value": "install" },
+            { "name": "Prepare", "name#zh": "准备", "value": "prepare" },
+            { "name": "NPM", "value": "npm" }
+        ]
+    },
+    "redir": {
+    }
+}

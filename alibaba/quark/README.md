@@ -8,7 +8,7 @@ A JavaScript library that helps you to create rich web apps with low cost to bui
 - Asynchronous modules loader supports.
 - Web-components.
 
-![Architecture](images/architecture_mvc.jpg)
+![Architecture](./architecture_mvc.jpg)
 
 ## CDN
 
@@ -16,6 +16,7 @@ A JavaScript library that helps you to create rich web apps with low cost to bui
 https://g.alicdn.com/hub/quark/1.8.1000/scripts/index.min.js
 ```
 
+<!-- End -->
 ## See also
 
 - [Tutorial](https://12dlabs.github.io/quark)
