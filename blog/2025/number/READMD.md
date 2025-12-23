@@ -92,7 +92,7 @@ In addition, there are following 3 special values of `Number` type.
   - Perform common arithmetic operations with `NaN`.
   - Turn some object invalidity into a number, such as getting a the tick from an illegal date (`new Date("Good morning").getTime()`).
 
-  This value has a special mine grabbing, that is, it is not equal to any value or object, including or equal to itself. It can only be judged by calling function `isNaN`. and its size comparison with any number, all return `false`.
+  This value has a special case, that is, it is not equal to any value or object, including or equal to itself. It can only be judged by calling function `isNaN`. and its size comparison with any number, all return `false`.
 
 - `Number.POSITIVE_INFINITY`
 
@@ -127,7 +127,7 @@ console.info(NaN !== Number.POSITIVE_INFINITY); // -> true
 // Infinity related
 console.info(100 / 0); // -> Infinity
 console.info(-100 / 0); // -> -Infinity
-console.info(INFINITY > Number.MAX_VALUE); // -> Infinity
+console.info(INFINITY > Number.MAX_VALUE); // -> true
 console.info(Number.POSITIVE_INFINITY); // -> Infinity
 console.info(-Number.POSITIVE_INFINITY); // -> -Infinity
 console.info(-Number.POSITIVE_INFINITY === Number.NEGATIVE_INFINITY); // -> true
@@ -170,7 +170,7 @@ So
 | `BigInt` type | Throw exception `TypeError` |
 | `Symbol` type | Throw exception `TypeError` |
 
-The conversion of strings is as follows.
+The conversion of string is as follows.
 
 - Leading and trailing spaces and line breaks are ignored. The following is the situation after ignoring.
 - An empty string is converted to 0.
@@ -178,9 +178,18 @@ The conversion of strings is as follows.
 - The default is decimal, and binary (with `0b` prefix), octal (with `0o` prefix), and hexadecimal (with `0x` prefix) are also supported.
 - Returns `NaN` when a conversion fails.
 
-The remaining values or objects are called sequentially when converted to numbers, and the member functions (if any) are called separately.[Symbol.toPrimitive]("number")valueOf()
+The conversion of array is as follows.
 
-In addition, and static functions are used to convert strings to integers and decimals, respectively, both of which fail .parseIntparseFloatNaN
+- Empty array is converted to 0.
+- Array with only one number, is converted to that number.
+- Array with only one string, is converted to the number converted from that string.
+- Array with only `null` 或 `undefined`, is converted to 0.
+- Array with only one `BigInt`, is converted to that number in the form of integer or exponential.
+- Otherwise, is converted to `NaN`.
+
+The remaining values or objects are called `[Symbol.toPrimitive]("number")` and `valueOf()` sequentially when converted to numbers, and the member functions (if any) are called separately, e.g. the instance of `Date` is converted to its tick.
+
+In addition, `parseInt` and `parseFloat` static functions are used to convert strings to integers and decimals. And returns `NaN` if fail.
 
 ## String format
 

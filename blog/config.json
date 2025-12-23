@@ -243,8 +243,8 @@
             "date": "20181202",
             "end": true,
             "thumb": {
-                "common": "https://kingcean.org/blog/2018/images/thumb-pca-n.webp",
-                "wide": "https://kingcean.org/blog/2018/images/thumb-pca-w.webp"
+                "common": "https://kingcean.org/blog/2018/images/thumb-pca-tile.webp",
+                "wide": "https://kingcean.org/blog/2018/images/thumb-pca-wide.webp"
             },
             "related": [
                 {
@@ -273,8 +273,8 @@
                 "end": true
             },
             "thumb": {
-                "common": "https://kingcean.org/blog/2024/webnn/images/thumb-n.webp",
-                "wide": "https://kingcean.org/blog/2024/webnn/images/thumb-w.webp"
+                "common": "https://kingcean.org/blog/2024/webnn/images/thumb-tile.webp",
+                "wide": "https://kingcean.org/blog/2024/webnn/images/thumb-wide.webp"
             },
             "related": [
                 {
@@ -328,8 +328,8 @@
             "keywords": ["underlying"],
             "date": "20251017",
             "thumb": {
-                "common": "https://kingcean.org/blog/2025/a-eq-1-n-2/images/thumb-n.webp",
-                "wide": "https://kingcean.org/blog/2025/a-eq-1-n-2/images/thumb-w.webp"
+                "common": "https://kingcean.org/blog/2025/a-eq-1-n-2/images/thumb-tile.webp",
+                "wide": "https://kingcean.org/blog/2025/a-eq-1-n-2/images/thumb-wide.webp"
             }
         },
         {
@@ -342,8 +342,8 @@
             "keywords": ["underlying"],
             "date": "20251027",
             "thumb": {
-                "common": "https://kingcean.org/blog/2025/number/images/thumb-n.webp",
-                "wide": "https://kingcean.org/blog/2025/number/images/thumb-w.webp"
+                "common": "https://kingcean.org/blog/2025/number/images/thumb-tile.webp",
+                "wide": "https://kingcean.org/blog/2025/number/images/thumb-wide.webp"
             }
         },
         {
@@ -357,8 +357,22 @@
             "keywords": [],
             "date": "20251207",
             "thumb": {
-                "common": "https://kingcean.org/blog/2025/microfe/images/thumb-n.webp",
-                "wide": "https://kingcean.org/blog/2025/microfe/images/thumb-w.webp"
+                "common": "https://kingcean.org/blog/2025/microfe/images/thumb-tile.webp",
+                "wide": "https://kingcean.org/blog/2025/microfe/images/thumb-wide.webp"
+            }
+        },
+        {
+            "name": "Server-sent event client implementation",
+            "name#zh": "满血版 SSE 客户端实现",
+            "disable": true,
+            "dir": "sse",
+            "file": true,
+            "file#zh": "chs.md",
+            "keywords": [],
+            "date": "20251227",
+            "thumb": {
+                "common": "https://kingcean.org/blog/2025/sse/images/thumb-tile.webp",
+                "wide": "https://kingcean.org/blog/2025/sse/images/thumb-wide.webp"
             }
         }
     ],

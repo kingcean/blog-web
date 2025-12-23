@@ -93,7 +93,7 @@ console.info((0.1 + 0.2 - 0.3) < Number.EPSILON); // -> true
   - 与 `NaN` 进行常见的算数运算。
   - 将一些对象的无效情况，转化成数字，例如从不合法的日期中获取 Tick（`new Date("Good morning").getTime()`）。
 
-  该值有一处比较特殊的抢矿，即其不等于任何值或对象，包括也不等于自己，只能使用 `isNaN` 判断；以及其与任何数字的大小比较，均返回 `false`。
+  该值有一处比较特殊的情况，即其不等于任何值或对象，包括也不等于自己，只能使用 `isNaN` 判断；以及其与任何数字的大小比较，均返回 `false`。
 
 - `Number.POSITIVE_INFINITY`
 
@@ -130,7 +130,7 @@ console.info(NaN !== Number.POSITIVE_INFINITY); // -> true
 // 无穷
 console.info(100 / 0); // -> Infinity
 console.info(-100 / 0); // -> -Infinity
-console.info(INFINITY > Number.MAX_VALUE); // -> Infinity
+console.info(INFINITY > Number.MAX_VALUE); // -> true
 console.info(Number.POSITIVE_INFINITY); // -> Infinity
 console.info(-Number.POSITIVE_INFINITY); // -> -Infinity
 console.info(-Number.POSITIVE_INFINITY === Number.NEGATIVE_INFINITY); // -> true
@@ -181,7 +181,16 @@ Number = (-1)<sup>sign</sup> × (1 + mantissa) × 2<sup>exponent</sup>
 - 默认为十进制，也支持二进制（`0b` 先导）、八进制（`0o` 先导）、十六进制（`0x` 先导）。
 - 转化失败时会返回 `NaN`。
 
-其余值或对象在转化为数字时，会按顺序分别调用 `[Symbol.toPrimitive]("number")` 和 `valueOf()` 成员函数（如果有）。
+对于数组，情况如下。
+
+- 空数组转化为 0，
+- 只有一个元素时，且元素为数字的，则为该数字。
+- 只有一个元素时，且元素为字符串的，则依照该字符串进行转化。
+- 只有一个元素时，且元素为 `null` 或 `undefined` 时，转化为 0。
+- 只有一个元素时，且元素为 `BigInt` 类型，转化为对应的整数或指数。
+- 其余情况，均返回 `NaN`。
+
+其余值或对象在转化为数字时，会按顺序分别调用 `[Symbol.toPrimitive]("number")` 和 `valueOf()` 成员函数（如果有），例如时间日期 `Date` 类型会转为对应的 Tick。
 
 除此之外，`parseInt` 和 `parseFloat` 静态函数分别用于将字符串转化为整数和小数，失败时均为 `NaN`。
 
