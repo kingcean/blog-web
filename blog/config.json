@@ -364,12 +364,13 @@
         {
             "name": "Server-sent event client implementation",
             "name#zh": "满血版 SSE 客户端实现",
-            "disable": true,
+            "intro": "Implement streaming fetch.",
+            "intro#zh": "使用 fetch 实现一个完整的流式请求处理。",
             "dir": "sse",
             "file": true,
             "file#zh": "chs.md",
             "keywords": [],
-            "date": "20251227",
+            "date": "20251224",
             "thumb": {
                 "common": "https://kingcean.org/blog/2025/sse/images/thumb-tile.webp",
                 "wide": "https://kingcean.org/blog/2025/sse/images/thumb-wide.webp"
