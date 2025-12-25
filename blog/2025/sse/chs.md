@@ -186,9 +186,9 @@ export class SseClient extends EventTarget {
   }
 
   // 预设的 on 系列事件回调
-  onopen: ((ev: Event) => any) | null;
-  onmessage: ((ev: MessageEvent) => any) | null;
-  onerror: ((ev: Event) => any) | null;
+  onopen: ((ev: Event) => any) | null | undefined;
+  onmessage: ((ev: MessageEvent) => any) | null | undefined;
+  onerror: ((ev: Event) => any) | null | undefined;
 
   // 获取一些基本信息
   get url() {
@@ -248,7 +248,6 @@ export function fromFetchSse(input: RequestInfo | URL, init?: RequestInit) {
     // 发出请求并处理后续返回
     fetch(input, init).then((response) => {
       const decoder = new TextDecoder("utf-8");
-      if (!response.body) return Promise.reject("");
       return handleSse(response, new TextDecoder("utf-8"), item => {
         destination.next(item);
       }).then(arr => {

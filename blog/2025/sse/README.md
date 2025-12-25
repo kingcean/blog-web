@@ -185,9 +185,9 @@ export class SseClient extends EventTarget {
   }
 
   // The on series event callbacks
-  onopen: ((ev: Event) => any) | null;
-  onmessage: ((ev: MessageEvent) => any) | null;
-  onerror: ((ev: Event) => any) | null;
+  onopen: ((ev: Event) => any) | null | undefined;
+  onmessage: ((ev: MessageEvent) => any) | null | undefined;
+  onerror: ((ev: Event) => any) | null | undefined;
 
   // Get basic info
   get url() {
@@ -247,7 +247,6 @@ export function fromFetchSse(input: RequestInfo | URL, init?: RequestInit) {
     // Fetch and raise destination notification handlers
     fetch(input, init).then((response) => {
       const decoder = new TextDecoder("utf-8");
-      if (!response.body) return Promise.reject("");
       return handleSse(response, new TextDecoder("utf-8"), item => {
         destination.next(item);
       }).then(arr => {
