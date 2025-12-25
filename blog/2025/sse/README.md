@@ -41,13 +41,13 @@ export class ServerSentEventItem {
   constructor(source: string) {
     this.source: Record<string, string> = {};
 
-    // Parse the SSE item
-    source.split('\n').forEach(line => {
-      const pos = line.indexOf(':');
+    // Parse the SSE record item
+    (source || "").split("\n").forEach(line => {
+      const pos = line.indexOf(":");
       if (pos < 0) return;
       const key = line.substring(0, pos);
       const value = line.substring(pos + 1);
-      if (!this.source[key] || (key !== 'data' && key !== '')) this.source[key] = value;
+      if (!this.source[key] || (key !== "data" && key !== "")) this.source[key] = value;
       else this.source[key] += value;
     });
   }
@@ -63,7 +63,7 @@ export class ServerSentEventItem {
     return this.source.id;
   }
   get comment() {
-    return this.source[''];
+    return this.source[""];
   }
   get retry() {
     return this.source.retry ? parseInt(this.source.retry, 10) : undefined;
@@ -74,7 +74,7 @@ export class ServerSentEventItem {
     const data = this.source.data;
     if (!data) return undefined;
     if (!this.dataParsedInJson) this.dataParsedInJson = JSON.parse(data);
-    return data as T;
+    return this.dataParsedInJson as T;
   }
 
   // Get original value of specific field
@@ -115,9 +115,9 @@ async function handleSse(response: Response, decoder: TextDecoder, callback: ((i
     buffer += decoder.decode(value, { stream: true });
 
     // Split each item
-    const messages = buffer.split('\n\n');
+    const messages = buffer.split("\n\n");
     if (messages.length < 2) continue;
-    buffer = messages.pop() || '';
+    buffer = messages.pop() || "";
 
     // Converts all items to the instances
     messages.forEach(msg => {
@@ -152,17 +152,6 @@ export class SseClient extends EventTarget {
   };
 
   constructor(input: RequestInfo | URL, init?: RequestInit) {
-    // Register all event callbacks of on series
-    this.addEventListener("open", ev => {
-      if (typeof this.onopen === "function") this.onopen(ev);
-    })
-    this.addEventListener("message", ev => {
-      if (typeof this.onmessage === "function") this.onopen(ev);
-    })
-    this.addEventListener("error", ev => {
-      if (typeof this.onerror === "function") this.onopen(ev);
-    })
-
     // Get URL
     if (typeof input === "string") this.internal.url = input;
     else if (input instanceof URL) this.internal.url = input.toString();
@@ -182,6 +171,17 @@ export class SseClient extends EventTarget {
       this.internal.readyState = EventSource.CLOSED;
       this.dispatchEvent(new Event("error"));
     });
+
+    // Register all event callbacks of on series
+    this.addEventListener("open", ev => {
+      if (typeof this.onopen === "function") this.onopen(ev);
+    })
+    this.addEventListener("message", ev => {
+      if (typeof this.onmessage === "function") this.onmessage(ev);
+    })
+    this.addEventListener("error", ev => {
+      if (typeof this.onerror === "function") this.onerror(ev);
+    })
   }
 
   // The on series event callbacks
@@ -229,44 +229,29 @@ sse.addEventListener("message", (e) => {
 });
 ```
 
-The first argument 其中 `type` in `addEventListener` method is the field `event` of SSE item.
+The first argument `type` in `addEventListener` method is the field `event` of SSE record item.
 
 ## RxJS Integration
 
 If you're using RxJS for data management, integration is straightforward. It mirrors the logic in the `SseClient` constructor, except that instead of triggering message events, it calls the `next` and `complete` methods in the `Observable` constructor's arguments.
 
 ```typescript
-import { Observable } from '@rxjs/observable';
+import { Observable } from "@rxjs/observable";
 
 export function fromFetchSse(input: RequestInfo | URL, init?: RequestInit) {
   return new Observable<ServerSentEventItem>(destination => {
-
     // Merge abort signal
-    const controller = new AbortController();
-    const { signal } = controller;
+    const controller = mergeSignals(destination, init?.signal);
     let abortable = true;
-    const { signal: outerSignal } = init;
-    if (outerSignal) {
-      if (outerSignal.aborted) {
-        controller.abort();
-      } else {
-        const outerSignalHandler = () => {
-          if (!signal.aborted) {
-            controller.abort();
-          }
-        };
-        outerSignal.addEventListener('abort', outerSignalHandler);
-        destination.add(() => outerSignal.removeEventListener('abort', outerSignalHandler));
-      }
-    }
 
     // Fetch and raise destination notification handlers
     fetch(input, init).then((response) => {
-      const decoder = new TextDecoder('utf-8');
+      const decoder = new TextDecoder("utf-8");
       if (!response.body) return Promise.reject("");
       return handleSse(response, new TextDecoder("utf-8"), item => {
         destination.next(item);
       }).then(arr => {
+        abortable = false;
         destination.complete();
         return arr;
       });
@@ -275,6 +260,30 @@ export function fromFetchSse(input: RequestInfo | URL, init?: RequestInit) {
       destination.error(err);
     });
   });
+
+  // Return dispose handler
+  return () => {
+    if (!abortable) return;
+    controller.abort();
+  };
+}
+
+function mergeSignals(destination: Subscriber<ServerSentEventItem>, outerSignal: AbortSignal | undefined | null) {
+  const controller = new AbortController();
+  const { signal } = controller;
+  if (!outerSignal) return controller;
+  if (outerSignal.aborted) {
+    controller.abort();
+  } else {
+    const outerSignalHandler = () => {
+      if (signal.aborted) return;
+      controller.abort();
+    };
+    outerSignal.addEventListener("abort", outerSignalHandler);
+    destination.add(() => outerSignal.removeEventListener("abort", outerSignalHandler));
+  }
+
+  return controller;
 }
 ```
 

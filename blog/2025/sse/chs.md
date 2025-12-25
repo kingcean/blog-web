@@ -43,12 +43,12 @@ export class ServerSentEventItem {
 
     // 对输入的字符串进行解析：
     // 1. 按换行分割；2. 然后读取半角冒号前后的键值；3. 存入记录池中。
-    source.split('\n').forEach(line => {
-      const pos = line.indexOf(':');
+    (source || "").split("\n").forEach(line => {
+      const pos = line.indexOf(":");
       if (pos < 0) return;
       const key = line.substring(0, pos);
       const value = line.substring(pos + 1);
-      if (!this.source[key] || (key !== 'data' && key !== '')) this.source[key] = value;
+      if (!this.source[key] || (key !== "data" && key !== "")) this.source[key] = value;
       else this.source[key] += value;
     });
   }
@@ -64,7 +64,7 @@ export class ServerSentEventItem {
     return this.source.id;
   }
   get comment() {
-    return this.source[''];
+    return this.source[""];
   }
   get retry() {
     return this.source.retry ? parseInt(this.source.retry, 10) : undefined;
@@ -75,7 +75,7 @@ export class ServerSentEventItem {
     const data = this.source.data;
     if (!data) return undefined;
     if (!this.dataParsedInJson) this.dataParsedInJson = JSON.parse(data);
-    return data as T;
+    return this.dataParsedInJson as T;
   }
 
   // 字段原始值读取
@@ -116,9 +116,9 @@ async function handleSse(response: Response, decoder: TextDecoder, callback: ((i
     buffer += decoder.decode(value, { stream: true });
 
     // 依据分隔符进行拆分并判断是否存在已完整输出的项
-    const messages = buffer.split('\n\n');
+    const messages = buffer.split("\n\n");
     if (messages.length < 2) continue;
-    buffer = messages.pop() || '';
+    buffer = messages.pop() || "";
 
     // 将所有拆分后的完整项进行解析并作为事件抛出
     messages.forEach(msg => {
@@ -153,17 +153,6 @@ export class SseClient extends EventTarget {
   };
 
   constructor(input: RequestInfo | URL, init?: RequestInit) {
-    // 提供 on 系列事件回调
-    this.addEventListener("open", ev => {
-      if (typeof this.onopen === "function") this.onopen(ev);
-    })
-    this.addEventListener("message", ev => {
-      if (typeof this.onmessage === "function") this.onopen(ev);
-    })
-    this.addEventListener("error", ev => {
-      if (typeof this.onerror === "function") this.onopen(ev);
-    })
-
     // 读取 URL
     if (typeof input === "string") this.internal.url = input;
     else if (input instanceof URL) this.internal.url = input.toString();
@@ -183,6 +172,17 @@ export class SseClient extends EventTarget {
       this.internal.readyState = EventSource.CLOSED;
       this.dispatchEvent(new Event("error"));
     });
+
+    // 提供 on 系列事件回调
+    this.addEventListener("open", ev => {
+      if (typeof this.onopen === "function") this.onopen(ev);
+    })
+    this.addEventListener("message", ev => {
+      if (typeof this.onmessage === "function") this.onmessage(ev);
+    })
+    this.addEventListener("error", ev => {
+      if (typeof this.onerror === "function") this.onerror(ev);
+    })
   }
 
   // 预设的 on 系列事件回调
@@ -230,44 +230,29 @@ sse.addEventListener("message", (e) => {
 });
 ```
 
-其中 `addEventListener` 方法的第一个入参 `type` 即为 SSE 消息项的 `event`。
+其中 `addEventListener` 方法的第一个入参 `type` 即为 SSE 消息项的 `event` 字段。
 
 ## RxJS 集成
 
 假如你用的是 RxJS 来管理数据，那么封装也非常简单，与前面的 `SseClient` 构造函数中的逻辑类似，只不过在原触发消息事件的地方换成 `Observable` 构造函数入参中对应的 `next` 和 `complete` 方法调用。
 
 ```typescript
-import { Observable } from '@rxjs/observable';
+import { Observable } from "@rxjs/observable";
 
 export function fromFetchSse(input: RequestInfo | URL, init?: RequestInit) {
   return new Observable<ServerSentEventItem>(destination => {
-
-    // 以下是对终止操作的例行整合处理
-    const controller = new AbortController();
-    const { signal } = controller;
+    // 对终止操作的例行整合
+    const controller = mergeSignals(destination, init?.signal);
     let abortable = true;
-    const { signal: outerSignal } = init;
-    if (outerSignal) {
-      if (outerSignal.aborted) {
-        controller.abort();
-      } else {
-        const outerSignalHandler = () => {
-          if (!signal.aborted) {
-            controller.abort();
-          }
-        };
-        outerSignal.addEventListener('abort', outerSignalHandler);
-        destination.add(() => outerSignal.removeEventListener('abort', outerSignalHandler));
-      }
-    }
 
     // 发出请求并处理后续返回
     fetch(input, init).then((response) => {
-      const decoder = new TextDecoder('utf-8');
+      const decoder = new TextDecoder("utf-8");
       if (!response.body) return Promise.reject("");
       return handleSse(response, new TextDecoder("utf-8"), item => {
         destination.next(item);
       }).then(arr => {
+        abortable = false;
         destination.complete();
         return arr;
       });
@@ -276,6 +261,30 @@ export function fromFetchSse(input: RequestInfo | URL, init?: RequestInit) {
       destination.error(err);
     });
   });
+
+  // 返回销毁处理方法
+  return () => {
+    if (!abortable) return;
+    controller.abort();
+  };
+}
+
+function mergeSignals(destination: Subscriber<ServerSentEventItem>, outerSignal: AbortSignal | undefined | null) {
+  const controller = new AbortController();
+  const { signal } = controller;
+  if (!outerSignal) return controller;
+  if (outerSignal.aborted) {
+    controller.abort();
+  } else {
+    const outerSignalHandler = () => {
+      if (signal.aborted) return;
+      controller.abort();
+    };
+    outerSignal.addEventListener("abort", outerSignalHandler);
+    destination.add(() => outerSignal.removeEventListener("abort", outerSignalHandler));
+  }
+
+  return controller;
 }
 ```
 
