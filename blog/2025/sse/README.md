@@ -11,17 +11,17 @@ sse.addEventListener("message", (e) => {
 });
 ```
 
-However, this API only supports GET requests. For the aforementioned LLM example, POST requests are more common, which cannot be achieved with this API. This article introduces how to implement a fully functional SSE client using the `fetch` interface to make requests, expecting SSE-formatted responses and parsing them.
+However, this API only supports `GET` requests. For the aforementioned LLM example, `POST` requests are more common, which cannot be achieved with this API. This article introduces how to implement a fully functional SSE client using the `fetch` interface to make requests, expecting SSE-formatted responses and parsing them.
 
 ## Structure and Parsing
 
 The SSE response content is essentially a string with a `Content-Type` value of `text/event-stream`. Its content represents an array, where each element supports the following fields by default, all of which are optional:
 
-- `event` _string_: The type of the current message item.
-- `data`: The message item's content (payload).
-- `id` _string_: The message ID.
+- `event` _string_: The type of the current record item.
+- `data`: The content of record item (payload).
+- `id` _string_: The record ID.
 - `retry` _integer_: Retry interval in seconds.
-- (Empty string as the key name) _string_: Unimportant comments.
+- (Empty string as the key name) _string_: Comments.
 
 Details:
 
@@ -31,7 +31,7 @@ Details:
 
 This structure does not use JSON format but is somewhat similar to YAML, though not entirely. Each field is separated by a `\n` newline, and the attribute name and value are separated by a colon `:`. If `data` spans multiple lines (i.e., its content contains `\n`), it is not achieved through escaping but by setting multiple `data` fields, which are ultimately concatenated into a multi-line string (using `\n`).
 
-Based on this, we design a class that accepts a string representing an SSE message item. In the constructor, it parses the string and stores the data in private member fields, exposing corresponding read-only properties for external access.
+Based on this, we design a class that accepts a string representing an SSE record item. In the constructor, it parses the string and stores the data in private member fields, exposing corresponding read-only properties for external access.
 
 ```typescript
 export class ServerSentEventItem {
@@ -77,7 +77,7 @@ export class ServerSentEventItem {
     return data as T;
   }
 
-  // Get any field
+  // Get original value of specific field
   get(key: string) {
     return this.source[key];
   }
@@ -90,7 +90,7 @@ These read-only properties return SSE standard fields and provide a `get` method
 
 An SSE request result is usually a series of instances of this type, which can notify external events for business use. However, as mentioned earlier, the information from the server is essentially a string transmitted in chunks.
 
-Using the `fetch` interface's return value, we can obtain a reader instance from its `body` content stream. Then, in a loop, we continuously call the reader's `read` method to check whether the stream is complete and retrieve the current value. This value needs to be converted into a final string using a decoder, requiring a `TextDecoder` string decoder. Ideally, each read value should be an SSE message item, but to be safe, we store the read strings and check whether they contain single or multiple message items.
+Using the `fetch` interface's return value, we can obtain a reader instance from its `body` content stream. Then, in a loop, we continuously call the reader's `read` method to check whether the stream is complete and retrieve the current value. This value needs to be converted into a final string using a decoder, requiring a `TextDecoder` string decoder. Ideally, each read value should be an SSE record item, but to be safe, we store the read strings and check whether they contain single or multiple record items.
 
 The SSE specification defines that items are separated by two consecutive `\n` newline characters (`\n\n`). Therefore, we can use this as a keyword for splitting. When complete items are extracted from the cache, the previously implemented `ServerSentEventItem` class can be used to parse them and trigger corresponding events.
 
@@ -99,7 +99,7 @@ async function handleSse(response: Response, decoder: TextDecoder, callback: ((i
   // Initialize
   if (!resp.body) return Promise.reject("no response body");
   const reader = resp.body.getReader();
-  let buffer = '';
+  let buffer = "";
   const arr: ServerSentEventItem[] = [];
 
   // Read buffer in loop
@@ -204,11 +204,11 @@ export class SseClient extends EventTarget {
 }
 ```
 
-Once initialized, the object immediately triggers `fetch` to create a connection. In the JavaScript world, since scripts run in a single thread, the callback injected by `Promise` is not executed immediately but waits until the current coroutine (`fiber`/execution segment) ends. This means that subsequent logic executed sequentially will fully trigger event functions registered via `addEventListener` on this instance. In this case, no prior events will be missed. This completes the core functionality.
+Once initialized, the object immediately triggers `fetch` to create a connection. In the JavaScript world, since scripts run in a single thread, the callback injected by `Promise` is not executed immediately but waits until the current fiber (execution segment in thread) ends. This means that subsequent logic executed sequentially will fully trigger event functions registered via `addEventListener` on this instance. In this case, no prior events will be missed. This completes the core functionality.
 
 ## Usage
 
-Suppose we want to make a POST request to a specific web API and expect an SSE response. This can be done with the following simple and familiar code:
+Suppose we want to make a `POST` request to a specific web API and expect an SSE response. This can be done with the following simple and familiar code:
 
 ```javascript
 // Initialize an instance and fetch
@@ -276,4 +276,24 @@ export function fromFetchSse(input: RequestInfo | URL, init?: RequestInit) {
     });
   });
 }
+```
+
+Following is the code about usage.
+
+```typescript
+const sse = fromFetchSse(SSE_API_URL, {
+  method: "POST",
+  body: JSON.stringify(REQ_BODY),
+  mode: "cors",
+  credentials: "include",
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "text/event-stream, application/json"
+  }
+});
+
+// Subscribe SSE
+sse.subscribe((e) => {
+  if (e.event === "message") console.log(e.data);
+});
 ```

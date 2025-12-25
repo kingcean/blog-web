@@ -1,6 +1,6 @@
 ## 背景
 
-JavaScript 请求后端接口，最常见的是 `fetch`；再更早之前，则是 XHR 和 JSONP。随着大语言模型（LLM）的流行，为了应对服务器端生成的内容是逐步产生且整体耗时过长的问题，称为 Server-Sent Event（简称 SSE）的流式传输模式便越来越流行。这种模式下，服务器端以字符串的形式，按批次将内容进行增量输出，而前端（或客户端）则依据每个批次进行读取解析，并以此更新界面元素，完整的数据亦可依照约定进行整合生成。
+JavaScript 请求后端接口，最常见的是 `fetch`；再更早之前，则是 XHR 和 JSONP。随着大语言模型（LLM）的流行，为了应对服务器端生成的内容是逐步产生且整体耗时过长的问题，称为 Server-Sent Events（简称 SSE）的流式传输模式便越来越流行。这种模式下，服务器端以字符串的形式，按批次将内容进行增量输出，而前端（或客户端）则依据每个批次进行读取解析，并以此更新界面元素，完整的数据亦可依照约定进行整合生成。
 
 在现行标准中，其实 Web 前端也是有一套读取 SSE 的 API 的，那便是 `EventSource`。该类型在初始化时可传入一个 URL 地址，浏览器就会去进行请求，并通过注册的事件将获取的消息反映在回调中。
 
@@ -11,7 +11,7 @@ sse.addEventListener("message", (e) => {
 });
 ```
 
-然而，该 API 只能执行 GET 请求。对于上述 LLM 的例子，更多的是 POST，使用这个就无法实现了。本文将介绍如何自行实现一个完整能力的 SSE 客户端，通过 `fetch` 接口发起请求，以预期获取 SSE 格式并进行解析。
+然而，该 API 只能执行 `GET` 请求。对于上述 LLM 的例子，更多的是 `POST`，使用这个就无法实现了。本文将介绍如何自行实现一个完整能力的 SSE 客户端，通过 `fetch` 接口发起请求，以预期获取 SSE 格式并进行解析。
 
 ## 结构和解析
 
@@ -78,7 +78,7 @@ export class ServerSentEventItem {
     return data as T;
   }
 
-  // 其它字段读取
+  // 字段原始值读取
   get(key: string) {
     return this.source[key];
   }
@@ -100,7 +100,7 @@ async function handleSse(response: Response, decoder: TextDecoder, callback: ((i
   // 初始化
   if (!resp.body) return Promise.reject("no response body");
   const reader = resp.body.getReader();
-  let buffer = '';
+  let buffer = "";
   const arr: ServerSentEventItem[] = [];
 
   // 循环读取
@@ -205,11 +205,11 @@ export class SseClient extends EventTarget {
 }
 ```
 
-以上实现，在对象被初始化后，便会立即触发 `fetch` 以创建连接。在 JavaScript 世界，由于脚本运行于单线程中，故其实际的触发后通过 `Promise` 注入的回调不会被立即执行，而是会等待当前协程（`fiber` / 线程执行片段）结束后才会被调用，也就是说，在下个事件周期到来前，也就是按顺序执行的后续逻辑中，通过此实例 `addEventListener` 注册的事件函数都会被完整触发，这种情况下不会出现前序事件遗失的情况。以上便完成了核心功能的实现。
+以上实现，在对象被初始化后，便会立即触发 `fetch` 以创建连接。在 JavaScript 世界，由于脚本运行于单线程中，故其实际的触发后通过 `Promise` 注入的回调不会被立即执行，而是会等待当前协程（fiber / 线程执行片段）结束后才会被调用，也就是说，在下个事件周期到来前，也就是按顺序执行的后续逻辑中，通过此实例 `addEventListener` 注册的事件函数都会被完整触发，这种情况下不会出现前序事件遗失的情况。以上便完成了核心功能的实现。
 
 ## 使用
 
-假设我们要通过 POST 请求一个特定的 Web API，并预期其返回的是 SSE，那么只需按如下代码调用即可，非常简单和熟悉。
+假设我们要通过 `POST` 请求一个特定的 Web API，并预期其返回的是 SSE，那么只需按如下代码调用即可，非常简单和熟悉。
 
 ```javascript
 // 创建实例并触发执行
@@ -277,4 +277,24 @@ export function fromFetchSse(input: RequestInfo | URL, init?: RequestInit) {
     });
   });
 }
+```
+
+使用方式如下。
+
+```typescript
+const sse = fromFetchSse(SSE_API_URL, {
+  method: "POST",
+  body: JSON.stringify(REQ_BODY),
+  mode: "cors",
+  credentials: "include",
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "text/event-stream, application/json"
+  }
+});
+
+// 监听事件注册回调
+sse.subscribe((e) => {
+  if (e.event === "message") console.log(e.data);
+});
 ```

@@ -362,8 +362,8 @@
             }
         },
         {
-            "name": "Server-sent event client implementation",
-            "name#zh": "满血版 SSE 客户端实现",
+            "name": "Server-sent events client implementation",
+            "name#zh": "满血版 SSE API 实现",
             "intro": "Implement streaming fetch.",
             "intro#zh": "使用 fetch 实现一个完整的流式请求处理。",
             "dir": "sse",
