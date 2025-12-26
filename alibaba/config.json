@@ -41,14 +41,7 @@
             "dir": "nine",
             "file": true,
             "keywords": [],
-            "end": true,
-            "related": [
-                {
-                    "name": "Main source code",
-                    "name#zh": "主要源码",
-                    "url": "https://g.alicdn.com/hub/nine/3.0.0/scripts/index.js"
-                }
-            ]
+            "end": true
         },
         {
             "name": "AliSOP",
