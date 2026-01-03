@@ -1,5 +1,5 @@
 ﻿{
-    "$schema": "https://cdn.jsdelivr.net/npm/hje@2.4.4/dist/mdblogs.schema.json",
+    "$schema": "https://cdn.jsdelivr.net/npm/hje@2.4.6/dist/mdblogs.schema.json",
     "name": "FE Blog",
     "name#zh": "前端博客",
     "blog": [
@@ -13,8 +13,8 @@
             "date": "20160318",
             "end": true,
             "thumb": {
-                "common": "https://kingcean.org/blog/2016/thumbnails/parse-dom-attribute-nd.webp",
-                "wide": "https://kingcean.org/blog/2016/thumbnails/parse-dom-attribute-wd.webp"
+                "common": "./2016/thumbnails/parse-dom-attribute-nd.webp",
+                "wide": "./2016/thumbnails/parse-dom-attribute-wd.webp"
             },
             "related": [
                 {
@@ -41,8 +41,8 @@
             "date": "20160320",
             "end": true,
             "thumb": {
-                "common": "https://kingcean.org/blog/2016/thumbnails/delay-task-nd.webp",
-                "wide": "https://kingcean.org/blog/2016/thumbnails/delay-task-wd.webp"
+                "common": "./2016/thumbnails/delay-task-nd.webp",
+                "wide": "./2016/thumbnails/delay-task-wd.webp"
             },
             "related": [
                 {
@@ -81,8 +81,8 @@
             "date": "20160321",
             "end": true,
             "thumb": {
-                "common": "https://kingcean.org/blog/2016/thumbnails/multiple-hit-task-nd.webp",
-                "wide": "https://kingcean.org/blog/2016/thumbnails/multiple-hit-task-wd.webp"
+                "common": "./2016/thumbnails/multiple-hit-task-nd.webp",
+                "wide": "./2016/thumbnails/multiple-hit-task-wd.webp"
             },
             "related": [
                 {
@@ -126,8 +126,8 @@
             "date": "20160323",
             "end": true,
             "thumb": {
-                "common": "https://kingcean.org/blog/2016/thumbnails/slide-nd.webp",
-                "wide": "https://kingcean.org/blog/2016/thumbnails/slide-wd.webp"
+                "common": "./2016/thumbnails/slide-nd.webp",
+                "wide": "./2016/thumbnails/slide-wd.webp"
             },
             "related": [
                 {
@@ -154,8 +154,8 @@
             "date": "20160325",
             "end": true,
             "thumb": {
-                "common": "https://kingcean.org/blog/2016/thumbnails/promise-nd.webp",
-                "wide": "https://kingcean.org/blog/2016/thumbnails/promise-wd.webp"
+                "common": "./2016/thumbnails/promise-nd.webp",
+                "wide": "./2016/thumbnails/promise-wd.webp"
             },
             "related": [
                 {
@@ -182,8 +182,8 @@
             "date": "20160330",
             "end": true,
             "thumb": {
-                "common": "https://kingcean.org/blog/2016/thumbnails/localization-nd.webp",
-                "wide": "https://kingcean.org/blog/2016/thumbnails/localization-wd.webp"
+                "common": "./2016/thumbnails/localization-nd.webp",
+                "wide": "./2016/thumbnails/localization-wd.webp"
             },
             "related": [
                 {
@@ -216,8 +216,8 @@
             "date": "20160414",
             "end": true,
             "thumb": {
-                "common": "https://kingcean.org/blog/2016/thumbnails/dom-size-nd.webp",
-                "wide": "https://kingcean.org/blog/2016/thumbnails/dom-size-wd.webp"
+                "common": "./2016/thumbnails/dom-size-nd.webp",
+                "wide": "./2016/thumbnails/dom-size-wd.webp"
             },
             "related": [
                 {
@@ -243,8 +243,8 @@
             "date": "20181202",
             "end": true,
             "thumb": {
-                "common": "https://kingcean.org/blog/2018/images/thumb-pca-tile.webp",
-                "wide": "https://kingcean.org/blog/2018/images/thumb-pca-wide.webp"
+                "common": "./2018/images/thumb-pca-tile.webp",
+                "wide": "./2018/images/thumb-pca-wide.webp"
             },
             "related": [
                 {
@@ -273,8 +273,8 @@
                 "end": true
             },
             "thumb": {
-                "common": "https://kingcean.org/blog/2024/webnn/images/thumb-tile.webp",
-                "wide": "https://kingcean.org/blog/2024/webnn/images/thumb-wide.webp"
+                "common": "./2024/webnn/images/thumb-tile.webp",
+                "wide": "./2024/webnn/images/thumb-wide.webp"
             },
             "related": [
                 {
@@ -328,8 +328,8 @@
             "keywords": ["underlying"],
             "date": "20251017",
             "thumb": {
-                "common": "https://kingcean.org/blog/2025/a-eq-1-n-2/images/thumb-tile.webp",
-                "wide": "https://kingcean.org/blog/2025/a-eq-1-n-2/images/thumb-wide.webp"
+                "common": "./2025/a-eq-1-n-2/images/thumb-tile.webp",
+                "wide": "./2025/a-eq-1-n-2/images/thumb-wide.webp"
             }
         },
         {
@@ -342,8 +342,8 @@
             "keywords": ["underlying"],
             "date": "20251027",
             "thumb": {
-                "common": "https://kingcean.org/blog/2025/number/images/thumb-tile.webp",
-                "wide": "https://kingcean.org/blog/2025/number/images/thumb-wide.webp"
+                "common": "./2025/number/images/thumb-tile.webp",
+                "wide": "./2025/number/images/thumb-wide.webp"
             }
         },
         {
@@ -357,8 +357,8 @@
             "keywords": [],
             "date": "20251207",
             "thumb": {
-                "common": "https://kingcean.org/blog/2025/microfe/images/thumb-tile.webp",
-                "wide": "https://kingcean.org/blog/2025/microfe/images/thumb-wide.webp"
+                "common": "./2025/microfe/images/thumb-tile.webp",
+                "wide": "./2025/microfe/images/thumb-wide.webp"
             }
         },
         {
@@ -372,10 +372,12 @@
             "keywords": [],
             "date": "20251224",
             "thumb": {
-                "common": "https://kingcean.org/blog/2025/sse/images/thumb-tile.webp",
-                "wide": "https://kingcean.org/blog/2025/sse/images/thumb-wide.webp"
+                "common": "./2025/sse/images/thumb-tile.webp",
+                "wide": "./2025/sse/images/thumb-wide.webp"
             }
         }
+    ],
+    "links": [
     ],
     "redir": {
     },
