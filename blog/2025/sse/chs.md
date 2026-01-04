@@ -39,7 +39,7 @@ export class ServerSentEventItem {
   private dataParsedInJson: Record<string, unknown> | undefined;
 
   constructor(source: string) {
-    this.source: Record<string, string> = {};
+    this.source = {};
 
     // 对输入的字符串进行解析：
     // 1. 按换行分割；2. 然后读取半角冒号前后的键值；3. 存入记录池中。
@@ -108,7 +108,6 @@ async function handleSse(response: Response, decoder: TextDecoder, callback: ((i
     const { done, value } = await reader.read();
     if (done) { // 结束处理
       convertSse(buffer, arr, callback);
-      this.internal.readyState = EventSource.CLOSED;
       return arr;
     }
 
@@ -129,9 +128,12 @@ async function handleSse(response: Response, decoder: TextDecoder, callback: ((i
 
 function convertSse(msg: string, arr: ServerSentEventItem[], callback: ((item: ServerSentEventItem) => void)) {
   if (!msg) return;
+
+  // Parse and raise callback for each.
   const sse = new ServerSentEventItem(msg);
   arr.push(sse);
-  callback(new MessageEvent(sse.event, { data: sse }));
+  callback(sse);
+  return sse;
 }
 ```
 
@@ -153,6 +155,8 @@ export class SseClient extends EventTarget {
   };
 
   constructor(input: RequestInfo | URL, init?: RequestInit) {
+    super();
+
     // 读取 URL
     if (typeof input === "string") this.internal.url = input;
     else if (input instanceof URL) this.internal.url = input.toString();
@@ -165,10 +169,13 @@ export class SseClient extends EventTarget {
       this.dispatchEvent(new Event("open"));
 
       // 流式处理
-      return handleSse(resp, new TextDecoder("utf-8"), item => {
+      return handleSse(r, new TextDecoder("utf-8"), item => {
         this.dispatchEvent(new MessageEvent(item.event, { data: item }));
       });
-    }).catch(err => { // 异常处理
+    }).then(arr => { // 正常返回
+      this.internal.readyState = EventSource.CLOSED;
+      return arr;
+    }, err => { // 异常处理
       this.internal.readyState = EventSource.CLOSED;
       this.dispatchEvent(new Event("error"));
     });
@@ -178,7 +185,7 @@ export class SseClient extends EventTarget {
       if (typeof this.onopen === "function") this.onopen(ev);
     })
     this.addEventListener("message", ev => {
-      if (typeof this.onmessage === "function") this.onmessage(ev);
+      if (typeof this.onmessage === "function") this.onmessage(ev as MessageEvent);
     })
     this.addEventListener("error", ev => {
       if (typeof this.onerror === "function") this.onerror(ev);

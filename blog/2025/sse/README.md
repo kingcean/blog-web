@@ -39,7 +39,7 @@ export class ServerSentEventItem {
   private dataParsedInJson: Record<string, unknown> | undefined;
 
   constructor(source: string) {
-    this.source: Record<string, string> = {};
+    this.source = {};
 
     // Parse the SSE record item
     (source || "").split("\n").forEach(line => {
@@ -107,7 +107,6 @@ async function handleSse(response: Response, decoder: TextDecoder, callback: ((i
     const { done, value } = await reader.read();
     if (done) { // Ending
       convertSse(buffer, arr, callback);
-      this.internal.readyState = EventSource.CLOSED;
       return arr;
     }
 
@@ -128,9 +127,12 @@ async function handleSse(response: Response, decoder: TextDecoder, callback: ((i
 
 function convertSse(msg: string, arr: ServerSentEventItem[], callback: ((item: ServerSentEventItem) => void)) {
   if (!msg) return;
+
+  // Parse and raise callback for each.
   const sse = new ServerSentEventItem(msg);
   arr.push(sse);
-  callback(new MessageEvent(sse.event, { data: sse }));
+  callback(sse);
+  return sse;
 }
 ```
 
@@ -152,6 +154,8 @@ export class SseClient extends EventTarget {
   };
 
   constructor(input: RequestInfo | URL, init?: RequestInit) {
+    super();
+
     // Get URL
     if (typeof input === "string") this.internal.url = input;
     else if (input instanceof URL) this.internal.url = input.toString();
@@ -164,10 +168,13 @@ export class SseClient extends EventTarget {
       this.dispatchEvent(new Event("open"));
 
       // Streaming handling
-      return handleSse(resp, new TextDecoder("utf-8"), item => {
+      return handleSse(r, new TextDecoder("utf-8"), item => {
         this.dispatchEvent(new MessageEvent(item.event, { data: item }));
       });
-    }).catch(err => { // Error handling
+    }).then(arr => { // Happy path
+      this.internal.readyState = EventSource.CLOSED;
+      return arr;
+    }, err => { // Error handling
       this.internal.readyState = EventSource.CLOSED;
       this.dispatchEvent(new Event("error"));
     });
@@ -177,7 +184,7 @@ export class SseClient extends EventTarget {
       if (typeof this.onopen === "function") this.onopen(ev);
     })
     this.addEventListener("message", ev => {
-      if (typeof this.onmessage === "function") this.onmessage(ev);
+      if (typeof this.onmessage === "function") this.onmessage(ev as MessageEvent);
     })
     this.addEventListener("error", ev => {
       if (typeof this.onerror === "function") this.onerror(ev);
