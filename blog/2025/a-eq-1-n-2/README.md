@@ -233,7 +233,7 @@ console.info(JSON.stringify(today)); // -> "2025-10-17T00:00:00.000Z"
 
 So, what's going on here? 
 
-It turns out that for objects, we can implement their `toJSON()` method. When such an object, or when it is a property of another object, is serialized using `JSON.stringif()`, this method, if present, will be implicitly called first. This method needs to return a value, which can be a simple type (such as a string, boolean, or number) or an object or array. Finally, the serialized result will then be based on this returned value. And the result will be a string.
+It turns out that for objects, we can implement their `toJSON()` method. When such an object, or when it is a property of another object, is serialized using `JSON.stringify()`, this method, if present, will be implicitly called first. This method needs to return a value, which can be a simple type (such as a string, boolean, or number) or an object or array. Finally, the serialized result will then be based on this returned value. And the result will be a string.
 
 | Type | The content of string | Result sample |
 | ------- | -------------------- | ---------- |
@@ -289,7 +289,7 @@ function numberToStringInternal(value, length) {
 class Date {
   toJSON() {
     // {yyyy}-{MM}-{dd}T{HH}-{mm}-{ss}.{sss}Z
-    return `${numberToStringInternal(this.getUTCFullYear())}-${numberToStringInternal(this.getUTCMonth() + 1)}-${numberToStringInternal(this.getUTCDay())}T${numberToStringInternal(this.getUTCHours())}:${numberToStringInternal(this.getUTCMinutes())}:${numberToStringInternal(this.getUTCSeconds())}.${numberToStringInternal(this.getUTCMilliseconds())}Z`;
+    return `${numberToStringInternal(this.getUTCFullYear(), 2)}-${numberToStringInternal(this.getUTCMonth() + 1, 2)}-${numberToStringInternal(this.getUTCDay(), 2)}T${numberToStringInternal(this.getUTCHours(), 2)}:${numberToStringInternal(this.getUTCMinutes(), 2)}:${numberToStringInternal(this.getUTCSeconds(), 2)}.${numberToStringInternal(this.getUTCMilliseconds(), 2)}Z`;
   }
 
   // … Other member properties and methods are omitted here.

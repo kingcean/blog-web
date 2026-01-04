@@ -60,7 +60,7 @@ JavaScript 如何执行这类转化呢？首先，它会根据当前语句，包
    - `"default"`：通常都是此值，除了以下情况。
    - `"number"`：数字强制转换时，包括一元数字运算和 `Number()`。
    - `"string"`：字符串强制转换时，包括模板字符串和 `String()`。
-2. `valueOf()`：尝试获取该对象原本的内置值。默认返回自身。当返回值是非复杂类型时，会被忽略。
+2. `valueOf()`：尝试获取该对象原本的内置值。默认返回自身。当返回值是复杂类型时，会被忽略。
 3. `toString()`：输出格式化后的字符串内容。仅部分场景适用。
 
 让我们来再做几个试验。先定义一个对象，里面包含了上述各方法。
@@ -232,7 +232,7 @@ console.info(JSON.stringify(today)); // -> "2025-10-17T00:00:00.000Z"
 
 那么，这是怎么回事呢？
 
-原来，对于对象，我们还可以实现其 `toJSON()` 成员方法，当该对象自身或其作为其它对象的属性，被执行 `JSON.stringif()` 执行序列化时，如果存在，便会自动隐式先调用该方法。该方法需要返回一个值，可以是简单类型（如字符串、布尔值和数字）的值，也可以是对象或数组。最终，序列化会基于该值执行，并最终返回一个字符串。
+原来，对于对象，我们还可以实现其 `toJSON()` 成员方法，当该对象自身或其作为其它对象的属性，被执行 `JSON.stringify()` 执行序列化时，如果存在，便会自动隐式先调用该方法。该方法需要返回一个值，可以是简单类型（如字符串、布尔值和数字）的值，也可以是对象或数组。最终，序列化会基于该值执行，并最终返回一个字符串。
 
 | 类型 | 返回值字符串中内容 | 返回值示例 |
 | ------- | -------------------- | ---------- |
@@ -288,7 +288,7 @@ function numberToStringInternal(value, length) {
 class Date {
   toJSON() {
     // {yyyy}-{MM}-{dd}T{HH}-{mm}-{ss}.{sss}Z
-    return `${numberToStringInternal(this.getUTCFullYear())}-${numberToStringInternal(this.getUTCMonth() + 1)}-${numberToStringInternal(this.getUTCDay())}T${numberToStringInternal(this.getUTCHours())}:${numberToStringInternal(this.getUTCMinutes())}:${numberToStringInternal(this.getUTCSeconds())}.${numberToStringInternal(this.getUTCMilliseconds())}Z`;
+    return `${numberToStringInternal(this.getUTCFullYear(), 2)}-${numberToStringInternal(this.getUTCMonth() + 1, 2)}-${numberToStringInternal(this.getUTCDay(), 2)}T${numberToStringInternal(this.getUTCHours(), 2)}:${numberToStringInternal(this.getUTCMinutes(), 2)}:${numberToStringInternal(this.getUTCSeconds(), 2)}.${numberToStringInternal(this.getUTCMilliseconds(), 2)}Z`;
   }
   
   // … 其它成员属性和方法，此处略。
