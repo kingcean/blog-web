@@ -374,7 +374,12 @@
             "thumb": {
                 "common": "./2025/sse/images/thumb-tile.webp",
                 "wide": "./2025/sse/images/thumb-wide.webp"
-            }
+            },
+            "related": [
+                { "name": "GitHub MR", "name#zh": "GitHub 合并请求", "disable": "label" },
+                { "name": "RxJS", "subtitle": "PR 7589", "url": "https://github.com/ReactiveX/rxjs/pull/7589" },
+                { "name": "DataSense", "subtitle": "Commit 67cb418", "url": "https://github.com/compositejs/datasense/commit/67cb418d5416dab650450dbcc27f36184a02e9fc" }
+            ]
         }
     ],
     "links": [
