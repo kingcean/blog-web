@@ -41,6 +41,12 @@
     h2#title-projects + section > img:first-child {
         width: 230px; height: 80px; position: absolute; top: 0; left: 30px;
     }
+    #group-projects-com > a.link-long-button > span + span {
+        color: #888; font-size: 14px;
+    }
+    #group-projects-com > a.link-long-button > span:first-child + span, #group-projects-com > a.link-long-button > img:first-child + span + span {
+        margin-left: 20px;
+    }
     #blog_container {
         border-width: 1px 0; border-style: solid none; border-color: rgba(128, 128, 128, 0.2);
     }
@@ -56,11 +62,31 @@
     #blog_content {
         display: block; min-height: 200px; padding: 0; grid-template-columns: auto; margin-bottom: 20px;
     }
+    @media screen and (max-width:600px) {
+    #group-projects-com > a.link-long-button > span:first-child + span, #group-projects-com > a.link-long-button > img:first-child + span + span {
+        margin-left: 32px; display: block;
+    }
+    }
     </style>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.4.6/docs/js/mdblogs.js" ></script>
     <script type="text/javascript">
+    const res = {
+        strings: {
+            openSourceProjects: "Open Source Projects",
+            "openSourceProjects#zh": "开源项目",
+            enterpriseProjects: "Enterprise Projects",
+            "enterpriseProjects#zh": "企业项目",
+            archived: "Archived",
+            "archived#zh": "已归档"
+        }
+    }
+    function getString(key, options) {
+        return DeepX.MdBlogs.getLocaleProp(res.strings, key, options);
+    }
     function showMoreProjects() {
-        DeepX.MdBlogs.showElements(["project-item-chemistry", "project-item-quark", "project-item-apass", "project-item-nine", "project-item-sop", "project-item-iqiyi"], ["project-more"]);
+        DeepX.MdBlogs.showElements(["group-projects-com", "title-projects-ent", "group-projects-ent"], ["project-more", "group-projects"]);
+        DeepX.MdBlogs.setElementProp("title-projects", null, getString("openSourceProjects"));
+        DeepX.MdBlogs.setElementProp("title-projects-ent", null, getString("enterpriseProjects"));
     }
     function onInit() {
         DeepX.MdBlogs.setElementText("topmenu-blogs", "blogs");
@@ -113,17 +139,27 @@
         <section>
             <img alt="WebDev" src="./images/logos/webdev_wordmark.png" />
         </section>
-        <section class="link-tile-wide">
+        <section id="group-projects" class="link-tile-wide">
             <a id="project-item-datasense" href="https://datasense.js.org"><span>DataSense</span>
             </a><a id="project-item-langpack" href="https://langpack.js.org"><span>Langpack</span>
             </a><a id="project-item-hje" href="https://hje.js.org"><span>Hyper-JSON Engine</span>
             </a><a id="project-more" class="grouping-more" href="#" onclick="showMoreProjects();return false;" ><span id="button-more">More…</span>
-            </a><a id="project-item-chemistry" href="https://github.com/12dlabs/chemistry" style="display: none;"><span>Chemistry</span>
-            </a><a id="project-item-quark" href="./alibaba?quark" style="display: none;"><span><span>Ali</span>Quark</span>
-            </a><a id="project-item-apass" href="./alibaba?apass" style="display: none;"><span>APASS</span>
-            </a><a id="project-item-nine" href="./alibaba?nine" style="display: none;"><span>Nine <span>(AliVOC)</span></span>
-            </a><a id="project-item-sop" href="./alibaba?sop" style="display: none;"><span><span>Ali</span>SOP</span>
-            </a><a id="project-item-iqiyi" href="./iqiyi" style="display: none;"><span>iQIYI<span> Windows client app</span></span>
+            </a>
+        </section>
+        <section id="group-projects-com" style="display: none;">
+            <a id="project-item-datasense-2" href="https://datasense.js.org" class="link-long-button" ><img alt="DataSense" src="./images/logos/datasense.png" /><span>DataSense</span><span>observable, events and advanced model.</span>
+            </a><a id="project-item-langpack-2" href="https://langpack.js.org" class="link-long-button" ><img alt="LangPack" src="./images/logos/langpack.png" /><span>LangPack</span><span>multiple language packs framework.</span>
+            </a><a id="project-item-hje-2" href="https://hje.js.org" class="link-long-button" ><img alt="Hyper-JSON Engine" src="./images/logos/hje.png" /><span>Hyper-JSON Engine</span><span>generate HTML view by JSON.</span>
+            </a><a id="project-item-chemistry-2" href="https://github.com/12dlabs/chemistry" class="link-long-button" ><img alt="Chemistry" src="./images/logos/chemistry.png" /><span>Chemistr</span><span>chemical elements, periodic table and isotopes.</span>
+            </a>
+        </section>
+        <h2 id="title-projects-ent" style="display: none;">Enterprise Projects</h2>
+        <section id="group-projects-ent" class="link-tile-wide" style="display: none;">
+            <a id="project-item-quark" href="./alibaba?quark"><span><span>Ali</span>Quark</span>
+            </a><a id="project-item-apass" href="./alibaba?apass"><span>APASS</span>
+            </a><a id="project-item-nine" href="./alibaba?nine"><span>Nine <span>(AliVOC)</span></span>
+            </a><a id="project-item-sop" href="./alibaba?sop"><span><span>Ali</span>SOP</span>
+            </a><a id="project-item-iqiyi" href="./iqiyi"><span>iQIYI<span> Windows client app</span></span>
             </a>
         </section>
     </section>
@@ -140,9 +176,7 @@
         <h2 id="title-links">Other links</h2>
         <section class="link-tile-wide">
             <a href="https://kingcean.net"><span>Kingcean.net</span>
-            </a><a href="https://jinchen.org"><span>Jinchen Art</span></a><a href="https://github.com/kingcean"><svg width="24" height="24" aria-hidden="true" viewBox="0 0 16 16" version="1.1" data-view-component="true" class="octicon octicon-mark-github v-align-middle">
-                <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-            </svg><span>GitHub<span></span><span>Kingcean</span></span></a>
+            </a><a href="https://jinchen.org"><img alt="Jinchen Art" src="./images/logos/jinchen.png" /><span>Jinchen Art</span></a><a href="https://github.com/kingcean"><img alt="GitHub" src="./images/logos/github_purple.svg" /><span>GitHub<span></span><span>Kingcean</span></span></a>
         </section>
     </section>
     <footer>
