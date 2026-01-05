@@ -41,6 +41,9 @@
     h2#title-projects + section > img:first-child {
         width: 230px; height: 80px; position: absolute; top: 0; left: 30px;
     }
+    h2#title-projects-ent > span + span {
+        color: #888; font-size: 14px; font-weight: normal; margin-left: 20px;
+    }
     #group-projects-com > a.link-long-button > span + span {
         color: #888; font-size: 14px;
     }
@@ -83,10 +86,13 @@
     function getString(key, options) {
         return DeepX.MdBlogs.getLocaleProp(res.strings, key, options);
     }
+    function setElementLocaleText(element, key, options) {
+        DeepX.MdBlogs.setElementProp(element, null, DeepX.MdBlogs.getLocaleProp(res.strings, key, options));
+    }
     function showMoreProjects() {
         DeepX.MdBlogs.showElements(["group-projects-com", "title-projects-ent", "group-projects-ent"], ["project-more", "group-projects"]);
-        DeepX.MdBlogs.setElementProp("title-projects", null, getString("openSourceProjects"));
-        DeepX.MdBlogs.setElementProp("title-projects-ent", null, getString("enterpriseProjects"));
+        setElementLocaleText("title-projects", "openSourceProjects");
+        setElementLocaleText("title-projects-ent-text", "enterpriseProjects");
     }
     function onInit() {
         DeepX.MdBlogs.setElementText("topmenu-blogs", "blogs");
@@ -94,6 +100,7 @@
         DeepX.MdBlogs.setElementText("title-links", "otherLinks");
         DeepX.MdBlogs.setElementText("button-blogs", "blogs");
         DeepX.MdBlogs.setElementText("button-more", "more");
+        setElementLocaleText("desc-projects-ent", "archived");
         const context = Hje.render(document.getElementById("blog_content"), {
             children: [{
                 tagName: "div",
@@ -150,10 +157,10 @@
             <a id="project-item-datasense-2" href="https://datasense.js.org" class="link-long-button" ><img alt="DataSense" src="./images/logos/datasense.png" /><span>DataSense</span><span>observable, events and advanced model.</span>
             </a><a id="project-item-langpack-2" href="https://langpack.js.org" class="link-long-button" ><img alt="LangPack" src="./images/logos/langpack.png" /><span>LangPack</span><span>multiple language packs framework.</span>
             </a><a id="project-item-hje-2" href="https://hje.js.org" class="link-long-button" ><img alt="Hyper-JSON Engine" src="./images/logos/hje.png" /><span>Hyper-JSON Engine</span><span>generate HTML view by JSON.</span>
-            </a><a id="project-item-chemistry-2" href="https://github.com/12dlabs/chemistry" class="link-long-button" ><img alt="Chemistry" src="./images/logos/chemistry.png" /><span>Chemistr</span><span>chemical elements, periodic table and isotopes.</span>
+            </a><a id="project-item-chemistry-2" href="https://github.com/12dlabs/chemistry" class="link-long-button" ><img alt="Chemistry" src="./images/logos/chemistry.png" /><span>Chemistry</span><span>chemical elements, periodic table and isotopes.</span>
             </a>
         </section>
-        <h2 id="title-projects-ent" style="display: none;">Enterprise Projects</h2>
+        <h2 id="title-projects-ent" style="display: none;"><span id="title-projects-ent-text">Enterprise Projects</span><span id="desc-projects-ent">Archived</span></h2>
         <section id="group-projects-ent" class="link-tile-wide" style="display: none;">
             <a id="project-item-quark" href="./alibaba?quark"><span><span>Ali</span>Quark</span>
             </a><a id="project-item-apass" href="./alibaba?apass"><span>APASS</span>
