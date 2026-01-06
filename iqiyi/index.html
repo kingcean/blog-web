@@ -8,21 +8,49 @@
     <link href="https://cdn.jsdelivr.net/npm/hje@2.4.6/docs/css/site.org.css" rel="stylesheet" />
     <link href="../css/current.css" rel="stylesheet" />
     <style type="text/css">
-    #sec-screenshots {
+    #sec-screenshots, #sec-architecture {
         user-select: none;
     }
-    #sec-screenshots > img {
-        width: 100%;
-        border: 1px solid rgba(128, 128, 128, 0.2);
-        border-radius: 4px;
-        display: block;
-        margin-bottom: 10px;
-        box-sizing: border-box;
+    #sec-screenshots > img, #sec-architecture > img {
+        width: 100%; border: 1px solid rgba(128, 128, 128, 0.2); border-radius: 4px; display: block; margin-bottom: 10px; box-sizing: border-box;
+    }
+    #sec-architecture > img {
+        max-width: 600px;
     }
     #sec-screenshots > span {
-        width: 100%;
-        display: block;
-        box-sizing: border-box;
+        width: 100%; margin: 20px 0; display: block; box-sizing: border-box;
+    }
+    #sec-screenshots > span > span {
+        color: #808080; margin-left: 10px;
+    }
+    section#timeline > div {
+        position: relative;
+    }
+    section#timeline > div:first-child > svg {
+        position: absolute; top: 0; left: 0;
+    }
+    section#timeline > div:first-child + ul, section#timeline > div:first-child + ul > li {
+        list-style: none; margin: 0;
+    }
+    section#timeline > div:first-child + ul {
+        height: 280px; padding: 10px 0 10px 50px;
+    }
+    section#timeline > div:first-child + ul > li {
+        line-height: 20px; height: 40px; padding: 0; overflow: hidden;
+    }
+    section#timeline > div:first-child + ul > li > span {
+        display: inline-block;
+    }
+    section#timeline > div:first-child + ul > li > span:first-child {
+        color: #999; width: 80px;
+    }
+    @media screen and (max-width:720px) {
+    section#timeline > div:first-child + ul > li > span {
+        display: inline; vertical-align: baseline;
+    }
+    section#timeline > div:first-child + ul > li > span:first-child::after {
+        content: ": ";
+    }
     }
     </style>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.4.6/docs/js/mdblogs.js" ></script>
@@ -53,34 +81,121 @@
             </ul>
         </section>
     </header>
-    <section style="min-height: 640px; margin-bottom: 60px; ">
+    <section>
         <section class="x-part-projects-banner" >
             <a href="../" id="link-gohome" >Back to homepage</a><span>Project at <strong>iQIYI</strong> Inc</span>
             <img alt="Logo" src="../images/logos/iqiyi.png" style="width: 48px; height: 48px; float: right; " />
         </section>
         <h2>iQIYI Windows client app</h2>
         <section>
-            <span>iQIYI is a video streaming platform with movies, TV series, shows, etc.</span>
-        </section>
-        <section>
-            <span>This project is about its Win32 app which is developed by C++ and web native (React Native on Type Script).</span>
+            <p>
+                <span>iQIYI is a video streaming platform with movies, TV series, shows, etc.</span>
+            </p>
+            <p>
+                <span>iQIYI Windows client app is a classic Win32 application to provide the mainstream services and native experience.</span>
+            </p>
         </section>
         <section>
             <a id="project-item-datasense" class="link-long-button" href="ms-windows-store://pdp/?productId=XPFP2VL78MNLGD"><span>iQIYI <span>- Microsoft Store page</span></span>
             </a>
         </section>
-        <h2 id="title-screenshots">Screenshots</h2>
-        <section id="sec-screenshots">
-            <img alt="Homepage" src="images/scn-220526-100135.jpg" />
-            <img alt="TV series page" src="images/scn-220526-100957.jpg" />
-            <img alt="Player" src="images/scn-220817-111355.jpg" />
-            <img alt="Variety page" src="images/scn-220526-100252.jpg" />
-            <img alt="Library (animes channel)" src="images/scn-220526-100730.jpg" />
-            <span style="color: #808080; " >Captured on May 26<sup>th</sup> 2022, version 9.6.158.</span>
+        <h2 id="title-timeline">Milestones</h2>
+        <section id="timeline" >
+            <div>
+                <svg width="48" height="280" viewbox="0 0 48 280" xmlns="http://www.w3.org/2000/svg">
+                    <g stroke="#444" stroke-width="1" >
+                        <line x1="0" y1="20" x2="50" y2="20" />
+                        <line x1="0" y1="60" x2="50" y2="60" />
+                        <line x1="0" y1="100" x2="50" y2="100" />
+                        <line x1="0" y1="140" x2="50" y2="140" />
+                        <line x1="0" y1="180" x2="50" y2="180" />
+                        <line x1="0" y1="220" x2="50" y2="220" />
+                        <line x1="0" y1="260" x2="50" y2="260" />
+                    </g>
+                    <g stroke="#36C" >
+                        <line x1="6" y1="4" x2="6" y2="276" stroke-width="6" stroke-linecap="round" />
+                        <circle cx="6" cy="120" r="4" fill="#333" stroke-width="2" />
+                    </g>
+                    <g stroke="#393" >
+                        <line x1="16" y1="60" x2="16" y2="260" stroke-width="6" stroke-linecap="round" />
+                        <circle cx="16" cy="60" r="4" fill="#333" stroke-width="2" />
+                        <circle cx="16" cy="260" r="4" fill="#333" stroke-width="2" />
+                    </g>
+                    <g stroke="#A63" >
+                        <line x1="26" y1="20" x2="26" y2="220" stroke-width="6" stroke-linecap="round" />
+                        <circle cx="26" cy="20" r="4" fill="#333" stroke-width="2" />
+                        <circle cx="26" cy="220" r="4" fill="#333" stroke-width="2" />
+                    </g>
+                    <g stroke="#C09" >
+                        <line x1="36" y1="140" x2="36" y2="276" stroke-width="6" stroke-linecap="round" />
+                        <circle cx="36" cy="140" r="4" fill="#333" stroke-width="2" />
+                        <circle cx="36" cy="180" r="4" fill="#333" stroke-width="2" />
+                    </g>
+                </svg>
+            </div>
+            <ul>
+                <li>
+                    <span>2016</span><span>Introduce RND, a self-developed React Native for Windows framework.</span>
+                </li>
+                <li>
+                    <span>2017 May</span><span>* Join and lead the product and services.</span>
+                </li>
+                <li>
+                    <span>2018</span><span>Merge PPS sub-app and iQIYI sub-app into one.</span>
+                </li>
+                <li>
+                    <span>2022 Sep</span><span>Introduce LWA, a framework developed by iQIYI and Microsoft.</span>
+                </li>
+                <li>
+                    <span>2023 Dec</span><span>Refactor official and streaming website to re-use same technology and bundle.</span>
+                </li>
+                <li>
+                    <span>2024 H1</span><span>RND is removed.</span>
+                </li>
+                <li>
+                    <span>2024 Sep</span><span>* Left the R&amp;D team of the product and services.</span>
+                </li>
+            </ul>
+            <p>
+                <span>Notes</span>
+            </p>
+            <ul>
+                <li>
+                    <span>There were 2 sub-apps before - one is called PPS and another is called iQIYI.<br />
+                        After merging, it has 2 theme mode: the style of original PPS is classic dark, and the style of original iQIYI is youth bright.
+                        And 2 years later, only dark mode is available to create an atmosphere of watching video.</span>
+                </li>
+                <li>
+                    <span>RND is a web native framework to enable Type Script developing.<br />The framework itself is developed by C++.</span>
+                </li>
+                <li>
+                    <span>LWA is a new hybrid framework with local H5 runtime based on Microsoft Edge WebView2. It enable Type Script developing with full H5 experience.<br />
+                        Microsoft Edge WebView2 id developed by C++; the LWA runtime is developed by C# for first version, and by C++ for the version in iQIYI Windows client app.</span>
+                </li>
+            </ul>
         </section>
         <h2 id="title-architecture">Architecture</h2>
-        <section>
+        <section id="sec-architecture">
+            <img alt="Architecture" src="images/arch-biz.png" loading="lazy" />
+            <a class="link-long-button" href="https://nuscien.github.io/winkit/localwebapp/" >LWA</a>
             <a class="link-long-button" href="../blog/?iqiyi-pca" >Web native PC app</a>
+        </section>
+        <h2 id="title-screenshots">Screenshots</h2>
+        <section id="sec-screenshots">
+            <span>v12.5.0<span> Captured on May 1<sup>st</sup> and Jul 5<sup>th</sup> 2024</span><span> (LWA)</span></span>
+            <img alt="Homepage" src="images/scn-240501-234752.jpg" loading="lazy" />
+            <img alt="TV series page" src="images/scn-240501-234941.jpg" loading="lazy" />
+            <img alt="Player" src="images/scn-240705-162055.png" loading="lazy" />
+            <img alt="Variety page" src="images/scn-240501-234839.jpg" loading="lazy" />
+            <img alt="Library (animes channel)" src="images/scn-240501-235356.jpg" loading="lazy" />
+            <img alt="UEFA Euro page" src="images/scn-240704-095106.jpg" loading="lazy" />
+            <img alt="Gesture over air" src="images/scn-240705-160300.jpg" loading="lazy" />
+            <span>v9.6.158<span> Captured on May 26<sup>th</sup> 2022</span><span> (RND)</span></span>
+            <img alt="Homepage" src="images/scn-220526-100135.jpg" loading="lazy" />
+            <img alt="TV series page" src="images/scn-220526-100957.jpg" loading="lazy" />
+            <img alt="Player" src="images/scn-220817-111355.jpg" loading="lazy" />
+            <img alt="Variety page" src="images/scn-220526-100252.jpg" loading="lazy" />
+            <img alt="Library (animes channel)" src="images/scn-220526-100730.jpg" loading="lazy" />
         </section>
         <h2 id="title-website">Official website</h2>
         <section>
