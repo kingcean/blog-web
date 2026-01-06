@@ -45,7 +45,19 @@
         display: inline-block;
     }
     section#timeline > div:first-child + ul > li > span:first-child {
-        color: #999; width: 80px;
+        color: #999; width: 90px;
+    }
+    section#timeline span#step-timeline-m-3-d {
+        color: #36C;
+    }
+    section#timeline span#step-timeline-m-1-d, section#timeline span#step-timeline-m-6-d {
+        color: #A63;
+    }
+    section#timeline span#step-timeline-m-2-d, section#timeline span#step-timeline-m-7-d {
+        color: #393;
+    }
+    section#timeline span#step-timeline-m-4-d, section#timeline span#step-timeline-m-5-d {
+        color: #C09;
     }
     @media screen and (max-width:720px) {
     section#timeline > div:first-child + ul > li > span {
@@ -60,7 +72,10 @@
     <script type="text/javascript">
     function onInit() {
         const res = {
-            localeKeys: ["title-timeline", "text-timeline-notes-title", "text-intro-corp", "text-intro-app", "step-timeline-m-1", "step-timeline-m-2", "step-timeline-m-3", "step-timeline-m-4", "step-timeline-m-5", "step-timeline-m-6", "step-timeline-m-7"],
+            localeKeys: ["title-timeline", "text-timeline-notes-title", "text-intro-corp", "text-intro-app",
+            "step-timeline-m-1-d", "step-timeline-m-1", "step-timeline-m-2-d", "step-timeline-m-2", "step-timeline-m-3-d", "step-timeline-m-3",
+            "step-timeline-m-4-d", "step-timeline-m-4", "step-timeline-m-5-d", "step-timeline-m-5", "step-timeline-m-6-d","step-timeline-m-6",
+            "step-timeline-m-7-d", "step-timeline-m-7"],
             locale: {
                 "title-timeline": "Milestones",
                 "title-timeline#zh": "纪事",
@@ -70,18 +85,32 @@
                 "text-intro-corp#zh": "爱奇艺是一个视频流媒体平台，拥有海量影视漫综等各类节目和视频。",
                 "text-intro-app": "iQIYI Windows client app is a classic Win32 application to provide the mainstream services and native experience.",
                 "text-intro-app#zh": "爱奇艺 Windows 客户端是一款经典 Win32 应用程序，向用户提供服务，并具备原生客户端体验。",
+                "step-timeline-m-1-d": "2016",
+                "step-timeline-m-1-d#zh": "2016年",
                 "step-timeline-m-1": "Introduce RND, a self-developed React Native for PC framework.",
                 "step-timeline-m-1#zh": "引入 RND 框架，这是一套自研的适用于桌面端的 React Native 框架。",
+                "step-timeline-m-2-d": "May, 2017",
+                "step-timeline-m-2-d#zh": "2017年5月",
                 "step-timeline-m-2": "Join and lead the product and services.",
                 "step-timeline-m-2#zh": "加入并领导负责本产品和服务的团队。",
+                "step-timeline-m-3-d": "H2, 2018",
+                "step-timeline-m-3-d#zh": "2018下半年",
                 "step-timeline-m-3": "Merge PPS sub-app and iQIYI modern sub-app into one.",
                 "step-timeline-m-3#zh": "合并 PPS 子程序和爱奇艺图文子程序于统一应用程序中。",
+                "step-timeline-m-4-d": "Sep, 2022",
+                "step-timeline-m-4-d#zh": "2022年9月",
                 "step-timeline-m-4": "Introduce LWA framework instead of RND.",
                 "step-timeline-m-4#zh": "引入 LWA 框架，以逐步替换 RND。",
+                "step-timeline-m-5-d": "Dec, 2023",
+                "step-timeline-m-5-d#zh": "2023年12月",
                 "step-timeline-m-5": "Refactor official and streaming website to re-use same technology and bundle.",
                 "step-timeline-m-5#zh": "重构网页版爱奇艺，使用与客户端上层业务相同的技术和程序包。",
+                "step-timeline-m-6-d": "H1, 2024",
+                "step-timeline-m-6-d#zh": "2024上半年",
                 "step-timeline-m-6": "RND is removed.",
                 "step-timeline-m-6#zh": "RND 已完成使命，被移除。",
+                "step-timeline-m-7-d": "Sep, 2024",
+                "step-timeline-m-7-d#zh": "2024年9月",
                 "step-timeline-m-7": "Leave the R&amp;D team of the product and services.",
                 "step-timeline-m-7#zh": "离职。",
                 "name": "iQIYI"
@@ -171,25 +200,25 @@
             </div>
             <ul>
                 <li>
-                    <span style="color: #A63; ">2016</span><span id="step-timeline-m-1" >Introduce RND, a self-developed React Native for PC framework.</span>
+                    <span id="step-timeline-m-1-d" >2016</span><span id="step-timeline-m-1" >Introduce RND, a self-developed React Native for PC framework.</span>
                 </li>
                 <li>
-                    <span style="color: #393; ">2017 May</span><span id="step-timeline-m-2" >Join and lead the product and services.</span>
+                    <span id="step-timeline-m-2-d" >2017 May</span><span id="step-timeline-m-2" >Join and lead the product and services.</span>
                 </li>
                 <li>
-                    <span style="color: #36C; ">2018</span><span id="step-timeline-m-3" >Merge PPS sub-app and iQIYI modern sub-app into one.</span>
+                    <span id="step-timeline-m-3-d" >2018 H2</span><span id="step-timeline-m-3" >Merge PPS sub-app and iQIYI modern sub-app into one.</span>
                 </li>
                 <li>
-                    <span style="color: #C09; ">2022 Sep</span><span id="step-timeline-m-4" >Introduce LWA framework instead of RND.</span>
+                    <span id="step-timeline-m-4-d" >2022 Sep</span><span id="step-timeline-m-4" >Introduce LWA framework instead of RND.</span>
                 </li>
                 <li>
-                    <span style="color: #C09; ">2023 Dec</span><span id="step-timeline-m-5" >Refactor official and streaming website to re-use same technology and bundle.</span>
+                    <span id="step-timeline-m-5-d" >2023 Dec</span><span id="step-timeline-m-5" >Refactor official and streaming website to re-use same technology and bundle.</span>
                 </li>
                 <li>
-                    <span style="color: #A63; ">2024 H1</span><span id="step-timeline-m-6" >RND is removed.</span>
+                    <span id="step-timeline-m-6-d" >2024 H1</span><span id="step-timeline-m-6" >RND is removed.</span>
                 </li>
                 <li>
-                    <span style="color: #393; ">2024 Sep</span><span id="step-timeline-m-7" >Leave the R&amp;D team of the product and services.</span>
+                    <span id="step-timeline-m-7-d" >2024 Sep</span><span id="step-timeline-m-7" >Leave the R&amp;D team of the product and services.</span>
                 </li>
             </ul>
             <p>
@@ -202,11 +231,12 @@
                         And 2 years later, only dark mode is available to create an atmosphere of watching video.</span>
                 </li>
                 <li>
-                    <span>RND is a web native framework to enable Type Script developing.<br />The framework itself is developed by C++.</span>
+                    <span><strong style="color: #A63; " >RND</strong> is a web native framework to enable Type Script (and <code>tsx</code>) developing desktop app.<br />
+                        The framework itself is developed by C++. Its render engine is Lyra (self-developed, based on Skia), and its JavaScript engine is V8. </span>
                 </li>
                 <li>
-                    <span>LWA is a new hybrid framework with local H5 runtime based on Microsoft Edge WebView2. It enable Type Script developing with full H5 experience.<br />
-                        Microsoft Edge WebView2 id developed by C++; the LWA runtime is developed by C# for first version (which uses in iQIYI UWP app), and by C++ for the version in iQIYI Windows client app.</span>
+                    <span><strong style="color: #C09; " >LWA</strong> is a new hybrid framework with local H5 runtime based on Microsoft Edge WebView2. It enable Type Script developing app with native capabilities and full H5 experience.<br />
+                        Microsoft Edge WebView2 is developed by C++; the LWA runtime is developed by C# for first version (which is imported to use for some pages in iQIYI UWP app), and by C++ for the version in iQIYI Windows client app.</span>
                 </li>
             </ul>
         </section>
