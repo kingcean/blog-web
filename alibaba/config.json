@@ -6,7 +6,7 @@
             "name": "Quark",
             "dir": "quark",
             "file": true,
-            "keywords": [],
+            "keywords": ["framework"],
             "end": true,
             "related": [
                 {
@@ -27,7 +27,7 @@
             "name": "APASS",
             "dir": "apass",
             "file": true,
-            "keywords": [],
+            "keywords": ["mobile", "desktop"],
             "end": true,
             "related": [
                 {
@@ -46,7 +46,7 @@
             "subtitle": "Alibaba VOC",
             "dir": "nine",
             "file": true,
-            "keywords": [],
+            "keywords": ["mobile"],
             "end": true,
             "data": {
                 "duration": { "start": 2015, "leave": 2016, "role": "owner" }
@@ -56,7 +56,7 @@
             "name": "AliSOP",
             "dir": "sop",
             "file": true,
-            "keywords": [],
+            "keywords": ["desktop"],
             "end": true,
             "related": [
                 {
@@ -79,7 +79,12 @@
         "keywords": [
             { "name": "Installation", "name#zh": "安装", "value": "install" },
             { "name": "Prepare", "name#zh": "准备", "value": "prepare" },
-            { "name": "NPM", "value": "npm" }
+            { "name": "NPM", "value": "npm" },
+            { "name": "Framework", "name#zh": "框架", "value": "framework" },
+            { "name": "Mobile", "name#zh": "移动端", "value": "mobile" },
+            { "name": "Desktop", "name#zh": "桌面端", "value": "desktop" },
+            { "name": "VR", "value": "vr" },
+            { "name": "IoT", "name#zh": "物联网", "value": "iot" }
         ]
     }
 }
