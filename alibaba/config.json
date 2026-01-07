@@ -18,7 +18,10 @@
                     "name": "GitHub",
                     "url": "https://github.com/12dlabs/quark"
                 }
-            ]
+            ],
+            "data": {
+                "duration": { "start": 2014, "end": 2017, "role": "owner" }
+            }
         },
         {
             "name": "APASS",
@@ -32,7 +35,10 @@
                     "name#zh": "官网",
                     "url": "https://apass.taobao.com"
                 }
-            ]
+            ],
+            "data": {
+                "duration": { "start": 2014, "leave": 2015, "role": "owner" }
+            }
         },
         {
             "name": "Nine",
@@ -41,7 +47,10 @@
             "dir": "nine",
             "file": true,
             "keywords": [],
-            "end": true
+            "end": true,
+            "data": {
+                "duration": { "start": 2015, "leave": 2016, "role": "owner" }
+            }
         },
         {
             "name": "AliSOP",
@@ -55,7 +64,10 @@
                     "name#zh": "静态演示",
                     "url": "https://g.alicdn.com/hub/flow/2.3.671/demo/index.html"
                 }
-            ]
+            ],
+            "data": {
+                "duration": { "start": 2016, "leave": 2017, "role": "owner" }
+            }
         }
     ],
     "redir": {

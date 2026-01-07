@@ -11,6 +11,23 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/marked@16.2.1/lib/marked.umd.js" ></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.4.6/docs/js/mdblogs.js" ></script>
+    <style type="text/css" >
+    section.x-part-blog-related > div.x-part-article-duration {
+        height: 60px; margin: 20px 0; position: relative;
+    }
+    section.x-part-blog-related > div.x-part-article-duration > svg {
+        position: absolute; top: 0; left: 110px;
+    }
+    section.x-part-blog-related > div.x-part-article-duration > div {
+        font-size: 12px; height: 20px; line-height: 20px; text-align: left;
+    }
+    section.x-part-blog-related > div.x-part-article-duration > div.x-part-article-duration-labels {
+        position: absolute; top: 40px; left: 110px;
+    }
+    section.x-part-blog-related > div.x-part-article-duration > div.x-part-article-duration-labels > span {
+        position: absolute; top: 0;
+    }
+    </style>
 </head>
 <body>
     <header>
@@ -36,7 +53,147 @@
     </section>
     <section id="blog_content" ></section>
     <script type="text/javascript">
-        DeepX.MdBlogs.render("blog_content", "./config.json", { title: true });
+        const res = {
+            strings: {
+                duration: "Duration",
+                "duration#zh": "周期",
+                project: "Project",
+                "project#zh": "项目",
+                participation: "Participation",
+                "participation#zh": "参与",
+                year: "Year",
+                "year#zh": "年份"
+            }
+        }
+        function getLocaleString(key, options) {
+            return DeepX.MdBlogs.getLocaleProp(res.strings, key, options)
+        }
+        function drawLine(start, end, y, color, points) {
+            const yStr = y.toString(10);
+            const children = [{
+                tagName: "svg:line",
+                props: { x1: (start || 0).toString(10), y1: yStr, x2: end.toString(10), y2: yStr, "stroke-width": "4", "stroke-linecap": "round" }
+            }];
+            if (points) {
+                for (let i = 0; i < points.length; i++) {
+                    const p = points[i];
+                    if (typeof p !== "number") continue;
+                    children.push({
+                        tagName: "svg:circle",
+                        props: {
+                            cx: p.toString(10), cy: yStr, r: "4", fill: "#333", strokeWidth: "2"
+                        }
+                    });
+                }
+            }
+
+            return {
+                tagName: "svg:g",
+                props: {
+                    stroke: color
+                },
+                children: children
+            }
+        }
+        DeepX.MdBlogs.render("blog_content", "./config.json", {
+            title: true,
+            onselect(ev) {
+                if (!ev) return;
+                const article = ev.article;
+                const model = ev.children;
+                if (!article || !model) return;
+                if (article.data && article.data.duration) {
+                    const duration = article.data.duration;
+                    const lifecycle = [];
+                    const join = [];
+                    const years = [];
+                    let joinStart = 6;
+                    if (typeof duration.start === "number" || typeof duration.start === "string") {
+                        lifecycle.push(6);
+                        years.push({ x: 6, y: duration.start });
+                        if (typeof duration.join === "number" || typeof duration.join === "string") {
+                            join.push(70);
+                            joinStart = joinStart;
+                            years.push({ x: joinStart, y: duration.join });
+                        } else {
+                            join.push(6);
+                        }
+                    } else {
+                        joinStart = 30;
+                        years.push({ x: joinStart, y: duration.join });
+                        join.push(joinStart);
+                    }
+
+                    let joinLeft = 204;
+                    if (typeof duration.end === "number" || typeof duration.end === "string") {
+                        lifecycle.push(204);
+                        years.push({ x: 204, y: duration.end });
+                        if (typeof duration.leave === "number" || typeof duration.leave === "string") {
+                            joinLeft = 140;
+                            years.push({ x: joinLeft, y: duration.leave });
+                            join.push(joinLeft);
+                        } else {
+                            join.push(204);
+                        }
+                    } else {
+                        joinLeft = 170;
+                        years.push({ x: joinLeft, y: duration.leave });
+                        join.push(joinLeft);
+                    }
+
+                    ev.insertChildren("end", {
+                        tagName: "section",
+                        styleRefs: "x-part-blog-related",
+                        children: [{
+                            tagName: "h2",
+                            children: getLocaleString("duration")
+                        }, {
+                            tagName: "div",
+                            styleRefs: "x-part-article-duration",
+                            children: [{
+                                tagName: "svg:svg",
+                                props: {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    viewBox: "0 0 210 40",
+                                    width: "210",
+                                    height: "40"
+                                },
+                                children: [{
+                                    tagName: "svg:g",
+                                    props: { stroke: "#444", "stroke-width": "1" },
+                                    children: years.map(function (y) {
+                                        const xStr = y.x.toString(10);
+                                        return {
+                                            tagName: "svg:line",
+                                            props: { x1: xStr, x2: xStr, y1: "0", y2: "40" }
+                                        };
+                                    })
+                                }, drawLine(6, 204, 10, "#36C", lifecycle), drawLine(joinStart, joinLeft, 30, "#393", join)]
+                            }, {
+                                tagName: "div",
+                                children: getLocaleString("project")
+                            }, {
+                                tagName: "div",
+                                children: getLocaleString("participation")
+                            }, {
+                                tagName: "div",
+                                children: getLocaleString("year")
+                            }, {
+                                tagName: "div",
+                                styleRefs: "x-part-article-duration-labels",
+                                children: years.map(function (y) {
+                                    return {
+                                        tagName: "span",
+                                        style: { left: (y.x - 10) + "px" },
+                                        children: y.y
+                                    };
+                                })
+                            }]
+                        }]
+                    });
+                }
+            }
+        });
         DeepX.MdBlogs.setElementText("topmenu-blogs", "blogs");
         DeepX.MdBlogs.setElementText("link-gohome", "goHome");
     </script>
