@@ -13,19 +13,19 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.4.6/docs/js/mdblogs.js" ></script>
     <style type="text/css" >
     section.x-part-blog-related > div.x-part-article-duration {
-        height: 60px; margin: 20px 0; position: relative;
+        height: 60px; margin: 20px 0; position: relative; overflow: hidden;
     }
     section.x-part-blog-related > div.x-part-article-duration > svg {
-        position: absolute; top: 0; left: 110px;
+        position: absolute; top: 0; left: 90px;
     }
     section.x-part-blog-related > div.x-part-article-duration > div {
         font-size: 12px; height: 20px; line-height: 20px; text-align: left;
     }
     section.x-part-blog-related > div.x-part-article-duration > div.x-part-article-duration-labels {
-        position: absolute; top: 40px; left: 110px;
+        position: absolute; top: 40px; left: 54px;
     }
     section.x-part-blog-related > div.x-part-article-duration > div.x-part-article-duration-labels > span {
-        position: absolute; top: 0;
+        width: 72px; text-align: center; text-overflow: clip; white-space: nowrap; display: block; position: absolute; top: 0;
     }
     </style>
 </head>
@@ -184,7 +184,7 @@
                                 children: years.map(function (y) {
                                     return {
                                         tagName: "span",
-                                        style: { left: (y.x - 10) + "px" },
+                                        style: { left: y.x + "px" },
                                         children: y.y
                                     };
                                 })
