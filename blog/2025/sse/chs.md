@@ -11,9 +11,13 @@ sse.addEventListener("message", (e) => {
 });
 ```
 
-然而，该 API 只能执行 `GET` 请求。对于上述 LLM 的例子，更多的是 `POST`，使用这个就无法实现了。本文将介绍如何自行实现一个完整能力的 SSE 客户端，通过 `fetch` 接口发起请求，以预期获取 SSE 格式并进行解析。
+然而，该 API 只能执行 `GET` 请求。对于上述 LLM 的例子，更多的是 `POST`，使用这个就无法实现了。
 
-## 结构和解析
+## 实现
+
+我们将自行实现一个完整能力的 SSE 客户端，通过 `fetch` 接口发起请求，以预期获取 SSE 格式并进行解析。
+
+### 结构和解析
 
 SSE 返回值内容，本质上是一个字符串，其 Content-Type 值为 `text/event-stream`。其内容表示的是一个数组，数组中各元素默认支持以下几个字段，全部为可选（即非必填）。
 
@@ -87,7 +91,7 @@ export class ServerSentEventItem {
 
 这些只读属性返回了 SSE 标准字段，同时还提供 `get` 方法用于获取各字段原始值和非标准定义的其它字段的值，以及考虑到 `data` 在许多情况下预期的都是一个 JSON 内容，此处 `dataJson` 方法用于进行 Parse 处理并进行缓存。
 
-## 流式处理
+### 流式处理
 
 一个 SSE 的请求结果，通常会是一连串的该类型实例，这些实例可以通过事件通知外部，以供业务读取。但如前面所言，从服务器端过来的这些信息本质上是一节一节的字符串。
 
@@ -137,7 +141,7 @@ function convertSse(msg: string, arr: ServerSentEventItem[], callback: ((item: S
 }
 ```
 
-## 请求和封装
+### 请求和封装
 
 有了 `Response` 内容流式解析后，还有很关键的一步，即对后端相关接口的请求。在此，我们使用标准的 `fetch` 接口，并以流的方式对其返回内容（即 `body`）进行读取，然后转为 UTF-8 进行解析。为了降低使用者的学习成本，我们的输入输出均仿效现有模式。
 
@@ -239,7 +243,74 @@ sse.addEventListener("message", (e) => {
 
 其中 `addEventListener` 方法的第一个入参 `type` 即为 SSE 消息项的 `event` 字段。
 
-## RxJS 集成
+## 框架集成
+
+如今很多时候我们都是使用流行的前端框架进行编程，直接使用原始接口固然是可行的，但如果有适用于对应框架编程风格的 API 那就更好了。
+
+### React
+
+对于 React 应用，我们更习惯在组件中通过 `use` 各类 Hooks 的方式来获取数据，因此，我们可以进行一次封装，从而创造更适合 React 中使用的 API。
+
+封装的实现原理很简单，就是通过 `useState` 来初始化结果列表和状态，然后在 `useEffect` 中触发 `fetch` 并用已封装好的 `handlerSse` 处理其中 SSE 返回结果，并在回调中变更结果。该函数将返回收到的结果列表及整体状态。
+
+```typescript
+import { useEffect, useState } from "react";
+
+export function useFetchSse(input: RequestInfo | URL, init?: RequestInit, dependencies: any[]) {
+  const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState();
+  useEffect(() => {
+    fetch(input, init).then((response) => {
+      return handleSse(response, new TextDecoder("utf-8"), item => {
+        setList([...list, item]);
+      }).then(arr => {
+        setLoading(false);
+        return arr;
+      });
+    }).catch((err: any) => {
+      setError(err);
+      setLoading(false);
+    });
+  }, dependencies === undefined ? [input, init] : dependencies);
+  return {
+    list,
+    loading,
+    error,
+    length: list.length,
+    last: list.length > 0 ? list[list.length - 1] : undefined,
+  };
+}
+```
+
+使用方式如下。
+
+```tsx
+export function StreamingItems() {
+  const { list } = useFetchSse(SSE_API_URL, {
+    method: "POST",
+    body: JSON.stringify(REQ_BODY),
+    mode: "cors",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "text/event-stream, application/json"
+    }
+  }, []);
+
+  return (
+    <ul>
+      {list.map((e, i) => {
+        return e.event === "message" ? <li key={`item-${i}`}>{e.data}</li> : null;
+      })}
+    </ul>
+  )
+}
+```
+
+请注意，此处实现中，`useFetchSse` 前两个参数和 `fetch` 的一致，而第3个参数是类似 `useEffect` 的第2个参数，即依赖数组。如果不传入依赖数组，则默认使用本 React Hooks 函数的前两个参数构成依赖数组，这也就意味着，如果不额外传入该依赖数组，需要确保前两个参数在需要重新请求前是静态恒定的而非现拼的，其中一种做法是它们也通过 `useState` 进行管理或由外部传入，当需要重新触发 SSE 请求时再在源头变更此二值。
+
+### RxJS
 
 假如你用的是 RxJS 来管理数据，那么封装也非常简单，与前面的 `SseClient` 构造函数中的逻辑类似，只不过在原触发消息事件的地方换成 `Observable` 构造函数入参中对应的 `next` 和 `complete` 方法调用。
 
@@ -254,7 +325,6 @@ export function fromFetchSse(input: RequestInfo | URL, init?: RequestInit) {
 
     // 发出请求并处理后续返回
     fetch(input, init).then((response) => {
-      const decoder = new TextDecoder("utf-8");
       return handleSse(response, new TextDecoder("utf-8"), item => {
         destination.next(item);
       }).then(arr => {

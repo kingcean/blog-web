@@ -11,9 +11,13 @@ sse.addEventListener("message", (e) => {
 });
 ```
 
-However, this API only supports `GET` requests. For the aforementioned LLM example, `POST` requests are more common, which cannot be achieved with this API. This article introduces how to implement a fully functional SSE client using the `fetch` interface to make requests, expecting SSE-formatted responses and parsing them.
+However, this API only supports `GET` requests. For the aforementioned LLM example, `POST` requests are more common, which cannot be achieved with this API.
 
-## Structure and Parsing
+## Implementation
+
+Let's implement a fully functional SSE client using the `fetch` interface to make requests, expecting SSE-formatted responses and parsing them.
+
+### Structure and Parsing
 
 The SSE response content is essentially a string with a `Content-Type` value of `text/event-stream`. Its content represents an array, where each element supports the following fields by default, all of which are optional:
 
@@ -86,7 +90,7 @@ export class ServerSentEventItem {
 
 These read-only properties return SSE standard fields and provide a `get` method for retrieving raw values of fields and non-standard fields. Additionally, considering that `data` is often expected to be JSON content, the `dataJson` method parses and caches the content.
 
-## Stream Processing
+### Stream Processing
 
 An SSE request result is usually a series of instances of this type, which can notify external events for business use. However, as mentioned earlier, the information from the server is essentially a string transmitted in chunks.
 
@@ -136,7 +140,7 @@ function convertSse(msg: string, arr: ServerSentEventItem[], callback: ((item: S
 }
 ```
 
-## Request and Encapsulation
+### Request and Encapsulation
 
 After parsing the response content stream, the next critical step is making requests to the backend API. Here, we use the standard `fetch` interface to make requests and read its response content (`body`) as a stream, decoding it into UTF-8. To reduce the learning curve, the input and output mimic existing patterns.
 
@@ -238,7 +242,74 @@ sse.addEventListener("message", (e) => {
 
 The first argument `type` in `addEventListener` method is the field `event` of SSE record item.
 
-## RxJS Integration
+## Integration for FE Framework
+
+如今很多时候我们都是使用流行的前端框架进行编程，直接使用原始接口固然是可行的，但如果有适用于对应框架编程风格的 API 那就更好了。
+
+### React
+
+For React, we always get data in components via React Hooks (`use` series). So we should create a function for a better experience on this framework.
+
+It's easy to do so. We can call `useState` to initialize and manage the result list and its state. And get response by `fetch` in `useEffect` so we can call `handleSse` aboved to handle the response to report the result in its callback parameter. It returns the result list received and its state.
+
+```typescript
+import { useEffect, useState } from "react";
+
+export function useFetchSse(input: RequestInfo | URL, init?: RequestInit, dependencies: any[]) {
+  const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState();
+  useEffect(() => {
+    fetch(input, init).then((response) => {
+      return handleSse(response, new TextDecoder("utf-8"), item => {
+        setList([...list, item]);
+      }).then(arr => {
+        setLoading(false);
+        return arr;
+      });
+    }).catch((err: any) => {
+      setError(err);
+      setLoading(false);
+    });
+  }, dependencies === undefined ? [input, init] : dependencies);
+  return {
+    list,
+    loading,
+    error,
+    length: list.length,
+    last: list.length > 0 ? list[list.length - 1] : undefined,
+  };
+}
+```
+
+Following is the code about usage.
+
+```tsx
+export function StreamingItems() {
+  const { list } = useFetchSse(SSE_API_URL, {
+    method: "POST",
+    body: JSON.stringify(REQ_BODY),
+    mode: "cors",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "text/event-stream, application/json"
+    }
+  }, []);
+
+  return (
+    <ul>
+      {list.map((e, i) => {
+        return e.event === "message" ? <li key={`item-${i}`}>{e.data}</li> : null;
+      })}
+    </ul>
+  )
+}
+```
+
+Please note the implementation above that the first and second parameter are the ones of `fetch`. And the third parameter is a dependency array like the second one of `useEffect` to control when occurs the function body to send request. It will use the first and second parameter to combine the dependency array by default (if do not pass the third parameter) so you may hold these instances by using `useState` or passing from outside. You can occur to send the request again by changing these instances or passing the third parameter.
+
+### RxJS
 
 If you're using RxJS for data management, integration is straightforward. It mirrors the logic in the `SseClient` constructor, except that instead of triggering message events, it calls the `next` and `complete` methods in the `Observable` constructor's arguments.
 
@@ -253,7 +324,6 @@ export function fromFetchSse(input: RequestInfo | URL, init?: RequestInit) {
 
     // Fetch and raise destination notification handlers
     fetch(input, init).then((response) => {
-      const decoder = new TextDecoder("utf-8");
       return handleSse(response, new TextDecoder("utf-8"), item => {
         destination.next(item);
       }).then(arr => {
