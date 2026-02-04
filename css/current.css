@@ -1,3 +1,12 @@
+body > header:first-child > section:first-child > h1 > img {
+    width: 48px; height: 48px; vertical-align: middle; margin-right: 8px;
+}
+body > header:first-child > section:first-child > h1 > img:hover {
+    width: 50px; height: 50px; vertical-align: middle; margin-right: 6px;
+}
+body > header:first-child > section:first-child > h1 > img:first-child + a > strong:first-child + span {
+    font-weight: lighter;
+}
 section.x-part-projects-banner {
     margin-bottom: 20px; cursor: default; user-select: none;
 }
