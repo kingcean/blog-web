@@ -220,7 +220,11 @@ export class SseClient extends EventTarget {
 
 ## 使用
 
-假设我们要通过 `POST` 请求一个特定的 Web API，并预期其返回的是 SSE，那么只需按如下代码调用即可，非常简单和熟悉。
+封装后的函数，使用起来也非常简单。
+
+### 熟悉的方式
+
+假设我们要通过 `POST` 请求一个特定的 Web API，并预期其返回的是 SSE，那么只需按如下代码调用即可，非常简单和熟悉，入参与 `fetch` 一致，回调与 `EventTarget` 一致。
 
 ```javascript
 // 创建实例并触发执行

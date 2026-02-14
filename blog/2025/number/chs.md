@@ -16,11 +16,11 @@ console.info(Number("100") === 100.0); // -> true
 console.info(Number("100.0") === 100); // -> true
 ```
 
-当然，JavaScript 在 `Number` 中提供了一个成员方法，用于帮助我们判断一个数字其本质是不是整数（即小数位均为0），即 `isInteger()`。
+当然，JavaScript 在 `Number` 中提供了一个静态方法，用于帮助我们判断一个数字其本质是不是整数（即小数位均为0），即 `isInteger()`。
 
 ```javascript
-console.info((100).isInteger());  // -> true
-console.info((3.14).isInteger()); // -> false
+console.info(Number.isInteger(100));  // -> true
+console.info(Number.isInteger(3.14)); // -> false
 ```
 
 其次，由于是浮点，也就是说，受 64 位二进制长度限制，为了尽可能表示更大范围的数值，其小数位的位数会随着要表示数值的大小而左右移动，从而产生精度问题。JavaScript 也将相关的阈值等信息，通过静态只读属性的方式，挂载在 `Number` 类型下。
@@ -39,7 +39,7 @@ console.info((3.14).isInteger()); // -> false
 
 - `Number.MIN_VALUE`
 
-  能表示的最小正数，也就是大小最接近 0 的整数，通常为 2⁻¹⁰⁷⁴，亦即 5×10³²⁴，具体根据浏览器和系统平台不同而有可能不一样。比这个小的值，基于精度限制，要么依旧与之相等，要么是 0，而更小的则为负数。
+  能表示的最小正数，也就是大小最接近 0 的整数，通常为 2⁻¹⁰⁷⁴，亦即 5×10⁻³²⁴，具体根据浏览器和系统平台不同而有可能不一样。比这个小的值，基于精度限制，要么依旧与之相等，要么是 0，而更小的则为负数。
 
   ```javascript
   console.info(Number.MIN_VALUE * 0.8 === Number.MIN_VALUE); // -> true
@@ -194,6 +194,18 @@ Number = (-1)<sup>sign</sup> × (1 + mantissa) × 2<sup>exponent</sup>
 
 除此之外，`parseInt` 和 `parseFloat` 静态函数分别用于将字符串转化为整数和小数，失败时均为 `NaN`。
 
+而当对数字进行一元为真判断时，仅数字 0 即 `NaN` 表示 `false`，其余均被视为 `true`。
+
+```javascript
+console.info(!!1);  // -> true
+console.info(!!-1); // -> true
+console.info(!!0.17); // true
+console.info(!!12e20); // true
+console.info(!!Number.NEGATIVE_INFINITY); // true
+console.info(!!0);  // -> false
+console.info(!!NaN); // -> false;
+```
+
 ## 格式化
 
 而数字也能通过其成员方法，转化为不同形式表示内容的字符串。
@@ -283,8 +295,29 @@ Number = (-1)<sup>sign</sup> × (1 + mantissa) × 2<sup>exponent</sup>
 ```javascript
 console.info(1n === BigInt(1)); // -> true
 console.info(1n + 1n); // -> 2n
+console.info(BigInt("100000000000000000001")); // -> 100000000000000000001n
 ```
 
 其 `typeof` 返回的是字符串 `bigint`。在执行 `JSON.stringify` 静态函数序列化时，会转成字符串形式，返回的内容为对应的十进制数字表示。
 
 `BigInt` 在计算机底层的结构，是采用变长字节数组（Variable-Length Byte Array）的形式来实现的，主要包括正负符号位、实际占用长度、数字本体。
+
+`BigInt` 作为数字，与 `Number` 有许多相似的地方，例如其也能进行算数运算，但 `BigInt` 只能与 `BigInt` 进行运算，不能与 `Number` 进行混合运算。
+
+```javascript
+console.info(1n + 1); // -> Uncaught TypeError: Cannot mix BigInt and other types, use explicit conversions
+```
+
+如果需要将这两种数字类型混合运算，需要将 `Number` 通过前述构造函数先转为 `BigInt` 再进行运算。除此之外，`Math` 静态类中的函数通常也不适用于 `BigInt`。
+
+```javascript
+console.info(Math.abs(1n)); // Uncaught TypeError: Cannot convert a BigInt value to a number
+```
+
+另外，与 `Number` 类似，当进行一元为真判断时，仅 `0n` 表示 `false`，其余均为 `true`。
+
+```javascript
+console.info(!!1n);  // -> true
+console.info(!!-1n); // -> true
+console.info(!!0n);  // -> false
+```

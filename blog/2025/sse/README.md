@@ -219,7 +219,11 @@ Once initialized, the object immediately triggers `fetch` to create a connection
 
 ## Usage
 
-Suppose we want to make a `POST` request to a specific web API and expect an SSE response. This can be done with the following simple and familiar code:
+The way to use is very simple and familiar.
+
+### Use Like Before
+
+Suppose we want to make a `POST` request to a specific web API and expect an SSE response. The input parameters are as same as `fetch`. The listen methods are as same as `EventTarget`. Following is the sample code.
 
 ```javascript
 // Initialize an instance and fetch

@@ -16,11 +16,11 @@ console.info(Number("100") === 100.0); // -> true
 console.info(Number("100.0") === 100); // -> true
 ```
 
-Of course, JavaScript provides a member method `isInteger()` in `Number` to help us determine whether a number is an integer.
+Of course, JavaScript provides a static function `isInteger()` in `Number` to help us determine whether a number is an integer.
 
 ```javascript
-console.info((100).isInteger());  // -> true
-console.info((3.14).isInteger()); // -> false
+console.info(Number.isInteger(100));  // -> true
+console.info(Number.isInteger(3.14)); // -> false
 ```
 
 Second, because it is a floating point, that is, limited by the length of 64 bits, in order to represent a wider range of values as much as possible, the number of decimal places will move left and right with the size of the value to be represented, resulting in accuracy problems. JavaScript also mounts relevant thresholds and other information under types `Number` through static read-only properties.
@@ -39,7 +39,7 @@ Second, because it is a floating point, that is, limited by the length of 64 bit
 
 - `Number.MIN_VALUE`
 
-  The smallest positive number that can be represented, that is, the integer with the nearest size to 0, is usually 2⁻¹⁰⁷⁴, or 5×10³²⁴, which may vary depending on the browser and system platform. Values smaller than this, based on precision limits, are either equal to it or 0, while smaller values are negative.
+  The smallest positive number that can be represented, that is, the integer with the nearest size to 0, is usually 2⁻¹⁰⁷⁴, or 5×10⁻³²⁴, which may vary depending on the browser and system platform. Values smaller than this, based on precision limits, are either equal to it or 0, while smaller values are negative.
 
   ```javascript
   console.info(Number.MIN_VALUE * 0.8 === Number.MIN_VALUE); // -> true
@@ -191,6 +191,18 @@ The remaining values or objects are called `[Symbol.toPrimitive]("number")` and 
 
 In addition, `parseInt` and `parseFloat` static functions are used to convert strings to integers and decimals. And returns `NaN` if fail.
 
+If indicates a number is true, only number 0 and `NaN` return `false` but others return `true`.
+
+```javascript
+console.info(!!1);  // -> true
+console.info(!!-1); // -> true
+console.info(!!0.17); // true
+console.info(!!12e20); // true
+console.info(!!Number.NEGATIVE_INFINITY); // true
+console.info(!!0);  // -> false
+console.info(!!NaN); // -> false;
+```
+
 ## String format
 
 Numbers can also be converted into strings that represent content in different forms through their member methods.
@@ -280,8 +292,29 @@ Its constructor (likewise `Number` without keywords `new`) accepts a number or a
 ```javascript
 console.info(1n === BigInt(1)); // -> true
 console.info(1n + 1n); // -> 2n
+console.info(BigInt("100000000000000000001")); // -> 100000000000000000001n
 ```
 
 Its `typeof` returns a string `bigint`. When performing static function `JSON.stringify` to serialize, it will be converted into a string form, and the content returned will be the corresponding decimal numeric representation.
 
 The structure of `BigInt` at the bottom of the computer is implemented in the form of a variable-length byte array, which mainly includes positive and negative symbol bits, actual occupied length, and number ontology.
+
+`BigInt` are similar with `Number` like  arithmetic operations. But it will throw error when calculate with a `BigInt` and a `Number`. Both should be `BigInt`.
+
+```javascript
+console.info(1n + 1); // -> Uncaught TypeError: Cannot mix BigInt and other types, use explicit conversions
+```
+
+It requires to convert the `Number` to `BitInt` by above constructor before calculating with these 2 kind of number. And the most of functions in `Math` do not apply to `BigInt`.
+
+```javascript
+console.info(Math.abs(1n)); // Uncaught TypeError: Cannot convert a BigInt value to a number
+```
+
+If indicates a `BigInt` is true, only number `0n` returns `false` but others return `true`.
+
+```javascript
+console.info(!!1n);  // -> true
+console.info(!!-1n); // -> true
+console.info(!!0n);  // -> false
+```

@@ -319,6 +319,19 @@
             ]
         },
         {
+            "name": "前端基础知识",
+            "disable": true,
+            "dir": "basic",
+            "file": true,
+            "keywords": ["underlying"],
+            "date": "20250702",
+            "related": [
+                { "name": "About Number", "name#zh": "关于数字类型", "url": "https://kingcean.org/blog/?2025/number" },
+                { "name": "About Promise", "name#zh": "关于 Promise", "url": "https://kingcean.org/blog/?2016/promise" }
+            ],
+            "thumb": null
+        },
+        {
             "name": "a == 1 && a == 2 && a != 2 && a != 1",
             "intro": "If we were to create an object a such that the equation a == 1 && a == 2 && a != 2 && a != 1 holds true, it sounds bizarre at first, but upon closer thought, it's actually quite easy to achieve.",
             "intro#zh": "如果让我们创建一个对象 a，使得等式 a == 1 && a == 2 && a != 2 && a != 1 成立，如何做到呢？",
