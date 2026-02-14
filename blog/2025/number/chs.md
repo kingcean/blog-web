@@ -270,7 +270,7 @@ console.info(!!NaN); // -> false;
 
   日期与时间（`Date`）是以协调世界时（UTC）1970年1月1日零点整为原点，以毫秒（ms）为精度，使用时间戳表示的具体时间点的结构，不考虑闰秒。也就是说，它本质上是依靠整数进行对具体日期时间进行存储，并经封装转义而来的结构。既然底层基于数字，那么似乎其表示的最古老时间和最未来时间，应该是受精确整数的最大和最小值确定。
 
-  然而实际也并非如此。日期的表示范围另有约定，其以该原点的正负一亿天（即864万亿毫秒）范围为界，也就是协调世界时公元前271821年4月20日零点整到公元275760年9月13日零点整闭区间，超出这个范围的会被视为非法日期。这个区间比 JavaScript 能表示的精确整数范围要小得多。
+  然而实际也并非如此。日期的表示范围另有约定，其以该原点的正负一亿天（即864万亿毫秒）范围为界，也就是协调世界时公元前271821年4月20日零点整（早于智人出现的25万年前）到公元275760年9月13日零点整闭区间，超出这个范围的会被视为非法日期。这个区间比 JavaScript 能表示的精确整数范围要小得多。
 
   ```javascript
   function logDate(num) {
@@ -311,7 +311,7 @@ console.info(1n + 1); // -> Uncaught TypeError: Cannot mix BigInt and other type
 如果需要将这两种数字类型混合运算，需要将 `Number` 通过前述构造函数先转为 `BigInt` 再进行运算。除此之外，`Math` 静态类中的函数通常也不适用于 `BigInt`。
 
 ```javascript
-console.info(Math.abs(1n)); // Uncaught TypeError: Cannot convert a BigInt value to a number
+console.info(Math.abs(1n)); // -> Uncaught TypeError: Cannot convert a BigInt value to a number
 ```
 
 另外，与 `Number` 类似，当进行一元为真判断时，仅 `0n` 表示 `false`，其余均为 `true`。

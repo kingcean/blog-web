@@ -267,7 +267,7 @@ Considering that many other types of range ranges in JavaScript are affected by 
 
   Date and time (`Date`) is a structure of a specific time point represented by a timestamp based on the origin of the zero point of January 1, 1970 in Coordinated Universal Time (UTC) and with milliseconds (ms) as the precision, regardless of leap seconds. In other words, it essentially relies on numbers to store specific dates and times, and is escaped by encapsulation. Since the underlying layer is based on numbers, it seems that the oldest and most future times it represents should be determined by the maximum and minimum values of the exact integer.
 
-  However, this is not the case. The range of the date is defined by the range of plus or minus 100 million days (i.e. 864 trillion milliseconds) of the origin, that is, the range from 0:00 on April 20, 271821 BC to 0:00 on September 13, 275760 AD. This range is less than and within the scope of exact integers in JavaScript.
+  However, this is not the case. The range of the date is defined by the range of plus or minus 100 million days (i.e. 864 trillion milliseconds) of the origin, that is, the range from 0:00 on April 20, 271821 BC to 0:00 on September 13, 275760 AD. This range is less than and within the scope of exact integers in JavaScript. And F.Y.I. Homo sapiens appeared in 250 thousands years before, which is later than the minimum date.
 
   ```javascript
   function logDate(num) {
@@ -308,7 +308,7 @@ console.info(1n + 1); // -> Uncaught TypeError: Cannot mix BigInt and other type
 It requires to convert the `Number` to `BitInt` by above constructor before calculating with these 2 kind of number. And the most of functions in `Math` do not apply to `BigInt`.
 
 ```javascript
-console.info(Math.abs(1n)); // Uncaught TypeError: Cannot convert a BigInt value to a number
+console.info(Math.abs(1n)); // -> Uncaught TypeError: Cannot convert a BigInt value to a number
 ```
 
 If indicates a `BigInt` is true, only number `0n` returns `false` but others return `true`.
