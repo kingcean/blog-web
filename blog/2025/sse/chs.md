@@ -133,7 +133,7 @@ async function handleSse(response: Response, decoder: TextDecoder, callback: ((i
 function convertSse(msg: string, arr: ServerSentEventItem[], callback: ((item: ServerSentEventItem) => void)) {
   if (!msg) return;
 
-  // Parse and raise callback for each.
+  // 解析消息并通过回调进行返回。
   const sse = new ServerSentEventItem(msg);
   arr.push(sse);
   callback(sse);
@@ -260,7 +260,7 @@ sse.addEventListener("message", (e) => {
 ```typescript
 import { useEffect, useState } from "react";
 
-export function useFetchSse(input: RequestInfo | URL, init?: RequestInit, dependencies: any[]) {
+export function useFetchSse(input: RequestInfo | URL, init?: RequestInit, dependencies?: DependencyList) {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
@@ -290,18 +290,21 @@ export function useFetchSse(input: RequestInfo | URL, init?: RequestInit, depend
 使用方式如下。
 
 ```tsx
-export function StreamingItems() {
-  const { list } = useFetchSse(SSE_API_URL, {
+function createPostRequest(body) {
+  return {
     method: "POST",
-    body: JSON.stringify(REQ_BODY),
+    body: JSON.stringify(body),
     mode: "cors",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
       "Accept": "text/event-stream, application/json"
     }
-  }, []);
+  };
+}
 
+export function StreamingItems() {
+  const { list } = useFetchSse(SSE_API_URL, createPostRequest(REQ_BODY), []);
   return (
     <ul>
       {list.map((e, i) => {

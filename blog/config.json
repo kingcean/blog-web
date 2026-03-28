@@ -392,6 +392,7 @@
                 { "name": "Related APIs", "name#zh": "相关 API 文档", "disable": "label" },
                 { "name": "fetch", "subtitle": "MDN", "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch" },
                 { "name": "GitHub MR", "name#zh": "GitHub 合并请求", "disable": "label" },
+                { "name": "React", "subtitle": "PR #36145", "url": "https://github.com/facebook/react/issues/36145" },
                 { "name": "RxJS", "subtitle": "PR #7589", "url": "https://github.com/ReactiveX/rxjs/pull/7589" },
                 { "name": "DataSense", "subtitle": "Commit 67cb418", "url": "https://github.com/compositejs/datasense/commit/67cb418d5416dab650450dbcc27f36184a02e9fc" }
             ]

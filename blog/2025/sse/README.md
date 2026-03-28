@@ -259,7 +259,7 @@ It's easy to do so. We can call `useState` to initialize and manage the result l
 ```typescript
 import { useEffect, useState } from "react";
 
-export function useFetchSse(input: RequestInfo | URL, init?: RequestInit, dependencies: any[]) {
+export function useFetchSse(input: RequestInfo | URL, init?: RequestInit, dependencies?: DependencyList) {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
@@ -289,18 +289,21 @@ export function useFetchSse(input: RequestInfo | URL, init?: RequestInit, depend
 Following is the code about usage.
 
 ```tsx
-export function StreamingItems() {
-  const { list } = useFetchSse(SSE_API_URL, {
+function createPostRequest(body) {
+  return {
     method: "POST",
-    body: JSON.stringify(REQ_BODY),
+    body: JSON.stringify(body),
     mode: "cors",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
       "Accept": "text/event-stream, application/json"
     }
-  }, []);
+  };
+}
 
+export function StreamingItems() {
+  const { list } = useFetchSse(SSE_API_URL, createPostRequest(REQ_BODY), []);
   return (
     <ul>
       {list.map((e, i) => {
