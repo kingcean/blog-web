@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:image" content="../images/bg/poster.jpg">
     <title>Projects at Alibaba Group - Kingcean.org</title>
-    <link href="https://cdn.jsdelivr.net/npm/hje@2.4.6/docs/css/site.org.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/hje@3.0.0/docs/css/site.org.css" rel="stylesheet" />
     <link href="../css/current.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/vs2015.min.css" rel="stylesheet" />
     <link rel="icon" type="image/png" href="../images/logos/tuans-s.png" />
     <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/marked@16.2.1/lib/marked.umd.js" ></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.4.6/docs/js/mdblogs.js" ></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@3.0.0/docs/js/mdblogs.js" ></script>
     <style type="text/css" >
     section.x-part-blog-related > div.x-part-article-duration {
         height: 60px; margin: 20px 0; position: relative; overflow: hidden;
@@ -144,13 +144,13 @@
 
                     ev.insertChildren("end", {
                         tagName: "section",
-                        styleRefs: "x-part-blog-related",
+                        className: "x-part-blog-related",
                         children: [{
                             tagName: "h2",
                             children: getLocaleString("duration")
                         }, {
                             tagName: "div",
-                            styleRefs: "x-part-article-duration",
+                            className: "x-part-article-duration",
                             children: [{
                                 tagName: "svg:svg",
                                 props: {
@@ -181,7 +181,7 @@
                                 children: getLocaleString("year")
                             }, {
                                 tagName: "div",
-                                styleRefs: "x-part-article-duration-labels",
+                                className: "x-part-article-duration-labels",
                                 children: years.map(function (y) {
                                     return {
                                         tagName: "span",

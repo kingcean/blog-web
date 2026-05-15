@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:image" content="./images/bg/poster.jpg">
     <title>FE Dev - Kingcean.org</title>
-    <link href="https://cdn.jsdelivr.net/npm/hje@2.4.6/docs/css/site.org.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/hje@3.0.0/docs/css/site.org.css" rel="stylesheet" />
     <link href="./css/current.css" rel="stylesheet" />
     <link rel="icon" type="image/png" href="./images/logos/tuans-s.png" />
     <style type="text/css">
@@ -75,7 +75,7 @@
     }
     }
     </style>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@2.4.6/docs/js/mdblogs.js" ></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/hje@3.0.0/docs/js/mdblogs.js" ></script>
     <script type="text/javascript">
     const res = {
         strings: {
@@ -105,25 +105,23 @@
         DeepX.MdBlogs.setElementText("button-blogs", "blogs");
         DeepX.MdBlogs.setElementText("button-more", "more");
         setElementLocaleText("desc-projects-ent", "archived");
-        const context = Hje.render(document.getElementById("blog_content"), {
+        const component = Hje.render(document.getElementById("blog_content"), {
             children: [{
                 tagName: "div",
                 children: DeepX.MdBlogs.getLocaleString("loading")
             }]
         });
         DeepX.MdBlogs.generateMenuPromise("./blog/config.json", "blogs", {
-            styleRefs: "link-item-blog",
+            className: "link-item-blog",
             deep: -2,
             path: "./blog/"
         }).then(function (r) {
-            context.model().children = [r];
-            context.refresh();
+            component.setChildren([r]);
         }, function (r) {
-            context.model().children = [{
+            context.setChildren([{
                 tagName: "div",
                 children: DeepX.MdBlogs.getLocaleString("loadFailed")
-            }];
-            context.refresh();
+            }]);
         });
     }
     </script>
